@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" fill="url(#grad)" />
+  
+  <!-- Profile silhouette -->
+  <circle cx="200" cy="150" r="80" fill="#ffffff" opacity="0.2" />
+  <path d="M200 250 Q 120 250 100 350 L 300 350 Q 280 250 200 250" fill="#ffffff" opacity="0.2" />
+  
+  <!-- Name text -->
+  <text x="200" y="380" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#ffffff">Kalhara Thabrew</text>
+  <text x="200" y="320" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" fill="#ffffff">Founder & CEO</text>
+</svg>
