@@ -125,7 +125,7 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-8"
             >
-              <img src={logoImage} alt="Katisa Technologies Logo" className="h-24" />
+              <img src={logoImage} alt="Katisa Technologies Logo" style={{ height: '350px', width: 'auto' }} />
             </motion.div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               <motion.span
