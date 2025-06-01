@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { FiCode, FiCpu, FiLayers, FiUsers } from 'react-icons/fi';
 
 // Import logo image
@@ -103,7 +102,7 @@ const HomePage = () => {
       />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-secondary/80 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-accent/80 z-10"></div>
         <div 
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')] bg-cover bg-center"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')" }}
@@ -141,7 +140,7 @@ const HomePage = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="block text-white bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent"
+                className="block text-white bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
               >
                 Delivering Innovation.
               </motion.span>
@@ -157,7 +156,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button to="/contact" variant="primary" className="text-lg px-8 py-3 bg-white text-primary hover:bg-secondary hover:text-dark transition-all duration-300 shadow-lg">
+                <Button to="/contact" variant="primary" className="text-lg px-8 py-3 bg-white text-primary hover:bg-accent hover:text-white transition-all duration-300 shadow-lg">
                   Hire Us
                 </Button>
               </motion.div>
@@ -168,7 +167,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button to="/internship" variant="outline" className="text-lg px-8 py-3 text-white border-white hover:bg-white hover:text-primary transition-all duration-300 border-2">
+                <Button to="/internship" variant="outline" className="text-lg px-8 py-3 text-white border-white hover:bg-white hover:text-primary transition-all duration-300">
                   Join as Intern
                 </Button>
               </motion.div>
