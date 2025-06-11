@@ -72,25 +72,48 @@ const ContactPage = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       
-      // Simulate API call
-      setTimeout(() => {
+      // Use FormSubmit to send the email
+      const form = e.target;
+      const formData = new FormData(form);
+      
+      fetch('https://formsubmit.co/ajax/katisatechnologies@gmail.com', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
         setIsSubmitting(false);
-        setSubmitSuccess(true);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: ''
-        });
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => {
+        if (data.success) {
+          setSubmitSuccess(true);
+          setSubmitError(false);
+          
+          // Reset form
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: ''
+          });
+          
+          // Reset success message after 5 seconds
+          setTimeout(() => {
+            setSubmitSuccess(false);
+          }, 5000);
+        } else {
+          setSubmitError(true);
           setSubmitSuccess(false);
-        }, 5000);
-      }, 1500);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setIsSubmitting(false);
+        setSubmitError(true);
+        setSubmitSuccess(false);
+      });
     }
   };
   return (
@@ -129,7 +152,7 @@ const ContactPage = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit} action="https://formsubmit.co/katisatechnologies@gmail.com" method="POST">
               {submitSuccess && (
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
@@ -159,6 +182,7 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.name && <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>}
               </div>
@@ -172,6 +196,7 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.email && <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>}
               </div>
@@ -198,6 +223,7 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.subject ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.subject && <p className="mt-1 text-sm text-red-500">{formErrors.subject}</p>}
               </div>
@@ -211,9 +237,16 @@ const ContactPage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-primary`}
+                  required
                 ></textarea>
                 {formErrors.message && <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>}
               </div>
+              
+              {/* Hidden FormSubmit fields */}
+              <input type="hidden" name="_subject" value="New contact form submission from Katisa website" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value={window.location.href} />
               
               <button
                 type="submit"
