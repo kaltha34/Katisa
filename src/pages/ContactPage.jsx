@@ -72,48 +72,62 @@ const ContactPage = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       
-      // Use FormSubmit to send the email
+      // Get the form element
       const form = e.target;
-      const formData = new FormData(form);
       
-      fetch('https://formsubmit.co/ajax/katisatechnologies@gmail.com', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
+      // For FormSubmit to work properly, we'll use their standard form submission
+      // but intercept it to show our custom UI
+      
+      // Create a hidden iframe to handle the form submission
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden-form-submit-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      // Set the form target to the iframe
+      form.target = 'hidden-form-submit-iframe';
+      
+      // Handle iframe load event to detect submission completion
+      iframe.onload = () => {
+        // Submission completed
         setIsSubmitting(false);
-        if (data.success) {
-          setSubmitSuccess(true);
-          setSubmitError(false);
-          
-          // Reset form
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            subject: '',
-            message: ''
-          });
-          
-          // Reset success message after 5 seconds
-          setTimeout(() => {
-            setSubmitSuccess(false);
-          }, 5000);
-        } else {
-          setSubmitError(true);
+        setSubmitSuccess(true);
+        setSubmitError(false);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
           setSubmitSuccess(false);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
+        }, 5000);
+        
+        // Clean up iframe
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      };
+      
+      // Handle errors
+      iframe.onerror = () => {
         setIsSubmitting(false);
         setSubmitError(true);
         setSubmitSuccess(false);
-      });
+        
+        // Clean up iframe
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      };
+      
+      // Submit the form
+      form.submit();
     }
   };
   return (
@@ -152,7 +166,7 @@ const ContactPage = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-            <form className="space-y-4" onSubmit={handleSubmit} action="https://formsubmit.co/katisatechnologies@gmail.com" method="POST">
+            <form className="space-y-4" onSubmit={handleSubmit} action="https://formsubmit.co/katisatechnologies@gmail.com" method="POST" encType="multipart/form-data">
               {submitSuccess && (
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
@@ -246,7 +260,9 @@ const ContactPage = () => {
               <input type="hidden" name="_subject" value="New contact form submission from Katisa website" />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value={window.location.href} />
+              <input type="hidden" name="_replyto" value={formData.email} />
+              <input type="hidden" name="_honey" value="" />
+              <input type="hidden" name="_next" value="#" />
               
               <button
                 type="submit"
