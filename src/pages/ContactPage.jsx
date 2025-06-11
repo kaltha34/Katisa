@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import { validateField, isValidEmail, isValidPhone, isNotEmpty } from '../utils/validation';
-import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook, FiInstagram, FiMessageSquare } from 'react-icons/fi';
+
+import FeedbackForm from '../components/feedback/FeedbackForm';
+import StarRating from '../components/feedback/StarRating';
 
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
@@ -396,6 +399,32 @@ const ContactPage = () => {
         </motion.div>
       </Section>
 
+      {/* Feedback Section */}
+      <Section bgColor="bg-gray-50">
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold mb-4">Share Your Ideas</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We value your input! Share your ideas for collaboration or feedback on how we can work together.
+            </p>
+          </motion.div>
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <FeedbackForm />
+        </motion.div>
+      </Section>
+      
       {/* FAQ Section */}
       <Section>
         <div className="text-center mb-12">

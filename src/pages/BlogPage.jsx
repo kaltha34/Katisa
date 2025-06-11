@@ -12,63 +12,63 @@ const BlogPage = () => {
   const allBlogPosts = [
     {
       id: 1,
-      title: 'The Future of AI in Business: Trends to Watch in 2025',
-      excerpt: 'Artificial intelligence is rapidly transforming how businesses operate. In this article, we explore the key AI trends that will shape the business landscape in 2025 and beyond.',
-      slug: 'ai-business-trends-2025',
+      title: 'Building Real-World Solutions: The Katisa Approach to Software Development',
+      excerpt: 'At Katisa Technologies, we focus on designing and delivering experience-driven software solutions that solve meaningful problems. Learn about our approach to building lean MVPs and intelligent systems.',
+      slug: 'katisa-approach-software-development',
       image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'May 28, 2025',
-      author: 'Dinesh Perera',
-      category: 'AI Trends'
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
+      category: 'Development Philosophy'
     },
     {
       id: 2,
-      title: 'How Our Internship Program is Shaping Tech Talent in Sri Lanka',
-      excerpt: 'At Katisa Technologies, we believe in nurturing local talent. Learn how our internship program is helping to build the next generation of tech professionals in Sri Lanka.',
-      slug: 'internship-program-impact',
+      title: 'How Our Collaborative Model Creates Opportunities for Students and Early Professionals',
+      excerpt: 'Discover how Katisa Technologies collaborates with students and early professionals to work on live, real-use case projects while building valuable experience and making an impact.',
+      slug: 'collaborative-model-opportunities',
       image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'May 15, 2025',
-      author: 'Amali Fernando',
-      category: 'Internship'
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
+      category: 'Collaboration'
     },
     {
       id: 3,
-      title: 'Case Study: How We Built an AI Chatbot that Increased Sales by 35%',
-      excerpt: 'Discover how we helped a leading e-commerce company implement an AI chatbot solution that significantly improved customer engagement and boosted sales.',
-      slug: 'ai-chatbot-case-study',
+      title: 'Case Study: Building an Intelligent System That Solves Real Problems',
+      excerpt: 'Learn how we developed a practical AI solution that addressed a meaningful problem for our client, combining rapid prototyping with user-centered design principles.',
+      slug: 'intelligent-system-case-study',
       image: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'May 5, 2025',
-      author: 'Rajiv Mendis',
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
       category: 'Case Study'
     },
     {
       id: 4,
-      title: 'Building Ethical AI: Our Approach to Responsible Innovation',
-      excerpt: 'As AI becomes more prevalent, ethical considerations are increasingly important. Learn about our framework for developing AI solutions that are both innovative and responsible.',
-      slug: 'ethical-ai-approach',
+      title: 'Why We Value Real-World Experience Over Textbook Theory',
+      excerpt: 'At Katisa Technologies, we prioritize practical experience over theoretical knowledge. Explore how this philosophy shapes our approach to software development and team building.',
+      slug: 'real-world-experience-value',
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'April 20, 2025',
-      author: 'Dinesh Perera',
-      category: 'Ethics'
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
+      category: 'Company Values'
     },
     {
       id: 5,
-      title: 'From Intern to Tech Lead: Success Stories from Our Program',
-      excerpt: 'Meet three former interns who have gone on to become tech leaders in their fields. Their journeys showcase the impact of hands-on experience and mentorship.',
-      slug: 'intern-success-stories',
+      title: 'Building a Culture of Creators: The Katisa Way',
+      excerpt: 'Discover how we are fostering a culture of creators who move fast, break monotony, and solve problems that others ignore. Our approach to building innovative solutions with purpose.',
+      slug: 'culture-of-creators',
       image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'April 10, 2025',
-      author: 'Amali Fernando',
-      category: 'Success Stories'
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
+      category: 'Company Culture'
     },
     {
       id: 6,
-      title: 'The Role of AI in Sustainable Business Practices',
-      excerpt: 'Explore how AI technologies can help businesses reduce their environmental impact and contribute to a more sustainable future.',
-      slug: 'ai-sustainable-business',
+      title: 'The Design-Development-Delivery Loop: Our Project Methodology',
+      excerpt: 'Learn about Katisa Technologies integrated approach to projects, where design, development, and delivery form a continuous loop focused on solving what matters.',
+      slug: 'design-development-delivery',
       image: 'https://images.unsplash.com/photo-1623227413711-25ee4388dae3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-      date: 'March 28, 2025',
-      author: 'Rajiv Mendis',
-      category: 'Sustainability'
+      date: 'June 11, 2025',
+      author: 'Kalhara Thabrew',
+      category: 'Methodology'
     }
   ];
 
@@ -168,22 +168,22 @@ const BlogPage = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="text-sm text-primary font-semibold mb-2">FEATURED ARTICLE</div>
-            <h2 className="text-3xl font-bold mb-4">The Future of AI in Business: Trends to Watch in 2025</h2>
+            <h2 className="text-3xl font-bold mb-4">Building Real-World Solutions: The Katisa Approach</h2>
             <p className="text-gray-600 mb-6">
-              Artificial intelligence is rapidly transforming how businesses operate. In this article, we explore the key AI trends that will shape the business landscape in 2025 and beyond.
+              At Katisa Technologies, we focus on designing and delivering experience-driven software solutions that solve meaningful problems. Learn about our approach to building lean MVPs and intelligent systems.
             </p>
             <div className="flex items-center text-sm text-gray-500 mb-6">
               <div className="flex items-center mr-4">
                 <FiCalendar className="mr-1" />
-                <span>May 28, 2025</span>
+                <span>June 11, 2025</span>
               </div>
               <div className="flex items-center mr-4">
                 <FiUser className="mr-1" />
-                <span>Dinesh Perera</span>
+                <span>Kalhara Thabrew</span>
               </div>
               <div className="flex items-center">
                 <FiTag className="mr-1" />
-                <span>AI Trends</span>
+                <span>Development Philosophy</span>
               </div>
             </div>
             <Button to="/blog/ai-business-trends-2025" variant="primary">
