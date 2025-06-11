@@ -13,6 +13,7 @@ import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import TestimonialSlider from '../components/ui/TestimonialSlider';
 import BlogPreview from '../components/ui/BlogPreview';
+import CodePlayground from '../components/ui/CodePlayground';
 
 const HomePage = () => {
   // Sample blog posts data
@@ -219,6 +220,33 @@ const HomePage = () => {
             </div>
           </motion.div>
         </div>
+      </Section>
+
+      {/* Interactive Code Playground Section */}
+      <Section bgColor="bg-gradient-to-r from-gray-900 to-gray-800">
+        <div className="text-center mb-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-white">Try Our Code Playground</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Experience our technical expertise firsthand. Modify the code below and see the results in real-time.
+            </p>
+          </motion.div>
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="max-w-4xl mx-auto"
+        >
+          <CodePlayground />
+        </motion.div>
       </Section>
 
       {/* Services Section */}
