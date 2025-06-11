@@ -14,14 +14,8 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-4">Katisa<span className="text-accent">Tech</span></h3>
             <p className="mb-4 text-gray-300">Empowering interns. Delivering innovation.</p>
             <div className="flex space-x-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-300 hover:text-accent transition-colors">
+              <a href="https://www.linkedin.com/company/105343942/admin/dashboard/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-300 hover:text-accent transition-colors">
                 <FiLinkedin size={20} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-300 hover:text-accent transition-colors">
-                <FiTwitter size={20} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-300 hover:text-accent transition-colors">
-                <FiFacebook size={20} />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-300 hover:text-accent transition-colors">
                 <FiInstagram size={20} />
