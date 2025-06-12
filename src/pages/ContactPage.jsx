@@ -332,14 +332,8 @@ const ContactPage = () => {
             
             <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
+              <a href="https://www.linkedin.com/company/105343942/admin/dashboard/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
                 <FiLinkedin size={24} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
-                <FiTwitter size={24} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
-                <FiFacebook size={24} />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
                 <FiInstagram size={24} />
