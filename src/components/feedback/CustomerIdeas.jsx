@@ -1,35 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMessageSquare, FiThumbsUp, FiLoader } from 'react-icons/fi';
-import { getTestimonials } from '../../services/testimonialService';
 
 const ClientTestimonials = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const [customerIdeas, setCustomerIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Function to fetch testimonials from JSON server API
+  // Function to fetch customer ideas from localStorage
+  // In a production environment, this would be an API call to a database
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        setLoading(true);
-        const data = await getTestimonials();
-        setTestimonials(data);
+    try {
+      // Simulate API call with setTimeout
+      setTimeout(() => {
+        const savedIdeas = localStorage.getItem('katisaCustomerIdeas');
+        if (savedIdeas) {
+          setCustomerIdeas(JSON.parse(savedIdeas));
+        }
         setLoading(false);
-      } catch (err) {
-        console.error('Error fetching testimonials:', err);
-        setError('Failed to load testimonials. Please try again later.');
-        setLoading(false);
+      }, 800);
+    } catch (err) {
+      console.error('Error fetching customer ideas:', err);
+      setError('Failed to load customer ideas');
+      setLoading(false);
+    }
+  }, []);
+  
+  // Listen for new submissions
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'katisaCustomerIdeas') {
+        try {
+          const updatedIdeas = JSON.parse(e.newValue);
+          setCustomerIdeas(updatedIdeas || []);
+        } catch (err) {
+          console.error('Error parsing updated ideas:', err);
+        }
       }
     };
     
-    fetchTestimonials();
-    
-    // Set up polling to check for new testimonials every 30 seconds
-    const intervalId = setInterval(fetchTestimonials, 30000);
-    
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   // Function to render stars based on rating
@@ -80,9 +91,9 @@ const ClientTestimonials = () => {
               Try Again
             </button>
           </div>
-        ) : testimonials.length > 0 ? (
+        ) : customerIdeas.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((idea, index) => (
+            {customerIdeas.map((idea, index) => (
               <motion.div
                 key={idea.id || index}
                 initial={{ opacity: 0, y: 20 }}
