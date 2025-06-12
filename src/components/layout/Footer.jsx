@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiInstagram } from 'react-icons/fi';
+
+// Import logo image
+import logoImage from '../../assets/images/Logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +14,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="mb-8 md:mb-0">
-            <h3 className="text-2xl font-bold mb-4">Katisa<span className="text-accent">Tech</span></h3>
+            <div className="mb-4">
+              <img src={logoImage} alt="Katisa Technologies Logo" className="h-16 w-auto" />
+            </div>
             <p className="mb-4 text-gray-300">Empowering interns. Delivering innovation.</p>
             <div className="flex space-x-4">
               <a href="https://www.linkedin.com/company/105343942/admin/dashboard/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-300 hover:text-accent transition-colors">
