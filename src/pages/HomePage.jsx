@@ -11,9 +11,9 @@ import NewsletterSubscribe from '../components/ui/NewsletterSubscribe';
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
-import TestimonialSlider from '../components/ui/TestimonialSlider';
 import BlogPreview from '../components/ui/BlogPreview';
 import CodePlayground from '../components/ui/CodePlayground';
+import ClientTestimonials from '../components/feedback/CustomerIdeas';
 
 const HomePage = () => {
   // Sample blog posts data
@@ -75,24 +75,7 @@ const HomePage = () => {
     }
   ];
 
-  // Sample testimonials data
-  const testimonials = [
-    {
-      quote: "Katisa Technologies helped us implement an AI chatbot that reduced our customer service response time by 60%. Their team was professional and delivered on time.",
-      name: "Sarah Johnson",
-      title: "CTO, TechSolutions Ltd"
-    },
-    {
-      quote: "The internship program at Katisa was a game-changer for my career. I gained hands-on experience with cutting-edge AI technologies and received excellent mentorship.",
-      name: "Raj Patel",
-      title: "Former Intern, now AI Engineer"
-    },
-    {
-      quote: "We needed an MVP for our startup quickly, and Katisa delivered a high-quality product within our tight deadline. Their expertise in AI integration gave us a competitive edge.",
-      name: "Michael Chen",
-      title: "Founder, InnovateSL"
-    }
-  ];
+  // Testimonials are now handled by the ClientTestimonials component
 
   return (
     <>
@@ -282,28 +265,8 @@ const HomePage = () => {
         </div>
       </Section>
 
-      {/* Testimonials Section */}
-      <Section>
-        <div className="text-center mb-12">
-          <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
-            <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Don't just take our word for it. Here's what our clients and interns have to say about their experience with Katisa Technologies.
-            </p>
-          </motion.div>
-        </div>
-        
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1 }
-            }}
-          >
-            <TestimonialSlider testimonials={testimonials} />
-          </motion.div>
-        </div>
-      </Section>
+      {/* Client Testimonials Section */}
+      <ClientTestimonials />
 
       {/* Blog Section */}
       <Section bgColor="bg-gray-50">
