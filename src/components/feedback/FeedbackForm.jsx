@@ -13,6 +13,36 @@ const FeedbackForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
+  // Function to save idea to localStorage
+  const saveIdeaToLocalStorage = (idea) => {
+    try {
+      // Get existing ideas or initialize empty array
+      const existingIdeas = JSON.parse(localStorage.getItem('katisaCustomerIdeas')) || [];
+      
+      // Add new idea with unique ID and current date
+      const newIdea = {
+        ...idea,
+        id: Date.now(), // Use timestamp as unique ID
+        date: new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      };
+      
+      // Add to beginning of array so newest ideas appear first
+      const updatedIdeas = [newIdea, ...existingIdeas];
+      
+      // Save back to localStorage
+      localStorage.setItem('katisaCustomerIdeas', JSON.stringify(updatedIdeas));
+      
+      // Dispatch storage event to notify other components
+      window.dispatchEvent(new Event('storage'));
+    } catch (err) {
+      console.error('Error saving idea to localStorage:', err);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -35,11 +65,20 @@ const FeedbackForm = () => {
     
     // Handle iframe load event to detect submission completion
     iframe.onload = () => {
+      // Save to localStorage for display in CustomerIdeas component
+      saveIdeaToLocalStorage({
+        type: feedbackType,
+        content: feedbackText,
+        author: name,
+        rating: rating || 5, // Default to 5 if not rated
+      });
+      
       setIsSubmitting(false);
       setSubmitted(true);
       setFeedbackText('');
       setName('');
       setEmail('');
+      setRating(0);
       
       // Clean up iframe
       setTimeout(() => {
