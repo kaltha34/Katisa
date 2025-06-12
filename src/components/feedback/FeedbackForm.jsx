@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiThumbsUp, FiMessageSquare } from 'react-icons/fi';
 import StarRating from './StarRating';
+import { addTestimonial } from '../../services/testimonialService';
 
 const FeedbackForm = () => {
   const [feedbackType, setFeedbackType] = useState('idea');
@@ -13,33 +14,14 @@ const FeedbackForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Function to save idea to localStorage
-  const saveIdeaToLocalStorage = (idea) => {
+  // Function to save testimonial to JSON server API
+  const saveTestimonial = async (testimonial) => {
     try {
-      // Get existing ideas or initialize empty array
-      const existingIdeas = JSON.parse(localStorage.getItem('katisaCustomerIdeas')) || [];
-      
-      // Add new idea with unique ID and current date
-      const newIdea = {
-        ...idea,
-        id: Date.now(), // Use timestamp as unique ID
-        date: new Date().toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-      };
-      
-      // Add to beginning of array so newest ideas appear first
-      const updatedIdeas = [newIdea, ...existingIdeas];
-      
-      // Save back to localStorage
-      localStorage.setItem('katisaCustomerIdeas', JSON.stringify(updatedIdeas));
-      
-      // Dispatch storage event to notify other components
-      window.dispatchEvent(new Event('storage'));
+      await addTestimonial(testimonial);
+      return true;
     } catch (err) {
-      console.error('Error saving idea to localStorage:', err);
+      console.error('Error saving testimonial to API:', err);
+      return false;
     }
   };
 
@@ -64,9 +46,9 @@ const FeedbackForm = () => {
     e.target.target = 'feedback-submit-iframe';
     
     // Handle iframe load event to detect submission completion
-    iframe.onload = () => {
-      // Save to localStorage for display in CustomerIdeas component
-      saveIdeaToLocalStorage({
+    iframe.onload = async () => {
+      // Save to JSON server API for display in ClientTestimonials component
+      const success = await saveTestimonial({
         type: feedbackType,
         content: feedbackText,
         author: name,
@@ -74,11 +56,16 @@ const FeedbackForm = () => {
       });
       
       setIsSubmitting(false);
-      setSubmitted(true);
-      setFeedbackText('');
-      setName('');
-      setEmail('');
-      setRating(0);
+      
+      if (success) {
+        setSubmitted(true);
+        setFeedbackText('');
+        setName('');
+        setEmail('');
+        setRating(0);
+      } else {
+        setError('Failed to save your feedback. Please try again later.');
+      }
       
       // Clean up iframe
       setTimeout(() => {
