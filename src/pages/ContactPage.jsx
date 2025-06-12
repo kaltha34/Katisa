@@ -315,8 +315,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email Us</h3>
-                  <p className="text-gray-600">info@katisatech.com</p>
-                  <p className="text-gray-600">support@katisatech.com</p>
+                  <p className="text-gray-600">katisatechnologies@gmail.com</p>
                 </div>
               </div>
               
@@ -326,8 +325,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Call Us</h3>
-                  <p className="text-gray-600">+94 123 456 789</p>
-                  <p className="text-gray-600">+94 987 654 321</p>
+                  <p className="text-gray-600">+94 72 5950 375</p>
                 </div>
               </div>
             </div>
