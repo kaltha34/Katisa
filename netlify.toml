@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Cache-Control = "public, max-age=31536000"
+    
+[template.environment]
+  REACT_APP_SITE_NAME = "Katisa Technologies"
+  REACT_APP_SITE_DESCRIPTION = "Experience-driven software solutions that solve meaningful problems"

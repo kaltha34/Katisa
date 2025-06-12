@@ -1,0 +1,10 @@
+{
+  "siteUrl": "https://katisa.netlify.app",
+  "siteName": "Katisa Technologies",
+  "siteDescription": "Experience-driven software solutions that solve meaningful problems",
+  "siteImage": "https://katisa.netlify.app/og-image.png",
+  "twitter": {
+    "cardType": "summary_large_image",
+    "handle": "@KatisaTech"
+  }
+}
