@@ -1,20 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { FiCalendar, FiCheck } from 'react-icons/fi';
 
 const ConsultationBooking = () => {
-  useEffect(() => {
-    // Load Calendly widget script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   const benefits = [
     'Choose your preferred time slot',
     'Automatic calendar invite sent to both parties',
