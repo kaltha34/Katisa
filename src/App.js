@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import BookConsultationPage from './pages/BookConsultationPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // UI Components
@@ -25,6 +26,7 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/book-consultation" element={<BookConsultationPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <BackToTop />

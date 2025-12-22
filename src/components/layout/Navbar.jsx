@@ -50,7 +50,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.name}
@@ -75,10 +75,10 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link 
-                to="/contact" 
+                to="/book-consultation" 
                 className="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-dark px-6 py-2 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg"
               >
-                Get Started
+                Book Consultation
               </Link>
             </motion.div>
           </div>
