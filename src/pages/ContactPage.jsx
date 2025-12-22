@@ -254,6 +254,7 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-semibold text-lg">Our Location</h3>
                   <p className="text-gray-600">Colombo, Sri Lanka</p>
+                  <a href="https://maps.app.goo.gl/5Pj3XuAYiydTurCA9" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm">View on Google Maps →</a>
                 </div>
               </div>
               
@@ -263,8 +264,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email Us</h3>
-                  <p className="text-gray-600">info@katisatech.com</p>
-                  <p className="text-gray-600">support@katisatech.com</p>
+                  <p className="text-gray-600">katisatechnologies@gmail.com</p>
                 </div>
               </div>
               
@@ -274,15 +274,14 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Call Us</h3>
-                  <p className="text-gray-600">+94 123 456 789</p>
-                  <p className="text-gray-600">+94 987 654 321</p>
+                  <p className="text-gray-600">+94 72 595 0375</p>
                 </div>
               </div>
             </div>
             
             <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
+              <a href="https://www.linkedin.com/company/katisatech/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
                 <FiLinkedin size={24} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
@@ -340,10 +339,16 @@ const ContactPage = () => {
           transition={{ duration: 0.5 }}
           className="h-96 w-full rounded-t-xl overflow-hidden shadow-md"
         >
-          {/* Placeholder for a map - in a real implementation, you would use Google Maps or similar */}
-          <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-            <p className="text-gray-600">Map would be displayed here</p>
-          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.87033597524988!2d79.86182257573845!3d6.927078199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259692f4bb2c5%3A0xd3e6c5c8e38e6e05!2sKatisa%20Technologies!5e0!3m2!1sen!2slk!4v1234567890123!5m2!1sen!2slk"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Katisa Technologies Location"
+          ></iframe>
         </motion.div>
       </Section>
 
