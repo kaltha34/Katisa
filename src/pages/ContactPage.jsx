@@ -151,6 +151,11 @@ const ContactPage = () => {
               Have a question or interested in our services? We'd love to hear from you.
               Fill out the form below or reach out directly through our contact information.
             </p>
+            <div className="flex flex-wrap gap-4">
+              <Button to="/book-consultation" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
+                📅 Book a Consultation
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
