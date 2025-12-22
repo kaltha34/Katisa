@@ -31,8 +31,8 @@ const AboutPage = () => {
       icon: FiTrendingUp
     },
     {
-      title: 'Education',
-      description: 'We believe in empowering the next generation of tech professionals through mentorship.',
+      title: 'Quality',
+      description: 'We deliver high-quality solutions with attention to detail and commitment to excellence.',
       icon: FiUsers
     },
     {
@@ -51,7 +51,7 @@ const AboutPage = () => {
     <>
       <SEO 
         title="About Us" 
-        description={formatMetaDescription("Learn about Katisa Technologies, a Sri Lankan tech startup specializing in AI-powered software development while nurturing local tech talent through our internship program.")} 
+        description={formatMetaDescription("Learn about Katisa Technologies, a Sri Lankan tech startup specializing in AI-powered software development and delivering innovative solutions to businesses worldwide.")} 
         keywords={combineKeywords(['about us', 'tech startup', 'Sri Lanka', 'company mission', 'AI development', 'team'])} 
         url="/about"
       />
@@ -73,8 +73,7 @@ const AboutPage = () => {
               <h1 className="text-4xl md:text-5xl font-bold">About Us</h1>
             </div>
             <p className="text-xl mb-8">
-              We're a tech startup in Sri Lanka with a dual mission: delivering innovative AI solutions 
-              while nurturing local tech talent through our internship program.
+              We're a tech startup in Sri Lanka delivering innovative AI solutions and building cutting-edge software for businesses worldwide.
             </p>
           </motion.div>
         </div>
@@ -91,18 +90,17 @@ const AboutPage = () => {
           >
             <h2 className="text-3xl font-bold mb-6">Our Story</h2>
             <p className="text-gray-600 mb-4">
-              Katisa Technologies was founded in 2020 with a vision to bridge two gaps: the growing demand for AI-powered 
-              software solutions, and the need for practical experience among tech graduates in Sri Lanka.
+              Katisa Technologies was founded in 2020 with a vision to deliver cutting-edge AI-powered 
+              software solutions to businesses worldwide from our base in Sri Lanka.
             </p>
             <p className="text-gray-600 mb-4">
-              Our founder, Ashan Perera, recognized that while Sri Lanka produces talented tech graduates, many struggle 
-              to find opportunities to apply their knowledge in real-world settings. At the same time, businesses worldwide 
-              are seeking innovative AI solutions to stay competitive.
+              Our founder, Kalhara Thabrew, recognized the growing demand for innovative AI solutions and saw an 
+              opportunity to showcase Sri Lankan talent on the global stage. With over 10 years of experience in 
+              software development and AI, he set out to build a company that delivers exceptional results.
             </p>
             <p className="text-gray-600 mb-4">
-              By creating a company that offers both professional AI development services and a structured internship program, 
-              Katisa Technologies addresses both needs simultaneously – delivering cutting-edge solutions while nurturing the 
-              next generation of tech professionals.
+              Today, Katisa Technologies specializes in developing AI chatbots, MVPs, and custom automation tools 
+              that help businesses streamline operations, enhance customer experiences, and drive growth.
             </p>
           </motion.div>
           
@@ -138,8 +136,8 @@ const AboutPage = () => {
               <h2 className="text-3xl font-bold">Our Mission</h2>
             </div>
             <p className="text-gray-600">
-              To deliver innovative AI-powered solutions that help businesses thrive, while providing meaningful 
-              learning opportunities for aspiring tech professionals in Sri Lanka through our internship program.
+              To deliver innovative AI-powered solutions that help businesses thrive in an increasingly 
+              digital world, while showcasing the talent and capabilities of Sri Lankan tech professionals.
             </p>
           </motion.div>
           
@@ -156,8 +154,8 @@ const AboutPage = () => {
               <h2 className="text-3xl font-bold">Our Vision</h2>
             </div>
             <p className="text-gray-600">
-              To be recognized globally as a leading AI solutions provider from Sri Lanka, and to create a sustainable 
-              model for tech education that bridges the gap between academic knowledge and industry requirements.
+              To be recognized globally as a leading AI solutions provider from Sri Lanka, delivering world-class 
+              software that drives innovation and showcases the exceptional talent of our tech community.
             </p>
           </motion.div>
         </div>
@@ -175,7 +173,7 @@ const AboutPage = () => {
             <h2 className="text-3xl font-bold mb-4">Our Values</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               These core principles guide everything we do at Katisa Technologies, from how we develop software 
-              to how we mentor our interns.
+              to how we serve our clients.
             </p>
           </motion.div>
         </div>
@@ -265,18 +263,18 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-6">Why We Focus on Sri Lanka</h2>
+            <h2 className="text-3xl font-bold mb-6">Why Sri Lanka</h2>
             <p className="text-gray-600 mb-4">
-              Sri Lanka has a growing tech ecosystem with talented graduates from top universities. However, many face 
-              a significant challenge: the lack of practical experience and mentorship opportunities.
+              Sri Lanka has a rapidly growing tech ecosystem with talented professionals and a strong educational foundation. 
+              The country's strategic location and time zone make it ideal for serving global clients.
             </p>
             <p className="text-gray-600 mb-4">
-              We believe that by providing structured internship experiences and real-world project exposure, we can help 
-              bridge this gap and showcase Sri Lankan talent on the global stage.
+              By operating from Sri Lanka, we can deliver world-class solutions while maintaining competitive pricing and 
+              providing exceptional value to our clients. Our team brings together local talent with global expertise.
             </p>
             <p className="text-gray-600 mb-4">
-              Our goal is to contribute to the growth of Sri Lanka's tech industry by nurturing skilled professionals who 
-              can drive innovation and attract international opportunities.
+              We're proud to showcase Sri Lankan innovation on the global stage and contribute to the growth of the 
+              country's technology sector.
             </p>
           </motion.div>
         </div>
@@ -318,10 +316,10 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-colors"
           >
-            <h3 className="text-xl font-bold mb-3">Scale Our Internship Program</h3>
+            <h3 className="text-xl font-bold mb-3">Grow Our Team</h3>
             <p className="text-white/80">
-              Increase the number of interns we can mentor each year and expand the program to include more 
-              specialized tracks in emerging technologies.
+              Expand our team of talented developers and AI specialists to take on more ambitious projects 
+              and deliver even greater value to our clients.
             </p>
           </motion.div>
           
@@ -332,8 +330,8 @@ const AboutPage = () => {
           >
             <h3 className="text-xl font-bold mb-3">Global Partnerships</h3>
             <p className="text-white/80">
-              Form partnerships with international tech companies and educational institutions to create more 
-              opportunities for our interns and expand our service offerings.
+              Form partnerships with international tech companies and clients to expand our service offerings 
+              and bring more innovative AI solutions to market.
             </p>
           </motion.div>
         </motion.div>
@@ -348,17 +346,17 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-6">Join Us on Our Journey</h2>
+            <h2 className="text-3xl font-bold mb-6">Ready to Work With Us?</h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Whether you're looking to hire us for your next project or join our team as an intern or employee, 
-              we'd love to connect with you.
+              Whether you're looking to hire us for your next project or want to join our growing team, 
+              we'd love to hear from you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button to="/contact" variant="primary">
                 Contact Us
               </Button>
-              <Button to="/internship" variant="outline">
-                Explore Internships
+              <Button to="/services" variant="outline">
+                View Our Services
               </Button>
             </div>
           </motion.div>

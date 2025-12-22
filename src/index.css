@@ -2,43 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
   }
   
   body {
-    @apply bg-light text-dark;
+    @apply text-dark;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%);
+    background-attachment: fixed;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-6 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105;
+    @apply px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
   }
   
   .btn-primary {
-    @apply btn bg-primary text-white hover:bg-blue-600;
+    @apply btn text-white hover:shadow-2xl border-2;
+    background: linear-gradient(to right, #F59E0B, #F97316, #EF4444);
+    border-color: #F59E0B;
+    box-shadow: 0 4px 14px 0 rgba(245, 158, 11, 0.5);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
   }
   
   .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-green-600;
+    @apply btn text-white hover:shadow-2xl border-2;
+    background: linear-gradient(to right, #06b6d4, #14b8a6);
+    border-color: #06b6d4;
+    box-shadow: 0 4px 14px 0 rgba(6, 182, 212, 0.39);
+  }
+  
+  .btn-secondary:hover {
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
   }
   
   .btn-outline {
-    @apply btn border-2 border-primary text-primary hover:bg-primary hover:text-white;
+    @apply btn border-2 bg-white hover:text-white;
+    border-color: #F59E0B;
+    color: #F59E0B;
+  }
+  
+  .btn-outline:hover {
+    background: linear-gradient(to right, #F59E0B, #F97316);
+    border-color: #F59E0B;
   }
   
   .section {
-    @apply py-16 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto;
+    @apply py-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto;
   }
   
   .card {
-    @apply bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg;
+    @apply bg-white rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-purple to-pink bg-clip-text text-transparent;
+  }
+  
+  .gradient-border {
+    @apply border-2 border-transparent bg-clip-padding;
+    background-image: linear-gradient(white, white), linear-gradient(to right, #FF6B6B, #A855F7, #EC4899);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
   }
 }
