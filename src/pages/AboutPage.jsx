@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import { FiTarget, FiEye, FiTrendingUp, FiUsers, FiAward, FiGlobe } from 'react-icons/fi';
-import { fadeIn, fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '../utils/animations';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 import { formatMetaDescription, combineKeywords } from '../utils/seo';
 
 // Import images directly
@@ -56,7 +56,7 @@ const AboutPage = () => {
         url="/about"
       />
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-r from-primary to-secondary text-dark">
+      <section className="pt-32 pb-20 bg-gradient-to-r from-accent to-primary text-white">
         <div className="container mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -281,7 +281,7 @@ const AboutPage = () => {
       </Section>
 
       {/* Future Goals Section */}
-      <Section bgColor="bg-gradient-to-r from-primary to-secondary text-dark">
+      <Section bgColor="bg-gradient-to-r from-primary to-accent text-white">
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0 }}

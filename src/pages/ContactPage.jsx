@@ -72,10 +72,27 @@ const ContactPage = () => {
     if (validateForm()) {
       setIsSubmitting(true);
       
-      // Simulate API call
-      setTimeout(() => {
+      // Get the form element
+      const form = e.target;
+      
+      // For FormSubmit to work properly, we'll use their standard form submission
+      // but intercept it to show our custom UI
+      
+      // Create a hidden iframe to handle the form submission
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden-form-submit-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      // Set the form target to the iframe
+      form.target = 'hidden-form-submit-iframe';
+      
+      // Handle iframe load event to detect submission completion
+      iframe.onload = () => {
+        // Submission completed
         setIsSubmitting(false);
         setSubmitSuccess(true);
+        setSubmitError(false);
         
         // Reset form
         setFormData({
@@ -90,7 +107,27 @@ const ContactPage = () => {
         setTimeout(() => {
           setSubmitSuccess(false);
         }, 5000);
-      }, 1500);
+        
+        // Clean up iframe
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      };
+      
+      // Handle errors
+      iframe.onerror = () => {
+        setIsSubmitting(false);
+        setSubmitError(true);
+        setSubmitSuccess(false);
+        
+        // Clean up iframe
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      };
+      
+      // Submit the form
+      form.submit();
     }
   };
   return (
@@ -129,7 +166,7 @@ const ContactPage = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit} action="https://formsubmit.co/katisatechnologies@gmail.com" method="POST" encType="multipart/form-data">
               {submitSuccess && (
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
@@ -159,6 +196,7 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.name && <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>}
               </div>
@@ -172,6 +210,7 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.email && <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>}
               </div>
@@ -198,6 +237,7 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.subject ? 'border-red-500' : 'border-gray-300'} rounded-md focus:ring-primary focus:border-primary`} 
+                  required
                 />
                 {formErrors.subject && <p className="mt-1 text-sm text-red-500">{formErrors.subject}</p>}
               </div>
@@ -211,9 +251,18 @@ const ContactPage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className={`w-full px-4 py-2 border ${formErrors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-primary`}
+                  required
                 ></textarea>
                 {formErrors.message && <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>}
               </div>
+              
+              {/* Hidden FormSubmit fields */}
+              <input type="hidden" name="_subject" value="New contact form submission from Katisa website" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_replyto" value={formData.email} />
+              <input type="hidden" name="_honey" value="" />
+              <input type="hidden" name="_next" value="#" />
               
               <button
                 type="submit"
@@ -284,12 +333,6 @@ const ContactPage = () => {
               <a href="https://www.linkedin.com/company/katisatech/" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
                 <FiLinkedin size={24} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
-                <FiTwitter size={24} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
-                <FiFacebook size={24} />
-              </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-100 hover:bg-primary hover:text-white p-3 rounded-full transition-colors">
                 <FiInstagram size={24} />
               </a>
@@ -352,6 +395,32 @@ const ContactPage = () => {
         </motion.div>
       </Section>
 
+      {/* Feedback Section */}
+      <Section bgColor="bg-gray-50">
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold mb-4">Share Your Ideas</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We value your input! Share your ideas for collaboration or feedback on how we can work together.
+            </p>
+          </motion.div>
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <FeedbackForm />
+        </motion.div>
+      </Section>
+      
       {/* FAQ Section */}
       <Section>
         <div className="text-center mb-12">
