@@ -55,11 +55,16 @@ const ConsultationBooking = () => {
         </div>
 
         {/* Calendly Embed Widget */}
-        <div 
-          className="calendly-inline-widget" 
-          data-url="https://calendly.com/katisatechnologies/new-meeting?hide_event_type_details=1&hide_gdpr_banner=1"
-          style={{ minWidth: '320px', height: '700px' }}
-        ></div>
+        <div className="calendly-embed-container" style={{ minWidth: '320px', height: '700px', position: 'relative' }}>
+          <iframe
+            src="https://calendly.com/katisatechnologies/new-meeting?embed_domain=katisa.netlify.app&embed_type=Inline"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            title="Schedule a consultation with Katisa Technologies"
+            style={{ border: 'none' }}
+          ></iframe>
+        </div>
 
         {/* Alternative: Direct Contact */}
         <div className="mt-6 text-center text-sm text-gray-600">
