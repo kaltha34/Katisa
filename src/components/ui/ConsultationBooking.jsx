@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiCalendar, FiCheck } from 'react-icons/fi';
+import Button from './Button';
 
 const ConsultationBooking = () => {
+  useEffect(() => {
+    // Load Calendly popup widget
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
+  const handleBooking = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/katisatechnologies/new-meeting'
+      });
+    }
+  };
+
   const benefits = [
     'Choose your preferred time slot',
     'Automatic calendar invite sent to both parties',
@@ -49,17 +72,29 @@ const ConsultationBooking = () => {
         {/* Instructions Box */}
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
           <p className="text-sm text-green-800">
-            <strong>✅ Booking Active!</strong> Select your preferred date and time below. 
+            <strong>✅ Booking Active!</strong> Click the button below to open the booking calendar. 
             Your appointment will be automatically added to our calendar and you'll receive a confirmation email with meeting details.
           </p>
         </div>
 
-        {/* Calendly Embed Widget */}
-        <div 
-          className="calendly-inline-widget" 
-          data-url="https://calendly.com/katisatechnologies/new-meeting?hide_event_type_details=1&hide_gdpr_banner=1"
-          style={{ minWidth: '320px', height: '700px' }}
-        ></div>
+        {/* Booking Button */}
+        <div className="text-center">
+          <Button
+            onClick={handleBooking}
+            variant="primary"
+            className="text-lg px-12 py-4 mb-4"
+          >
+            <FiCalendar className="inline mr-2" />
+            Open Booking Calendar
+          </Button>
+          
+          <p className="text-sm text-gray-500 mb-8">
+            A new window will open with available time slots
+          </p>
+        </div>
+
+        {/* Calendly Badge Widget */}
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
 
         {/* Alternative: Direct Contact */}
         <div className="mt-6 text-center text-sm text-gray-600">
