@@ -67,9 +67,9 @@ const HomePage = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-8"
+              className="mb-4"
             >
-              <img src={logoImage} alt="Katisa Technologies Logo" style={{ height: '350px', width: 'auto' }} />
+              <img src={logoImage} alt="Katisa Technologies Logo" style={{ height: '200px', width: 'auto' }} />
             </motion.div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
               <motion.span
@@ -89,10 +89,10 @@ const HomePage = () => {
                 AI Solutions Today
               </motion.span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/95 mb-10 leading-relaxed font-light">
+            <p className="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed font-light">
               We build AI-powered software solutions that help businesses innovate and grow in Sri Lanka and beyond.
             </p>
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-4 mb-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button to="/contact" variant="primary" className="text-lg px-10 py-4 font-bold shadow-xl border-2 border-white">
+                <Button to="/contact" variant="primary" className="text-lg px-8 py-3 font-bold shadow-xl border-2 border-white">
                   Get Started →
                 </Button>
               </motion.div>
@@ -111,7 +111,7 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button to="/services" variant="outline" className="text-lg px-10 py-4 text-white border-white border-2 hover:bg-white hover:text-primary font-bold backdrop-blur-sm bg-white/10">
+                <Button to="/services" variant="outline" className="text-lg px-8 py-3 text-white border-white border-2 hover:bg-white hover:text-primary font-bold backdrop-blur-sm bg-white/10">
                   Explore Services
                 </Button>
               </motion.div>
