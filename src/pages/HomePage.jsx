@@ -111,13 +111,8 @@ const HomePage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-<<<<<<< HEAD
                 <Button to="/services" variant="outline" className="text-lg px-10 py-4 text-white border-white border-2 hover:bg-white hover:text-primary font-bold backdrop-blur-sm bg-white/10">
                   Explore Services
-=======
-                <Button to="/internship" variant="outline" className="text-lg px-8 py-3 text-white border-white hover:bg-white hover:text-primary transition-all duration-300">
-                  Join as Intern
->>>>>>> origin/master
                 </Button>
               </motion.div>
             </div>
@@ -185,16 +180,6 @@ const HomePage = () => {
             </p>
           </motion.div>
         </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <CodePlayground />
-        </motion.div>
       </Section>
 
       {/* Services Section */}
@@ -235,34 +220,6 @@ const HomePage = () => {
         </div>
       </Section>
 
-<<<<<<< HEAD
-=======
-      {/* Client Testimonials Section */}
-      <ClientTestimonials />
-
-      {/* Blog Section */}
-      <Section bgColor="bg-gray-50">
-        <div className="text-center mb-12">
-          <motion.div
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-          >
-            <h2 className="text-3xl font-bold mb-4">Latest from Our Blog</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Stay updated with the latest insights, case studies, and news from Katisa Technologies.
-            </p>
-          </motion.div>
-        </div>
-        
-        <BlogPreview posts={blogPosts} />
-        
-        <div className="text-center mt-12">
-          <Button to="/blog" variant="outline">
-            View All Articles
-          </Button>
-        </div>
-      </Section>
-
->>>>>>> origin/master
       {/* CTA Section */}
       <Section bgColor="bg-primary">
         <div className="text-center text-white">
