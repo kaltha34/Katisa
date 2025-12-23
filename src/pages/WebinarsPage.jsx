@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiCalendar, FiClock, FiUsers, FiVideo, FiDownload } from 'react-icons/fi';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import emailjs from '@emailjs/browser';
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
 import SEO from '../components/ui/SEO';
@@ -113,6 +114,34 @@ const WebinarsPage = () => {
         ...prev,
         [selectedWebinar.id]: (prev[selectedWebinar.id] || 0) + 1
       }));
+
+      // Send confirmation email
+      try {
+        await emailjs.send(
+          'service_jnqvdcz', // EmailJS Service ID
+          'template_nq9ly35', // EmailJS Template ID
+          {
+            to_email: registrationData.email,
+            to_name: registrationData.name,
+            webinar_title: selectedWebinar.title,
+            webinar_date: selectedWebinar.date?.toDate ? 
+              selectedWebinar.date.toDate().toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+              }) : 'TBD',
+            webinar_time: selectedWebinar.date?.toDate ? 
+              selectedWebinar.date.toDate().toLocaleTimeString('en-US', { 
+                hour: '2-digit', minute: '2-digit', hour12: true 
+              }) : 'TBD',
+            webinar_description: selectedWebinar.description,
+            webinar_link: `${window.location.origin}/webinars`
+          },
+          'AjK9HQim3RbpwOLW9' // EmailJS Public Key
+        );
+        console.log('Confirmation email sent successfully');
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+        // Don't block registration if email fails
+      }
 
       setRegistrationSuccess(true);
       setTimeout(() => {
