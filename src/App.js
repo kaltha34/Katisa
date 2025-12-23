@@ -11,6 +11,8 @@ import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BookConsultationPage from './pages/BookConsultationPage';
+import WebinarsPage from './pages/WebinarsPage';
+import WebinarRoomPage from './pages/WebinarRoomPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // UI Components
@@ -20,17 +22,26 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/book-consultation" element={<BookConsultationPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <BackToTop />
-      </Layout>
+      <Routes>
+        {/* Full-screen route without layout */}
+        <Route path="/webinar-room/:roomName" element={<WebinarRoomPage />} />
+        
+        {/* All other routes with layout */}
+        <Route path="*" element={
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/book-consultation" element={<BookConsultationPage />} />
+              <Route path="/webinars" element={<WebinarsPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+            <BackToTop />
+          </Layout>
+        } />
+      </Routes>
     </Router>
   );
 }

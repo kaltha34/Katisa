@@ -23,6 +23,7 @@ const ContactPage = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -420,76 +421,67 @@ const ContactPage = () => {
         </div>
       </Section>
       
-      {/* FAQ Section */}
+      {/* FAQ Section - Accordion Style */}
       <Section>
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Find answers to common questions about our services and internship program.
-            </p>
+            <h2 className="text-3xl font-bold mb-2">FAQ</h2>
           </motion.div>
         </div>
         
-        <div className="max-w-3xl mx-auto">
-          <div className="space-y-4">
+        <div className="max-w-3xl mx-auto space-y-2">
+          {[
+            {
+              q: "What services do you offer?",
+              a: "We specialize in AI chatbot development, MVP websites and apps, automation tools, and intern-led product prototypes. Our focus is on delivering innovative AI-powered solutions tailored to your business needs."
+            },
+            {
+              q: "How can I apply for the internship program?",
+              a: "You can apply for our internship program by visiting the Internship page on our website and filling out the application form. We review applications on a rolling basis and will contact you if your profile matches our current needs."
+            },
+            {
+              q: "Do you work with international clients?",
+              a: "Yes, we work with clients from around the world. Our team is experienced in remote collaboration and we use modern tools to ensure smooth communication and project management regardless of location."
+            },
+            {
+              q: "What is your typical project timeline?",
+              a: "Project timelines vary depending on the scope and complexity. A simple MVP might take 4-6 weeks, while more complex AI solutions could take 2-3 months. We'll provide a detailed timeline during our initial consultation based on your specific requirements."
+            }
+          ].map((faq, index) => (
             <motion.div
+              key={index}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-white rounded-lg shadow-md p-6"
+              transition={{ delay: index * 0.05 }}
+              className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden"
             >
-              <h3 className="text-lg font-semibold mb-2">What services do you offer?</h3>
-              <p className="text-gray-600">
-                We specialize in AI chatbot development, MVP websites and apps, automation tools, and intern-led product prototypes. Our focus is on delivering innovative AI-powered solutions tailored to your business needs.
-              </p>
+              <button
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+              >
+                <span className="font-semibold text-gray-800">{faq.q}</span>
+                <span className={`text-primary text-xl transition-transform duration-300 ${openFaq === index ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
+              </button>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="px-4 pb-4"
+                >
+                  <p className="text-gray-600 text-sm">{faq.a}</p>
+                </motion.div>
+              )}
             </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white rounded-lg shadow-md p-6"
-            >
-              <h3 className="text-lg font-semibold mb-2">How can I apply for the internship program?</h3>
-              <p className="text-gray-600">
-                You can apply for our internship program by visiting the Internship page on our website and filling out the application form. We review applications on a rolling basis and will contact you if your profile matches our current needs.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="bg-white rounded-lg shadow-md p-6"
-            >
-              <h3 className="text-lg font-semibold mb-2">Do you work with international clients?</h3>
-              <p className="text-gray-600">
-                Yes, we work with clients from around the world. Our team is experienced in remote collaboration and we use modern tools to ensure smooth communication and project management regardless of location.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-white rounded-lg shadow-md p-6"
-            >
-              <h3 className="text-lg font-semibold mb-2">What is your typical project timeline?</h3>
-              <p className="text-gray-600">
-                Project timelines vary depending on the scope and complexity. A simple MVP might take 4-6 weeks, while more complex AI solutions could take 2-3 months. We'll provide a detailed timeline during our initial consultation based on your specific requirements.
-              </p>
-            </motion.div>
-          </div>
+          ))}
         </div>
       </Section>
 
