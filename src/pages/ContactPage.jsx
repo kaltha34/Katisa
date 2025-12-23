@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import { validateField, isValidEmail, isValidPhone, isNotEmpty } from '../utils/validation';
 import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
+import FeedbackForm from '../components/feedback/FeedbackForm';
+import FeedbackDisplay from '../components/feedback/FeedbackDisplay';
 
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
@@ -20,6 +22,7 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -488,6 +491,61 @@ const ContactPage = () => {
             </motion.div>
           </div>
         </div>
+      </Section>
+
+      {/* Feedback Section */}
+      <Section>
+        <div className="max-w-4xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold mb-4">Client Feedback</h2>
+            <p className="text-xl text-gray-600">
+              See what our clients have to say about working with us
+            </p>
+          </motion.div>
+          <FeedbackDisplay />
+        </div>
+
+        <div className="max-w-2xl mx-auto text-center">
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            onClick={() => setShowFeedbackForm(true)}
+            className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            ✍️ Share Your Feedback
+          </motion.button>
+        </div>
+
+        {/* Feedback Form Modal Popup */}
+        {showFeedbackForm && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowFeedbackForm(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowFeedbackForm(false)}
+                className="absolute top-4 right-4 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+              >
+                ✕
+              </button>
+              <FeedbackForm onSuccess={() => setShowFeedbackForm(false)} />
+            </motion.div>
+          </div>
+        )}
       </Section>
 
       {/* CTA Section */}

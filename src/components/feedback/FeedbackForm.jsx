@@ -1,242 +1,238 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiThumbsUp, FiMessageSquare } from 'react-icons/fi';
-import StarRating from './StarRating';
+import { FiStar, FiUser, FiMail, FiMessageSquare, FiSend } from 'react-icons/fi';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+import Button from '../ui/Button';
 
-const FeedbackForm = () => {
-  const [feedbackType, setFeedbackType] = useState('idea');
-  const [feedbackText, setFeedbackText] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [rating, setRating] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
+
+const FeedbackForm = ({ onSuccess }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    feedback: '',
+    rating: 0
+  });
+  const [hoveredRating, setHoveredRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  // Function to save idea to localStorage
-  const saveIdeaToLocalStorage = (idea) => {
-    try {
-      // Get existing ideas or initialize empty array
-      const existingIdeas = JSON.parse(localStorage.getItem('katisaCustomerIdeas')) || [];
-      
-      // Add new idea with unique ID and current date
-      const newIdea = {
-        ...idea,
-        id: Date.now(), // Use timestamp as unique ID
-        date: new Date().toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-      };
-      
-      // Add to beginning of array so newest ideas appear first
-      const updatedIdeas = [newIdea, ...existingIdeas];
-      
-      // Save back to localStorage
-      localStorage.setItem('katisaCustomerIdeas', JSON.stringify(updatedIdeas));
-      
-      // Dispatch storage event to notify other components
-      window.dispatchEvent(new Event('storage'));
-    } catch (err) {
-      console.error('Error saving idea to localStorage:', err);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleRatingClick = (rating) => {
+    setFormData(prev => ({
+      ...prev,
+      rating
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!feedbackText.trim() || !name.trim() || !email.trim()) {
-      setError('Please fill in all required fields');
+    if (formData.rating === 0) {
+      setSubmitError('Please select a rating');
       return;
     }
-    
+
     setIsSubmitting(true);
-    setError(null);
-    
-    // Create a hidden iframe to handle the form submission
-    const iframe = document.createElement('iframe');
-    iframe.name = 'feedback-submit-iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-    
-    // Set the form target to the iframe
-    e.target.target = 'feedback-submit-iframe';
-    
-    // Handle iframe load event to detect submission completion
-    iframe.onload = () => {
-      // Save to localStorage for display in CustomerIdeas component
-      saveIdeaToLocalStorage({
-        type: feedbackType,
-        content: feedbackText,
-        author: name,
-        rating: rating || 5, // Default to 5 if not rated
+    setSubmitError('');
+
+    try {
+      await addDoc(collection(db, 'feedback'), {
+        ...formData,
+        createdAt: serverTimestamp()
       });
-      
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFeedbackText('');
-      setName('');
-      setEmail('');
-      setRating(0);
-      
-      // Clean up iframe
+
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        feedback: '',
+        rating: 0
+      });
+
       setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    };
-    
-    // Handle errors
-    iframe.onerror = () => {
+        setSubmitSuccess(false);
+        if (onSuccess) onSuccess();
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      setSubmitError('Failed to submit feedback. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setError('Something went wrong. Please try again.');
-      
-      // Clean up iframe
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    };
-    
-    // Submit the form
-    e.target.submit();
+    }
   };
 
   const feedbackTypes = [
     { id: 'idea', label: 'Share an Idea', icon: <FiMessageSquare className="mr-2" /> },
-    { id: 'collaboration', label: 'Collaboration', icon: <FiThumbsUp className="mr-2" /> }
+    { id: 'collaboration', label: 'Collaboration', icon: <FiStar className="mr-2" /> }
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-2xl font-bold mb-4">Share Your Ideas</h3>
-      <p className="text-gray-600 mb-6">
-        Have an idea for working with us? Share your thoughts and we'll get back to you!
-      </p>
-      
-      {submitted ? (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl p-8 border border-gray-100"
+    >
+      <div className="text-center mb-8">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-green-50 text-green-700 p-4 rounded-md mb-4"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full mb-4"
         >
-          <p className="font-medium">Thank you for your feedback!</p>
-          <p>We appreciate your ideas and will review them soon.</p>
-          <button 
-            onClick={() => setSubmitted(false)} 
-            className="mt-2 text-sm font-medium text-primary hover:underline"
-          >
-            Submit another idea
-          </button>
+          <FiMessageSquare className="text-white text-2xl" />
         </motion.div>
-      ) : (
-        <form onSubmit={handleSubmit} action="https://formsubmit.co/katisatechnologies@gmail.com" method="POST" encType="multipart/form-data">
-          {error && (
-            <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4">
-              {error}
-            </div>
-          )}
-          
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">How would you rate your interest in working with us?</label>
-            <StarRating rating={rating} setRating={setRating} />
-          </div>
-          
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Feedback Type</label>
-            <div className="flex flex-wrap gap-3">
-              {feedbackTypes.map(type => (
-                <button
-                  key={type.id}
-                  type="button"
-                  onClick={() => setFeedbackType(type.id)}
-                  className={`flex items-center px-4 py-2 rounded-md ${
-                    feedbackType === type.id 
-                      ? 'bg-primary text-white' 
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                  }`}
-                >
-                  {type.icon} {type.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          <div className="mb-4">
-            <label htmlFor="feedbackText" className="block text-sm font-medium text-gray-700 mb-1">
-              Your Idea or Feedback
-            </label>
-            <textarea
-              id="feedbackText"
-              name="message"
-              rows="4"
-              value={feedbackText}
-              onChange={(e) => setFeedbackText(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
-              placeholder="Share your ideas for collaboration or feedback..."
-              required
-            ></textarea>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Your Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
-                required
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
-                required
-              />
-            </div>
-          </div>
-          
-          {/* Hidden FormSubmit fields */}
-          <input type="hidden" name="_subject" value={`New ${feedbackType} submission from Katisa website`} />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_replyto" value={email} />
-          <input type="hidden" name="feedback_type" value={feedbackType} />
-          <input type="hidden" name="rating" value={rating} />
-          <input type="hidden" name="_honey" value="" />
-          <input type="hidden" name="_next" value="#" />
-          
-          <button
-            type="submit"
-            className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors flex items-center justify-center"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Submitting...
-              </>
-            ) : 'Submit Feedback'}
-          </button>
-        </form>
+        <h3 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          Share Your Ideas
+        </h3>
+        <p className="text-gray-600">
+          We value your input! Share your ideas for collaboration or feedback on how we can work together.
+        </p>
+      </div>
+
+      {submitSuccess && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6"
+        >
+          <p className="text-green-800 text-center font-medium">
+            ✅ Thank you for your feedback! We'll review it shortly.
+          </p>
+        </motion.div>
       )}
-    </div>
+
+      {submitError && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6"
+        >
+          <p className="text-red-800 text-center">{submitError}</p>
+        </motion.div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Rating Section */}
+        <div className="text-center">
+          <label className="block text-lg font-semibold mb-3 text-gray-800">
+            How was your experience?
+          </label>
+          <div className="flex justify-center gap-2 mb-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <motion.button
+                key={star}
+                type="button"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => handleRatingClick(star)}
+                onMouseEnter={() => setHoveredRating(star)}
+                onMouseLeave={() => setHoveredRating(0)}
+                className="focus:outline-none transition-all duration-200"
+              >
+                <FiStar
+                  size={40}
+                  className={`transition-all duration-200 ${
+                    star <= (hoveredRating || formData.rating)
+                      ? 'fill-yellow-400 text-yellow-400 drop-shadow-lg'
+                      : 'text-gray-300'
+                  }`}
+                />
+              </motion.button>
+            ))}
+          </div>
+          <p className="text-sm text-gray-500">
+            {formData.rating === 0 && 'Click to rate'}
+            {formData.rating === 1 && '⭐ Poor'}
+            {formData.rating === 2 && '⭐⭐ Fair'}
+            {formData.rating === 3 && '⭐⭐⭐ Good'}
+            {formData.rating === 4 && '⭐⭐⭐⭐ Very Good'}
+            {formData.rating === 5 && '⭐⭐⭐⭐⭐ Excellent'}
+          </p>
+        </div>
+
+        {/* Name Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            <FiUser className="inline mr-2" />
+            Your Name *
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            placeholder="John Doe"
+          />
+        </div>
+
+        {/* Email Input */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            <FiMail className="inline mr-2" />
+            Email Address *
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            placeholder="john@example.com"
+          />
+        </div>
+
+        {/* Feedback Textarea */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            <FiMessageSquare className="inline mr-2" />
+            Your Feedback *
+          </label>
+          <textarea
+            name="feedback"
+            value={formData.feedback}
+            onChange={handleChange}
+            required
+            rows="5"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+            placeholder="Tell us about your experience working with us, or share any ideas for collaboration..."
+          ></textarea>
+        </div>
+
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={isSubmitting}
+          className="w-full text-lg py-4 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary"
+        >
+          {isSubmitting ? (
+            <>
+              <span className="inline-block animate-spin mr-2">⏳</span>
+              Submitting...
+            </>
+          ) : (
+            <>
+              <FiSend className="inline mr-2" />
+              Submit Feedback
+            </>
+          )}
+        </Button>
+      </form>
+    </motion.div>
   );
 };
 
