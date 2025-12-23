@@ -11,7 +11,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer-when-downgrade"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com https://*.calendly.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com https://*.calendly.com; img-src 'self' data: https: https://calendly.com https://*.calendly.com; font-src 'self' data: https://assets.calendly.com; connect-src 'self' https: https://calendly.com https://*.calendly.com; frame-src https://calendly.com https://*.calendly.com; frame-ancestors 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://meet.jit.si https://8x8.vc https://*.jitsi.net https://assets.calendly.com https://fonts.googleapis.com https://*.googleapis.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com https://*.calendly.com; font-src 'self' data: https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: https: http:; connect-src 'self' https://meet.jit.si https://8x8.vc https://*.jitsi.net wss://*.jitsi.net https://*.firebase.com https://*.firebaseio.com https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com https://api.emailjs.com https://api.qrserver.com; frame-src 'self' https://meet.jit.si https://8x8.vc https://*.jitsi.net https://calendly.com https://*.calendly.com; media-src 'self' https: data: blob:; worker-src 'self' blob:; frame-ancestors 'self';"
     
     # Custom metadata to override default React App metadata
     cache-control = '''
