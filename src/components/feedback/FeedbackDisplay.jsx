@@ -91,82 +91,58 @@ const FeedbackDisplay = () => {
   }
 
   return (
-    <div className="space-y-8">
-      {/* Statistics Section */}
+    <div className="space-y-6">
+      {/* Compact Statistics */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-r from-primary to-accent rounded-2xl p-8 text-white shadow-xl"
+        className="bg-gradient-to-r from-primary to-accent rounded-xl p-4 text-white shadow-lg"
       >
-        <div className="grid md:grid-cols-3 gap-6 text-center">
+        <div className="flex items-center justify-around text-center">
           <div>
-            <div className="text-5xl font-bold mb-2">{stats.average}</div>
-            <div className="flex justify-center mb-2">
+            <div className="text-3xl font-bold">{stats.average || "0"}</div>
+            <div className="flex justify-center mt-1">
               <StarRating rating={Math.round(parseFloat(stats.average))} />
             </div>
-            <div className="text-white/80">Average Rating</div>
           </div>
+          <div className="border-l border-white/30 h-12"></div>
           <div>
-            <div className="text-5xl font-bold mb-2">{stats.total}</div>
-            <div className="text-white/80">Total Reviews</div>
+            <div className="text-3xl font-bold">{stats.total}</div>
+            <div className="text-sm text-white/80">Reviews</div>
           </div>
+          <div className="border-l border-white/30 h-12"></div>
           <div>
-            <div className="text-5xl font-bold mb-2">
-              {stats.distribution[4]}
-            </div>
-            <div className="flex justify-center mb-2">
-              <StarRating rating={5} />
-            </div>
-            <div className="text-white/80">5-Star Reviews</div>
+            <div className="text-3xl font-bold">{stats.distribution[4]}</div>
+            <div className="text-sm text-white/80">5-Star</div>
           </div>
-        </div>
-
-        {/* Rating Distribution */}
-        <div className="mt-6 space-y-2">
-          {[5, 4, 3, 2, 1].map((star) => (
-            <div key={star} className="flex items-center gap-3">
-              <span className="text-sm w-12">{star} ⭐</span>
-              <div className="flex-1 bg-white/20 rounded-full h-2">
-                <div
-                  className="bg-white h-2 rounded-full transition-all duration-500"
-                  style={{
-                    width: `${stats.total > 0 ? (stats.distribution[star - 1] / stats.total) * 100 : 0}%`
-                  }}
-                ></div>
-              </div>
-              <span className="text-sm w-12 text-right">{stats.distribution[star - 1]}</span>
-            </div>
-          ))}
         </div>
       </motion.div>
 
-      {/* Feedback Cards */}
-      <div className="grid md:grid-cols-2 gap-6">
+      {/* Compact Feedback Cards */}
+      <div className="grid md:grid-cols-2 gap-4">
         {feedbacks.length === 0 ? (
-          <div className="col-span-2 text-center py-12 text-gray-500">
-            <p className="text-xl mb-2">No feedback yet</p>
-            <p>Be the first to share your experience!</p>
+          <div className="col-span-2 text-center py-8 text-gray-500">
+            <p>No feedback yet. Be the first!</p>
           </div>
         ) : (
           feedbacks.map((feedback, index) => (
             <motion.div
               key={feedback.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow"
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="bg-white rounded-lg shadow p-4 border border-gray-100"
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h4 className="font-bold text-lg text-gray-800">{feedback.name}</h4>
+                  <h4 className="font-semibold text-gray-800">{feedback.name}</h4>
                   <StarRating rating={feedback.rating} />
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-gray-400">
                   {feedback.createdAt?.toDate().toLocaleDateString()}
                 </div>
               </div>
-              <p className="text-gray-600 leading-relaxed">{feedback.feedback}</p>
+              <p className="text-gray-600 text-sm line-clamp-3">{feedback.feedback}</p>
             </motion.div>
           ))
         )}
