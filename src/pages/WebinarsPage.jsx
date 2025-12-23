@@ -291,11 +291,11 @@ const WebinarsPage = () => {
 
       {/* Hero */}
       <Section bgColor="bg-gradient-to-r from-primary to-accent">
-        <div className="text-center text-white py-12">
+        <div className="text-center text-white py-8 md:py-12 px-4">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl font-bold mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
           >
             🎓 Webinars & Workshops
           </motion.h1>
@@ -303,7 +303,7 @@ const WebinarsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-xl max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto"
           >
             Free online sessions on AI, Technology, and Innovation. Join from anywhere!
           </motion.p>
@@ -312,8 +312,8 @@ const WebinarsPage = () => {
 
       {/* Upcoming Webinars */}
       <Section>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Upcoming Sessions</h2>
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center">Upcoming Sessions</h2>
           
           {loading ? (
             <div className="text-center py-12">
@@ -326,32 +326,32 @@ const WebinarsPage = () => {
               <p className="text-gray-500">Check back soon for upcoming sessions!</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {webinars.map((webinar, index) => (
                 <motion.div
                   key={webinar.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-100 hover:shadow-xl transition-shadow"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">{webinar.title}</h3>
+                  <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-3">
+                    <div className="flex-1 w-full">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">{webinar.title}</h3>
                       <p className="text-gray-600 text-sm mb-4">{webinar.description}</p>
                     </div>
                     <img 
                       src={getQRCode(webinar.id)} 
                       alt="QR Code"
-                      className="w-20 h-20 rounded border"
+                      className="w-16 h-16 sm:w-20 sm:h-20 rounded border self-center sm:self-start"
                     />
                   </div>
 
                   <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-gray-600">
-                      <FiCalendar className="mr-2" />
-                      <span className="text-sm font-medium mr-2">Date:</span>
-                      <span className="text-sm">
+                    <div className="flex items-start sm:items-center text-gray-600">
+                      <FiCalendar className="mr-2 mt-0.5 sm:mt-0 flex-shrink-0" />
+                      <span className="text-sm font-medium mr-2 flex-shrink-0">Date:</span>
+                      <span className="text-sm break-words">
                         {webinar.date?.toDate ? 
                           webinar.date.toDate().toLocaleDateString('en-US', { 
                             weekday: 'long', 
@@ -364,8 +364,8 @@ const WebinarsPage = () => {
                       </span>
                     </div>
                     <div className="flex items-center text-gray-600">
-                      <FiClock className="mr-2" />
-                      <span className="text-sm font-medium mr-2">Time:</span>
+                      <FiClock className="mr-2 flex-shrink-0" />
+                      <span className="text-sm font-medium mr-2 flex-shrink-0">Time:</span>
                       <span className="text-sm">
                         {webinar.date?.toDate ? 
                           webinar.date.toDate().toLocaleTimeString('en-US', { 
@@ -378,19 +378,19 @@ const WebinarsPage = () => {
                       </span>
                     </div>
                     <div className="flex items-center text-gray-600">
-                      <FiUsers className="mr-2" />
-                      <span className="text-sm font-medium mr-2">Speaker:</span>
-                      <span className="text-sm">{webinar.speaker || 'TBD'}</span>
+                      <FiUsers className="mr-2 flex-shrink-0" />
+                      <span className="text-sm font-medium mr-2 flex-shrink-0">Speaker:</span>
+                      <span className="text-sm break-words">{webinar.speaker || 'TBD'}</span>
                     </div>
-                    <div className="flex items-center text-sm mt-2">
+                    <div className="flex flex-wrap items-center text-sm mt-2 gap-1">
                       <span className={`font-semibold ${(registrationCounts[webinar.id] || 0) >= 20 ? 'text-red-600' : 'text-green-600'}`}>
                         {20 - (registrationCounts[webinar.id] || 0)} seats left
                       </span>
-                      <span className="text-gray-500 ml-2">({registrationCounts[webinar.id] || 0}/20 registered)</span>
+                      <span className="text-gray-500">({registrationCounts[webinar.id] || 0}/20 registered)</span>
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     <Button
                       onClick={() => {
                         const count = registrationCounts[webinar.id] || 0;
@@ -454,18 +454,18 @@ const WebinarsPage = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-xl p-8 max-w-md w-full"
+            className="bg-white rounded-xl p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setShowRegistration(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-500 hover:text-gray-700 text-xl"
             >
               ✕
             </button>
 
-            <h3 className="text-2xl font-bold mb-2">Register for Webinar</h3>
-            <p className="text-gray-600 mb-6">{selectedWebinar?.title}</p>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2">Register for Webinar</h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 pr-6">{selectedWebinar?.title}</p>
 
             {registrationSuccess ? (
               <div className="text-center py-8">
@@ -485,7 +485,7 @@ const WebinarsPage = () => {
                 />
                 
                 <div className="space-y-2">
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <input
                       type="email"
                       placeholder="Email *"
@@ -495,7 +495,7 @@ const WebinarsPage = () => {
                         setRegistrationData({...registrationData, email: e.target.value});
                         setEmailVerified(false); // Reset verification if email changes
                       }}
-                      className="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
+                      className="w-full sm:flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary text-sm sm:text-base"
                     />
                     <Button
                       type="button"
@@ -516,14 +516,14 @@ const WebinarsPage = () => {
                   placeholder="Phone Number"
                   value={registrationData.phone}
                   onChange={(e) => setRegistrationData({...registrationData, phone: e.target.value})}
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary text-sm sm:text-base"
                 />
                 <input
                   type="text"
                   placeholder="University / Company"
                   value={registrationData.university}
                   onChange={(e) => setRegistrationData({...registrationData, university: e.target.value})}
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary text-sm sm:text-base"
                 />
                 <Button 
                   type="submit" 
@@ -541,22 +541,22 @@ const WebinarsPage = () => {
 
       {/* Features */}
       <Section bgColor="bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">Why Join Our Webinars?</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8">Why Join Our Webinars?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-white p-5 sm:p-6 rounded-lg shadow">
               <div className="text-4xl mb-3">🎯</div>
-              <h3 className="font-bold mb-2">Practical Skills</h3>
+              <h3 className="font-bold mb-2 text-base sm:text-lg">Practical Skills</h3>
               <p className="text-gray-600 text-sm">Learn real-world skills from industry experts</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
+            <div className="bg-white p-5 sm:p-6 rounded-lg shadow">
               <div className="text-4xl mb-3">💰</div>
-              <h3 className="font-bold mb-2">100% Free</h3>
+              <h3 className="font-bold mb-2 text-base sm:text-lg">100% Free</h3>
               <p className="text-gray-600 text-sm">All sessions are completely free to attend</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
+            <div className="bg-white p-5 sm:p-6 rounded-lg shadow">
               <div className="text-4xl mb-3">📜</div>
-              <h3 className="font-bold mb-2">Certificates</h3>
+              <h3 className="font-bold mb-2 text-base sm:text-lg">Certificates</h3>
               <p className="text-gray-600 text-sm">Get completion certificates for attended sessions</p>
             </div>
           </div>
@@ -572,13 +572,13 @@ const WebinarsPage = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-8 max-w-md w-full"
+            className="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-2xl font-bold mb-4">📧 Verify Your Email</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4">📧 Verify Your Email</h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
               We've sent a 6-digit verification code to<br/>
-              <strong>{registrationData.email}</strong>
+              <strong className="break-all">{registrationData.email}</strong>
             </p>
             <input
               type="text"
@@ -586,7 +586,7 @@ const WebinarsPage = () => {
               onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, '').slice(0, 6))}
               placeholder="Enter 6-digit code"
               maxLength="6"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3 text-center text-2xl tracking-widest focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3 text-center text-xl sm:text-2xl tracking-widest focus:ring-2 focus:ring-primary focus:border-transparent"
               onKeyPress={(e) => e.key === 'Enter' && verifyOtp()}
             />
             {otpError && (
@@ -633,11 +633,11 @@ const WebinarsPage = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-8 max-w-md w-full"
+            className="bg-white rounded-lg p-6 sm:p-8 max-w-md w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-2xl font-bold mb-4">🔒 Verify Your Registration</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4">🔒 Verify Your Registration</h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-4">
               Enter the email address you used to register for this webinar:
             </p>
             <input
@@ -645,7 +645,7 @@ const WebinarsPage = () => {
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
               placeholder="your@email.com"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-3 focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-3 focus:ring-2 focus:ring-orange-500 focus:border-transparent text-sm sm:text-base"
               onKeyPress={(e) => e.key === 'Enter' && verifyAndJoin()}
             />
             {emailError && (
