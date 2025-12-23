@@ -232,6 +232,7 @@ const WebinarsPage = () => {
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center text-gray-600">
                       <FiCalendar className="mr-2" />
+                      <span className="text-sm font-medium mr-2">Date:</span>
                       <span className="text-sm">
                         {webinar.date?.toDate ? 
                           webinar.date.toDate().toLocaleDateString('en-US', { 
@@ -246,10 +247,21 @@ const WebinarsPage = () => {
                     </div>
                     <div className="flex items-center text-gray-600">
                       <FiClock className="mr-2" />
-                      <span className="text-sm">{webinar.time || 'Time TBD'}</span>
+                      <span className="text-sm font-medium mr-2">Time:</span>
+                      <span className="text-sm">
+                        {webinar.date?.toDate ? 
+                          webinar.date.toDate().toLocaleTimeString('en-US', { 
+                            hour: '2-digit', 
+                            minute: '2-digit',
+                            hour12: true
+                          })
+                          : 'Time TBD'
+                        }
+                      </span>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <FiUsers className="mr-2" />
+                      <span className="text-sm font-medium mr-2">Speaker:</span>
                       <span className="text-sm">{webinar.speaker || 'TBD'}</span>
                     </div>
                     <div className="flex items-center text-sm mt-2">
