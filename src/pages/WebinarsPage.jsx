@@ -24,10 +24,18 @@ const WebinarsPage = () => {
   const [emailError, setEmailError] = useState('');
   const [pendingWebinar, setPendingWebinar] = useState(null);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     fetchWebinars();
     fetchRegistrationCounts();
+    
+    // Update current time every minute to check if webinars are live
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update every minute
+    
+    return () => clearInterval(timer);
   }, []);
 
   const fetchRegistrationCounts = async () => {
@@ -71,6 +79,18 @@ const WebinarsPage = () => {
       console.error('Error fetching webinars:', error);
       setLoading(false);
     }
+  };
+
+  // Check if webinar is live based on scheduled time
+  // Goes live 5 minutes before scheduled time and stays live for 3 hours
+  const isWebinarLive = (webinar) => {
+    if (!webinar.date?.toDate) return false;
+    
+    const webinarStart = webinar.date.toDate();
+    const fiveMinutesBefore = new Date(webinarStart.getTime() - 5 * 60 * 1000);
+    const threeHoursAfter = new Date(webinarStart.getTime() + 3 * 60 * 60 * 1000);
+    
+    return currentTime >= fiveMinutesBefore && currentTime <= threeHoursAfter;
   };
 
   const handleRegister = async (e) => {
@@ -275,7 +295,7 @@ const WebinarsPage = () => {
                           ? 'Registration Closed'
                           : 'Register Now'}
                     </Button>
-                    {webinar.isLive && (
+                    {isWebinarLive(webinar) && (
                       <Button
                         onClick={() => joinWebinar(webinar)}
                         className="flex-1 bg-green-500 hover:bg-green-600"
