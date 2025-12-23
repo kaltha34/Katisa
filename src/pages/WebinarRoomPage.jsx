@@ -40,7 +40,11 @@ const WebinarRoomPage = () => {
         startWithVideoMuted: false,
         enableWelcomePage: false,
         prejoinPageEnabled: true,
-        disableDeepLinking: true,
+        disableDeepLinking: false,
+        enableNoisyMicDetection: false,
+      },
+      userInfo: {
+        displayName: 'Guest',
       },
       interfaceConfigOverwrite: {
         SHOW_JITSI_WATERMARK: false,
