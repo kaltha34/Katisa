@@ -495,28 +495,24 @@ const ContactPage = () => {
 
       {/* Feedback Section */}
       <Section>
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="text-center mb-6"
           >
-            <h2 className="text-4xl font-bold mb-4">Client Feedback</h2>
-            <p className="text-xl text-gray-600">
-              See what our clients have to say about working with us
-            </p>
+            <h2 className="text-3xl font-bold mb-2">Client Feedback</h2>
           </motion.div>
           <FeedbackDisplay />
         </div>
 
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-2xl mx-auto text-center mt-6">
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             onClick={() => setShowFeedbackForm(true)}
-            className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-lg text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            className="bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
           >
             ✍️ Share Your Feedback
           </motion.button>
