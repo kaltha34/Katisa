@@ -26,6 +26,12 @@ const WebinarsPage = () => {
   const [pendingWebinar, setPendingWebinar] = useState(null);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [showOtpVerification, setShowOtpVerification] = useState(false);
+  const [generatedOtp, setGeneratedOtp] = useState('');
+  const [otpInput, setOtpInput] = useState('');
+  const [otpError, setOtpError] = useState('');
+  const [otpSending, setOtpSending] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
 
   useEffect(() => {
     fetchWebinars();
@@ -94,10 +100,93 @@ const WebinarsPage = () => {
     return currentTime >= fiveMinutesBefore && currentTime <= threeHoursAfter;
   };
 
+  const sendOtp = async () => {
+    if (!registrationData.email) {
+      alert('Please enter your email address');
+      return;
+    }
+
+    setOtpSending(true);
+    setOtpError('');
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(otp);
+
+    try {
+      // Send OTP email using dedicated OTP template
+      await emailjs.send(
+        'service_jnqvdcz',
+        'template_l14v6m1', // OTP verification template
+        {
+          to_email: registrationData.email,
+          to_name: registrationData.name || 'User',
+          otp_code: otp
+        },
+        'AjK9HQim3RbpwOLW9'
+      );
+
+      setShowOtpVerification(true);
+      setOtpSending(false);
+      
+      // Auto-expire OTP after 5 minutes
+      setTimeout(() => {
+        setGeneratedOtp('');
+        setOtpError('OTP expired. Please request a new one.');
+      }, 5 * 60 * 1000);
+    } catch (error) {
+      console.error('Failed to send OTP:', error);
+      setOtpError('Failed to send OTP. Please check your email and try again.');
+      setOtpSending(false);
+    }
+  };
+
+  const verifyOtp = () => {
+    if (otpInput === generatedOtp) {
+      setEmailVerified(true);
+      setShowOtpVerification(false);
+      setOtpError('');
+      alert('✅ Email verified successfully! Complete your registration.');
+    } else {
+      setOtpError('❌ Invalid OTP. Please check and try again.');
+    }
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // Check if email is verified
+    if (!emailVerified) {
+      alert('⚠️ Please verify your email first by clicking "Verify Email"');
+      return;
+    }
     
     try {
+      // Check for duplicate email or phone for this webinar
+      const registrationsRef = collection(db, 'webinar-registrations');
+      const existingRegistrations = await getDocs(registrationsRef);
+      
+      let duplicateFound = false;
+      let duplicateType = '';
+      
+      existingRegistrations.forEach((doc) => {
+        const data = doc.data();
+        if (data.webinarId === selectedWebinar.id) {
+          if (data.email.toLowerCase() === registrationData.email.toLowerCase()) {
+            duplicateFound = true;
+            duplicateType = 'email';
+          } else if (registrationData.phone && data.phone === registrationData.phone) {
+            duplicateFound = true;
+            duplicateType = 'phone';
+          }
+        }
+      });
+
+      if (duplicateFound) {
+        alert(`❌ This ${duplicateType} is already registered for this webinar!`);
+        return;
+      }
+
       // Generate unique access token for this registration
       const accessToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       
@@ -322,6 +411,9 @@ const WebinarsPage = () => {
                         
                         setSelectedWebinar(webinar);
                         setShowRegistration(true);
+                        setEmailVerified(false); // Reset verification for new registration
+                        setOtpInput('');
+                        setOtpError('');
                       }}
                       className="flex-1"
                       variant="primary"
@@ -391,14 +483,34 @@ const WebinarsPage = () => {
                   onChange={(e) => setRegistrationData({...registrationData, name: e.target.value})}
                   className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
                 />
-                <input
-                  type="email"
-                  placeholder="Email *"
-                  required
-                  value={registrationData.email}
-                  onChange={(e) => setRegistrationData({...registrationData, email: e.target.value})}
-                  className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
-                />
+                
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      placeholder="Email *"
+                      required
+                      value={registrationData.email}
+                      onChange={(e) => {
+                        setRegistrationData({...registrationData, email: e.target.value});
+                        setEmailVerified(false); // Reset verification if email changes
+                      }}
+                      className="flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
+                    />
+                    <Button
+                      type="button"
+                      onClick={sendOtp}
+                      disabled={otpSending || emailVerified}
+                      className={`whitespace-nowrap ${emailVerified ? 'bg-green-500' : ''}`}
+                    >
+                      {otpSending ? 'Sending...' : emailVerified ? '✓ Verified' : 'Verify Email'}
+                    </Button>
+                  </div>
+                  {emailVerified && (
+                    <p className="text-sm text-green-600">✅ Email verified successfully!</p>
+                  )}
+                </div>
+
                 <input
                   type="tel"
                   placeholder="Phone Number"
@@ -413,8 +525,13 @@ const WebinarsPage = () => {
                   onChange={(e) => setRegistrationData({...registrationData, university: e.target.value})}
                   className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary"
                 />
-                <Button type="submit" className="w-full" variant="primary">
-                  Complete Registration
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  variant="primary"
+                  disabled={!emailVerified}
+                >
+                  {emailVerified ? 'Complete Registration' : '⚠️ Verify Email First'}
                 </Button>
               </form>
             )}
@@ -446,7 +563,68 @@ const WebinarsPage = () => {
         </div>
       </Section>
 
-      {/* Email Verification Modal */}
+      {/* OTP Verification Modal */}
+      {showOtpVerification && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowOtpVerification(false)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-lg p-8 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-2xl font-bold mb-4">📧 Verify Your Email</h3>
+            <p className="text-gray-600 mb-4">
+              We've sent a 6-digit verification code to<br/>
+              <strong>{registrationData.email}</strong>
+            </p>
+            <input
+              type="text"
+              value={otpInput}
+              onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, '').slice(0, 6))}
+              placeholder="Enter 6-digit code"
+              maxLength="6"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-3 text-center text-2xl tracking-widest focus:ring-2 focus:ring-primary focus:border-transparent"
+              onKeyPress={(e) => e.key === 'Enter' && verifyOtp()}
+            />
+            {otpError && (
+              <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-3 text-sm">
+                {otpError}
+              </div>
+            )}
+            <div className="flex gap-3">
+              <Button
+                onClick={() => {
+                  setShowOtpVerification(false);
+                  setOtpInput('');
+                  setOtpError('');
+                }}
+                variant="secondary"
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={verifyOtp}
+                className="flex-1"
+                disabled={otpInput.length !== 6}
+              >
+                Verify Code
+              </Button>
+            </div>
+            <button
+              onClick={sendOtp}
+              className="w-full mt-4 text-sm text-primary hover:underline"
+            >
+              Didn't receive code? Resend
+            </button>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Email Verification Modal (for joining) */}
       {showEmailPrompt && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
