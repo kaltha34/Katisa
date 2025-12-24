@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
-import { FiTarget, FiEye, FiTrendingUp, FiUsers, FiAward, FiGlobe } from 'react-icons/fi';
+import { FiTarget, FiEye, FiTrendingUp, FiUsers, FiAward, FiGlobe, FiLinkedin, FiInstagram } from 'react-icons/fi';
 import { fadeInUp, staggerContainer } from '../utils/animations';
 import { formatMetaDescription, combineKeywords } from '../utils/seo';
 
@@ -19,7 +19,11 @@ const AboutPage = () => {
       name: 'Kalhara Thabrew',
       title: 'Founder & CEO',
       bio: 'Visionary tech entrepreneur with 10+ years of experience in AI and software development, leading Katisa Technologies into the future.',
-      image: kalharaImage
+      image: kalharaImage,
+      socials: {
+        instagram: 'https://www.instagram.com/kali_x_sa/',
+        linkedin: 'https://www.linkedin.com/in/kalhara-thabrew-288565258/'
+      }
     }
   ];
 
@@ -232,7 +236,35 @@ const AboutPage = () => {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                 <p className="text-primary font-medium mb-3">{member.title}</p>
-                <p className="text-gray-600">{member.bio}</p>
+                <p className="text-gray-600 mb-4">{member.bio}</p>
+                
+                {/* Social Media Links */}
+                {member.socials && (
+                  <div className="flex gap-3 pt-3 border-t border-gray-200">
+                    {member.socials.instagram && (
+                      <a 
+                        href={member.socials.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-pink-600 transition-colors"
+                        aria-label="Instagram"
+                      >
+                        <FiInstagram size={20} />
+                      </a>
+                    )}
+                    {member.socials.linkedin && (
+                      <a 
+                        href={member.socials.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 hover:text-blue-600 transition-colors"
+                        aria-label="LinkedIn"
+                      >
+                        <FiLinkedin size={20} />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
