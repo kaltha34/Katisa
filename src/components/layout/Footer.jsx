@@ -46,7 +46,7 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-secondary">What We Build</h4>
             <ul className="space-y-3">
               <li><Link to="/services" className="text-gray-300 hover:text-primary transition-colors hover:translate-x-2 inline-block duration-300">→ Business Websites</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-secondary transition-colors hover:translate-x-2 inline-block duration-300">→ IDORA - NFC Smart Cards</Link></li>
+              <li><a href="https://idora.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-secondary transition-colors hover:translate-x-2 inline-block duration-300">→ IDORA - NFC Smart Cards</a></li>
               <li><Link to="/services" className="text-gray-300 hover:text-accent transition-colors hover:translate-x-2 inline-block duration-300">→ Inventory Management</Link></li>
               <li><Link to="/services" className="text-gray-300 hover:text-pink transition-colors hover:translate-x-2 inline-block duration-300">→ Custom Solutions</Link></li>
             </ul>

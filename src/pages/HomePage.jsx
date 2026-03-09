@@ -27,7 +27,7 @@ const HomePage = () => {
       title: 'IDORA - NFC Smart Cards',
       description: 'Our flagship product: Smart NFC business cards for instant contact sharing. Tap once to share everything.',
       icon: FiCpu,
-      link: '/services'
+      link: 'https://idora.netlify.app/'
     },
     {
       title: 'Inventory Management',
