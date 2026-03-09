@@ -275,7 +275,7 @@ const BlogPostPage = () => {
                 </div>
               </div>
               <p className="text-gray-600 text-sm">
-                Expert in AI and technology trends with over 5 years of experience in the tech industry.
+                Expert in AI and technology trends with over 3 years of experience in the tech industry.
               </p>
             </div>
             

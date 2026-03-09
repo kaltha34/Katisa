@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiCode, FiCpu, FiLayers, FiPackage, FiMessageSquare, FiCheckCircle, FiUsers, FiAward, FiClock } from 'react-icons/fi';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 // Import logo and founder image
 import logoImage from '../assets/images/Logo.png';
@@ -16,6 +18,35 @@ import FeedbackDisplay from '../components/feedback/FeedbackDisplay';
 
 const HomePage = () => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [happyClientsCount, setHappyClientsCount] = useState('...');
+  
+  useEffect(() => {
+    fetchHappyClientsCount();
+  }, []);
+
+  const fetchHappyClientsCount = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'feedback'));
+      const ratings = [];
+      
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        ratings.push(data.rating);
+      });
+
+      if (ratings.length > 0) {
+        // Count satisfied clients (4 and 5 star ratings)
+        const satisfiedCount = ratings.filter(rating => rating >= 4).length;
+        setHappyClientsCount(satisfiedCount);
+      } else {
+        setHappyClientsCount(0);
+      }
+    } catch (error) {
+      console.error('Error fetching happy clients count:', error);
+      setHappyClientsCount('N/A');
+    }
+  };
+
   // Sample services data
   const services = [
     {
@@ -141,7 +172,7 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="text-4xl font-bold text-primary mb-2">5+</div>
+            <div className="text-4xl font-bold text-primary mb-2">3+</div>
             <div className="text-gray-600">Years Experience</div>
           </motion.div>
           <motion.div
@@ -150,7 +181,7 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="text-4xl font-bold text-secondary mb-2">50+</div>
+            <div className="text-4xl font-bold text-secondary mb-2">6+</div>
             <div className="text-gray-600">Projects Delivered</div>
           </motion.div>
           <motion.div
@@ -159,8 +190,8 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="text-4xl font-bold text-accent mb-2">100%</div>
-            <div className="text-gray-600">Client Satisfaction</div>
+            <div className="text-4xl font-bold text-accent mb-2">{happyClientsCount}+</div>
+            <div className="text-gray-600">Happy Clients</div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -207,7 +238,7 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold mb-6">Built on Trust & Expertise</h2>
             <p className="text-gray-600 mb-6">
               Founded and led by <span className="font-semibold text-primary">Kalhara Thabrew</span>, Katisa Technologies 
-              is a trusted partner for businesses in Sri Lanka looking to digitize their operations. With over 3+ years of 
+              is a trusted partner for businesses in Sri Lanka looking to digitize their operations. With over 3 years of 
               experience in software development, we understand what businesses need.
             </p>
             <p className="text-gray-600 mb-6">
@@ -221,7 +252,7 @@ const HomePage = () => {
                 <FiCheckCircle className="text-secondary mt-1 mr-3 flex-shrink-0" size={20} />
                 <div>
                   <p className="font-semibold">Proven Track Record</p>
-                  <p className="text-gray-600 text-sm">50+ successful projects delivered to satisfied clients</p>
+                  <p className="text-gray-600 text-sm">6+ successful projects delivered to satisfied clients</p>
                 </div>
               </div>
               <div className="flex items-start">

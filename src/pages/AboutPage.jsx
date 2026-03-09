@@ -19,7 +19,7 @@ const AboutPage = () => {
     {
       name: 'Kalhara Thabrew',
       title: 'Founder & CEO',
-      bio: 'Visionary tech entrepreneur with 10+ years of experience in AI and software development, leading Katisa Technologies into the future.',
+      bio: 'Visionary tech entrepreneur with 3+ years of experience in AI and software development, leading Katisa Technologies into the future.',
       image: kalharaImage,
       socials: {
         instagram: 'https://www.instagram.com/kali_x_sa/',
@@ -101,7 +101,7 @@ const AboutPage = () => {
             </p>
             <p className="text-gray-600 mb-4">
               Our founder, Kalhara Thabrew, recognized the growing demand for innovative AI solutions and saw an 
-              opportunity to showcase Sri Lankan talent on the global stage. With over 10 years of experience in 
+              opportunity to showcase Sri Lankan talent on the global stage. With over 3 years of experience in 
               software development and AI, he set out to build a company that delivers exceptional results.
             </p>
             <p className="text-gray-600 mb-4">
