@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiCode, FiCpu, FiLayers, FiPackage, FiMessageSquare } from 'react-icons/fi';
+import { FiCode, FiCpu, FiLayers, FiPackage, FiMessageSquare, FiCheckCircle, FiUsers, FiAward, FiClock } from 'react-icons/fi';
 
-// Import logo image
+// Import logo and founder image
 import logoImage from '../assets/images/Logo.png';
+import founderImage from '../assets/images/Kalhara thabrew.jpeg';
 
 import SEO from '../components/ui/SEO';
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import FeedbackForm from '../components/feedback/FeedbackForm';
+import FeedbackDisplay from '../components/feedback/FeedbackDisplay';
 
 const HomePage = () => {
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   // Sample services data
   const services = [
     {
@@ -126,8 +130,50 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <Section>
+      {/* Trust Stats Section */}
+      <Section bgColor="bg-white">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="text-4xl font-bold text-primary mb-2">5+</div>
+            <div className="text-gray-600">Years Experience</div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <div className="text-4xl font-bold text-secondary mb-2">50+</div>
+            <div className="text-gray-600">Projects Delivered</div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="text-4xl font-bold text-accent mb-2">100%</div>
+            <div className="text-gray-600">Client Satisfaction</div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+            <div className="text-gray-600">Support Available</div>
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Founder & About Section */}
+      <Section bgColor="bg-gray-50">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -135,18 +181,19 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
-            <h2 className="text-3xl font-bold mb-6">About Katisa Technologies</h2>
-            <p className="text-gray-600 mb-6">
-              Katisa Technologies is a tech startup based in Sri Lanka, focused on building practical software solutions for businesses. 
-              We create websites, inventory systems, simple applications, and our flagship product IDORA - smart NFC business cards.
-            </p>
-            <p className="text-gray-600 mb-6">
-              Our mission is to help businesses digitize their operations with simple, effective tools that work. 
-              Whether you need a website, a custom application, or IDORA cards for your team, we're here to build it.
-            </p>
-            <Button to="/about" variant="outline">
-              Learn More About Us
-            </Button>
+            <div className="relative">
+              <div className="rounded-xl overflow-hidden shadow-xl">
+                <img 
+                  src={founderImage} 
+                  alt="Kalhara Thabrew - Founder & CEO" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-primary text-white p-4 rounded-lg shadow-lg">
+                <p className="font-bold">Kalhara Thabrew</p>
+                <p className="text-sm">Founder & CEO</p>
+              </div>
+            </div>
           </motion.div>
           
           <motion.div
@@ -154,42 +201,119 @@ const HomePage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="relative"
           >
-            <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" 
-                alt="Team collaboration" 
-                className="w-full h-full object-cover"
-              />
+            <h2 className="text-3xl font-bold mb-6">Built on Trust & Expertise</h2>
+            <p className="text-gray-600 mb-6">
+              Founded and led by <span className="font-semibold text-primary">Kalhara Thabrew</span>, Katisa Technologies 
+              is a trusted partner for businesses in Sri Lanka looking to digitize their operations. With over 10 years of 
+              experience in software development, we understand what businesses need.
+            </p>
+            <p className="text-gray-600 mb-6">
+              We don't just build software—we build solutions that work. From simple business websites to custom inventory 
+              systems and our innovative IDORA NFC smart cards, every project is delivered with attention to detail and 
+              commitment to quality.
+            </p>
+            
+            <div className="space-y-4 mb-6">
+              <div className="flex items-start">
+                <FiCheckCircle className="text-secondary mt-1 mr-3 flex-shrink-0" size={20} />
+                <div>
+                  <p className="font-semibold">Proven Track Record</p>
+                  <p className="text-gray-600 text-sm">50+ successful projects delivered to satisfied clients</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <FiCheckCircle className="text-secondary mt-1 mr-3 flex-shrink-0" size={20} />
+                <div>
+                  <p className="font-semibold">Local Expertise</p>
+                  <p className="text-gray-600 text-sm">Based in Sri Lanka, we understand local business needs</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <FiCheckCircle className="text-secondary mt-1 mr-3 flex-shrink-0" size={20} />
+                <div>
+                  <p className="font-semibold">Transparent Process</p>
+                  <p className="text-gray-600 text-sm">Clear communication and honest pricing, always</p>
+                </div>
+              </div>
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-accent text-white p-4 rounded-lg shadow-lg">
-              <p className="font-bold">5+ Years</p>
-              <p className="text-sm">of Excellence</p>
-            </div>
+            
+            <Button to="/about" variant="primary">
+              Learn More About Us
+            </Button>
           </motion.div>
         </div>
       </Section>
 
-      {/* Interactive Code Playground Section */}
-      <Section bgColor="bg-gradient-to-r from-gray-900 to-gray-800">
-        <div className="text-center mb-8">
+      {/* Why Choose Us Section */}
+      <Section>
+        <div className="text-center mb-12">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-white">Try Our Code Playground</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              Experience our technical expertise firsthand. Modify the code below and see the results in real-time.
+            <h2 className="text-3xl font-bold mb-4">Why Choose Katisa Technologies?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We're not just another software company. Here's what makes us different.
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow"
+          >
+            <div className="text-primary mb-4">
+              <FiAward size={40} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Quality Guaranteed</h3>
+            <p className="text-gray-600">
+              Every project is built with care and tested thoroughly. We stand behind our work with ongoing support.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow"
+          >
+            <div className="text-secondary mb-4">
+              <FiClock size={40} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">On-Time Delivery</h3>
+            <p className="text-gray-600">
+              We respect your time and deadlines. Projects are delivered on schedule, without compromising quality.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow"
+          >
+            <div className="text-accent mb-4">
+              <FiUsers size={40} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Personal Support</h3>
+            <p className="text-gray-600">
+              You're not just a ticket number. Get direct access to our team for support and updates.
             </p>
           </motion.div>
         </div>
       </Section>
 
       {/* Services Section */}
-      <Section bgColor="bg-gray-50">
+      <Section bgColor="bg-white">
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -223,6 +347,60 @@ const HomePage = () => {
             View All Services
           </Button>
         </div>
+      </Section>
+
+      {/* Client Feedback Section */}
+      <Section bgColor="bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-6"
+          >
+            <h2 className="text-3xl font-bold mb-2">What Our Clients Say</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Real feedback from real clients. See what businesses say about working with us.
+            </p>
+          </motion.div>
+          <FeedbackDisplay />
+        </div>
+
+        <div className="max-w-2xl mx-auto text-center mt-6">
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            onClick={() => setShowFeedbackForm(true)}
+            className="bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+          >
+            ✍️ Share Your Feedback
+          </motion.button>
+        </div>
+
+        {/* Feedback Form Modal Popup */}
+        {showFeedbackForm && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowFeedbackForm(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowFeedbackForm(false)}
+                className="absolute top-4 right-4 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
+              >
+                ✕
+              </button>
+              <FeedbackForm onSuccess={() => setShowFeedbackForm(false)} />
+            </motion.div>
+          </div>
+        )}
       </Section>
 
       {/* CTA Section */}

@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import { validateField, isValidEmail, isValidPhone, isNotEmpty } from '../utils/validation';
 import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook, FiInstagram } from 'react-icons/fi';
-import FeedbackForm from '../components/feedback/FeedbackForm';
-import FeedbackDisplay from '../components/feedback/FeedbackDisplay';
 
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
@@ -22,7 +20,6 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   
   const handleChange = (e) => {
@@ -485,56 +482,7 @@ const ContactPage = () => {
         </div>
       </Section>
 
-      {/* Feedback Section */}
-      <Section>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-6"
-          >
-            <h2 className="text-3xl font-bold mb-2">Client Feedback</h2>
-          </motion.div>
-          <FeedbackDisplay />
-        </div>
 
-        <div className="max-w-2xl mx-auto text-center mt-6">
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            onClick={() => setShowFeedbackForm(true)}
-            className="bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-          >
-            ✍️ Share Your Feedback
-          </motion.button>
-        </div>
-
-        {/* Feedback Form Modal Popup */}
-        {showFeedbackForm && (
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-            onClick={() => setShowFeedbackForm(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setShowFeedbackForm(false)}
-                className="absolute top-4 right-4 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors"
-              >
-                ✕
-              </button>
-              <FeedbackForm onSuccess={() => setShowFeedbackForm(false)} />
-            </motion.div>
-          </div>
-        )}
-      </Section>
 
       {/* CTA Section */}
       <Section bgColor="bg-primary">
