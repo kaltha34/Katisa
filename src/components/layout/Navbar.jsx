@@ -5,6 +5,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 
 // Import logo image
 import logoImage from '../../assets/images/Logo.png';
+import idoraLogo from '../../assets/images/Idora.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +45,10 @@ const Navbar = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="flex items-center"
+              className="flex items-center gap-2"
             >
-              <img src={logoImage} alt="Katisa Technologies Logo" className="h-10 mr-2" />
+              <img src={logoImage} alt="Katisa Technologies Logo" className="h-10" />
+              <img src={idoraLogo} alt="IDORA Logo" className="h-9" />
             </motion.div>
           </Link>
 

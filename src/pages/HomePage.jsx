@@ -4,6 +4,7 @@ import { FiCode, FiCpu, FiLayers, FiPackage, FiMessageSquare, FiCheckCircle, FiU
 
 // Import logo and founder image
 import logoImage from '../assets/images/Logo.png';
+import idoraLogo from '../assets/images/Idora.png';
 import founderImage from '../assets/images/Kalhara thabrew.jpeg';
 
 import SEO from '../components/ui/SEO';
@@ -77,9 +78,10 @@ const HomePage = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4"
+              className="mb-4 flex items-center gap-6"
             >
               <img src={logoImage} alt="Katisa Technologies Logo" style={{ height: '200px', width: 'auto' }} />
+              <img src={idoraLogo} alt="IDORA Logo" style={{ height: '180px', width: 'auto' }} />
             </motion.div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
               <motion.span
@@ -205,7 +207,7 @@ const HomePage = () => {
             <h2 className="text-3xl font-bold mb-6">Built on Trust & Expertise</h2>
             <p className="text-gray-600 mb-6">
               Founded and led by <span className="font-semibold text-primary">Kalhara Thabrew</span>, Katisa Technologies 
-              is a trusted partner for businesses in Sri Lanka looking to digitize their operations. With over 10 years of 
+              is a trusted partner for businesses in Sri Lanka looking to digitize their operations. With over 3+ years of 
               experience in software development, we understand what businesses need.
             </p>
             <p className="text-gray-600 mb-6">

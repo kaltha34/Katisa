@@ -8,6 +8,7 @@ import { formatMetaDescription, combineKeywords } from '../utils/seo';
 // Import images directly
 import kalharaImage from '../assets/images/Kalhara thabrew.jpeg';
 import logoImage from '../assets/images/Logo.png';
+import idoraLogo from '../assets/images/Idora.png';
 
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
@@ -73,7 +74,8 @@ const AboutPage = () => {
             className="max-w-3xl"
           >
             <div className="flex items-center mb-6">
-              <img src={logoImage} alt="Katisa Technologies Logo" className="h-16 mr-4" />
+              <img src={logoImage} alt="Katisa Technologies Logo" className="h-16 mr-3" />
+              <img src={idoraLogo} alt="IDORA Logo" className="h-14 mr-4" />
               <h1 className="text-4xl md:text-5xl font-bold">About Us</h1>
             </div>
             <p className="text-xl mb-8">
