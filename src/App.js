@@ -13,6 +13,7 @@ import ContactPage from './pages/ContactPage';
 import BookConsultationPage from './pages/BookConsultationPage';
 import WebinarsPage from './pages/WebinarsPage';
 import WebinarRoomPage from './pages/WebinarRoomPage';
+import JoinUsPage from './pages/JoinUsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // UI Components
@@ -36,6 +37,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/book-consultation" element={<BookConsultationPage />} />
               <Route path="/webinars" element={<WebinarsPage />} />
+              <Route path="/join-us" element={<JoinUsPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <BackToTop />

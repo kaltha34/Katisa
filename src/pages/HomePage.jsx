@@ -161,6 +161,57 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Recruitment Announcement Banner */}
+      <Section className="py-10 bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 border-y-4 border-yellow-500 shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <motion.div 
+            className="flex flex-col md:flex-row items-center justify-center gap-6"
+            animate={{ 
+              scale: [1, 1.02, 1],
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <motion.span 
+                className="text-5xl"
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+              >
+              </motion.span>
+              <div className="text-left">
+                <p className="text-white font-extrabold text-2xl md:text-3xl drop-shadow-lg">
+                  We're Building IDORA!
+                </p>
+                <p className="text-white text-lg md:text-xl font-semibold">
+                  Join as an Early Contributor & Earn Equity
+                </p>
+              </div>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button 
+                to="/join-us" 
+                className="bg-white text-orange-600 hover:bg-gray-100 font-bold px-8 py-4 shadow-2xl text-lg border-2 border-white hover:border-orange-600 transition-all"
+              >
+                Apply Now →
+              </Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </Section>
+
       {/* Trust Stats Section */}
       <Section bgColor="bg-white">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">

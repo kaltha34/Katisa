@@ -31,6 +31,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
     { name: 'Webinars', path: '/webinars' },
+    { name: 'Join Us', path: '/join-us', highlight: true },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -60,10 +61,10 @@ const Navbar = () => {
               >
                 <Link
                   to={link.path}
-                  className="font-medium relative group"
+                  className={`font-medium relative group ${link.highlight ? 'px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/30' : ''}`}
                 >
-                  <span className="text-dark group-hover:text-primary transition-colors duration-300">{link.name}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                  <span className={`${link.highlight ? 'text-primary font-semibold' : 'text-dark'} group-hover:text-primary transition-colors duration-300`}>{link.name}</span>
+                  {!link.highlight && <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>}
                 </Link>
               </motion.div>
             ))}
@@ -115,11 +116,11 @@ const Navbar = () => {
               >
                 <Link
                   to={link.path}
-                  className="py-3 block font-medium text-dark hover:text-primary transition-colors relative group"
+                  className={`py-3 block font-medium transition-colors relative group ${link.highlight ? 'text-primary font-bold bg-primary/5 px-4 rounded-lg' : 'text-dark hover:text-primary'}`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <span>{link.name}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-1/3 transition-all duration-300"></span>
+                  <span>{link.name} {link.highlight && '🚀'}</span>
+                  {!link.highlight && <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-1/3 transition-all duration-300"></span>}
                 </Link>
               </motion.div>
             ))}
