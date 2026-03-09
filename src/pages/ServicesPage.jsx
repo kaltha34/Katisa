@@ -140,7 +140,7 @@ const ServicesPage = () => {
                 title={service.title} 
                 description={service.description} 
                 icon={service.icon}
-                link={service.id === 'idora-nfc' ? 'https://idora.netlify.app/' : `#${service.id}`}
+                link={service.id === 'idora-nfc' ? 'https://idora.netlify.app/' : null}
               />
             </motion.div>
           ))}
