@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiCode, FiCpu, FiLayers } from 'react-icons/fi';
+import { FiCode, FiCpu, FiLayers, FiPackage, FiMessageSquare } from 'react-icons/fi';
 
 // Import logo image
 import logoImage from '../assets/images/Logo.png';
@@ -14,21 +14,27 @@ const HomePage = () => {
   // Sample services data
   const services = [
     {
-      title: 'AI Chatbot Development',
-      description: 'Custom AI chatbots to enhance customer engagement and automate support.',
-      icon: FiCpu,
-      link: '/services'
-    },
-    {
-      title: 'MVP Websites & Apps',
-      description: 'Rapid development of minimum viable products to validate your business ideas.',
+      title: 'Business Websites',
+      description: 'Professional websites tailored to your business needs, from simple portfolios to full-featured company sites.',
       icon: FiCode,
       link: '/services'
     },
     {
-      title: 'Automation & AI Tools',
-      description: 'Streamline your business processes with custom automation solutions.',
-      icon: FiLayers,
+      title: 'IDORA - NFC Smart Cards',
+      description: 'Our flagship product: Smart NFC business cards for instant contact sharing. Tap once to share everything.',
+      icon: FiCpu,
+      link: '/services'
+    },
+    {
+      title: 'Inventory Management',
+      description: 'Simple, effective inventory tracking systems designed for small businesses and local operations.',
+      icon: FiPackage,
+      link: '/services'
+    },
+    {
+      title: 'Custom Solutions',
+      description: 'Have a unique requirement? Let\'s talk and build a solution that perfectly matches your needs.',
+      icon: FiMessageSquare,
       link: '/services'
     }
   ];
@@ -37,8 +43,8 @@ const HomePage = () => {
     <>
       <SEO 
         title="Home" 
-        description="Katisa Technologies builds AI-powered software solutions for businesses in Sri Lanka and beyond." 
-        keywords={['AI', 'software development', 'Sri Lanka', 'chatbot', 'MVP']} 
+        description="Katisa Technologies builds websites, inventory systems, simple applications, and IDORA NFC smart cards for businesses in Sri Lanka." 
+        keywords={['business websites', 'inventory management', 'NFC cards', 'IDORA', 'software development', 'Sri Lanka']} 
       />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -78,7 +84,7 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="block"
               >
-                Building Tomorrow's
+                Building Solutions
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, x: -20 }}
@@ -86,11 +92,11 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="block bg-gradient-to-r from-accent via-white to-cyan bg-clip-text text-transparent animate-gradient"
               >
-                AI Solutions Today
+                For Your Business
               </motion.span>
             </h1>
             <p className="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed font-light">
-              We build AI-powered software solutions that help businesses innovate and grow in Sri Lanka and beyond.
+              We build websites, inventory systems, and smart tools that help businesses in Sri Lanka grow and succeed.
             </p>
             <div className="flex flex-wrap gap-4 mb-8">
               <motion.div
@@ -131,12 +137,12 @@ const HomePage = () => {
           >
             <h2 className="text-3xl font-bold mb-6">About Katisa Technologies</h2>
             <p className="text-gray-600 mb-6">
-              Katisa Technologies is a tech startup based in Sri Lanka, specializing in AI-powered software development. 
-              We combine cutting-edge technology with local talent to deliver innovative solutions to businesses worldwide.
+              Katisa Technologies is a tech startup based in Sri Lanka, focused on building practical software solutions for businesses. 
+              We create websites, inventory systems, simple applications, and our flagship product IDORA - smart NFC business cards.
             </p>
             <p className="text-gray-600 mb-6">
-              Our mission is to help businesses leverage the power of artificial intelligence to improve their operations, 
-              enhance customer experiences, and drive growth.
+              Our mission is to help businesses digitize their operations with simple, effective tools that work. 
+              Whether you need a website, a custom application, or IDORA cards for your team, we're here to build it.
             </p>
             <Button to="/about" variant="outline">
               Learn More About Us
@@ -191,15 +197,14 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-4">Our Services</h2>
+            <h2 className="text-3xl font-bold mb-4">What We Build</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We offer a range of AI-powered services to help businesses innovate and grow.
-              Our solutions are built with cutting-edge technology and a focus on delivering value.
+              Focused solutions for real businesses. We build websites, simple applications, and smart systems that work.
             </p>
           </motion.div>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -229,10 +234,10 @@ const HomePage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold mb-6">Ready to Innovate with AI?</h2>
+            <h2 className="text-3xl font-bold mb-6">Ready to Build Something?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help transform your business with AI-powered solutions.
-              Get in touch with us today to start your project.
+              Whether you need a website, an inventory system, or IDORA cards for your team,
+              let's discuss how we can help your business.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button to="/contact" variant="secondary" className="text-lg px-8 py-3">

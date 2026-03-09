@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
-import { FiCpu, FiCode, FiLayers, FiUsers, FiCheckCircle } from 'react-icons/fi';
+import { FiCpu, FiCode, FiLayers, FiPackage, FiMessageSquare, FiCheckCircle, FiCreditCard } from 'react-icons/fi';
 
 import Section from '../components/ui/Section';
 import Button from '../components/ui/Button';
@@ -11,58 +11,72 @@ const ServicesPage = () => {
   // Sample services data
   const services = [
     {
-      id: 'ai-chatbot',
-      title: 'AI Chatbot Development',
-      description: 'Custom AI chatbots to enhance customer engagement and automate support.',
-      icon: FiCpu,
-      features: [
-        'Natural language processing capabilities',
-        'Integration with existing platforms',
-        'Custom training for your business domain',
-        'Analytics dashboard for performance tracking',
-        '24/7 customer support automation'
-      ],
-      image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-    },
-    {
-      id: 'mvp-development',
-      title: 'MVP Websites & Apps',
-      description: 'Rapid development of minimum viable products to validate your business ideas.',
+      id: 'websites',
+      title: 'Business Websites',
+      description: 'Professional websites designed to showcase your business and reach more customers online.',
       icon: FiCode,
       features: [
-        'Rapid prototyping and development',
-        'User-centric design approach',
-        'Essential features implementation',
-        'Scalable architecture',
-        'Post-launch support and iterations'
+        'Responsive design for all devices',
+        'Fast loading and SEO optimized',
+        'Easy content management',
+        'Contact forms and integrations',
+        'Hosting and maintenance support'
       ],
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1115&q=80'
     },
     {
-      id: 'automation-tools',
-      title: 'Automation & AI Tools',
-      description: 'Streamline your business processes with custom automation solutions.',
+      id: 'idora-nfc',
+      title: 'IDORA - NFC Smart Cards',
+      description: 'Our flagship product: Smart NFC business cards that let you share your contact info in one tap. No app required.',
+      icon: FiCreditCard,
+      features: [
+        'Instant contact sharing with one tap',
+        'Works on all smartphones (iPhone & Android)',
+        'Customizable digital profile page',
+        'Update your details anytime online',
+        'Perfect for networking and business'
+      ],
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+    },
+    {
+      id: 'simple-apps',
+      title: 'Simple Applications',
+      description: 'Localhost and internal applications for specific business needs - from data entry to workflow management.',
       icon: FiLayers,
       features: [
-        'Workflow automation',
-        'Data processing and analysis',
-        'Custom AI algorithms',
-        'Integration with existing systems',
-        'Performance monitoring and optimization'
+        'Custom-built for your workflow',
+        'Easy to use interface',
+        'Can run on local network',
+        'Data stays private and secure',
+        'Training and documentation included'
       ],
       image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
     },
     {
-      id: 'intern-prototypes',
-      title: 'Intern-Led Product Prototypes',
-      description: 'Innovative prototypes developed by our talented interns under expert guidance.',
-      icon: FiUsers,
+      id: 'inventory',
+      title: 'Inventory Management Systems',
+      description: 'Track your stock, manage orders, and stay organized with simple inventory systems built for your business.',
+      icon: FiPackage,
       features: [
-        'Fresh perspectives and innovative ideas',
-        'Cost-effective development',
-        'Supervised by experienced mentors',
-        'Regular progress updates',
-        'Option to hire interns post-project'
+        'Track stock levels in real-time',
+        'Manage purchases and sales',
+        'Generate reports and insights',
+        'Low stock alerts',
+        'Simple to learn and use'
+      ],
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+    },
+    {
+      id: 'custom-solutions',
+      title: 'Custom Solutions',
+      description: 'Have a unique requirement? Let\'s discuss your needs and build something tailored just for you.',
+      icon: FiMessageSquare,
+      features: [
+        'Free consultation to understand your needs',
+        'Flexible scope and timeline',
+        'Built exactly to your specifications',
+        'Transparent pricing',
+        'Ongoing support available'
       ],
       image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80'
     }
@@ -72,8 +86,8 @@ const ServicesPage = () => {
     <>
       <SEO 
         title="Our Services" 
-        description="Explore Katisa Technologies' AI-powered services including chatbot development, MVP websites & apps, automation tools, and intern-led product prototypes." 
-        keywords={['AI chatbot', 'MVP development', 'automation tools', 'product prototypes', 'software services']} 
+        description="Katisa Technologies builds business websites, inventory systems, simple applications, and IDORA NFC smart cards. Custom solutions available." 
+        keywords={['business websites', 'inventory management', 'NFC cards', 'IDORA', 'custom software', 'Sri Lanka']} 
       />
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-r from-primary to-accent text-white">
@@ -84,10 +98,10 @@ const ServicesPage = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">What We Build</h1>
             <p className="text-xl mb-8">
-              We deliver AI-powered solutions that help businesses innovate and grow.
-              Our services combine cutting-edge technology with practical implementation.
+              Simple, effective solutions for real businesses. From websites to inventory systems,
+              we build tools that work for you.
             </p>
             <Button to="/contact" className="bg-white text-primary hover:bg-gray-100">
               Get a Free Consultation
@@ -107,13 +121,13 @@ const ServicesPage = () => {
           >
             <h2 className="text-3xl font-bold mb-4">What We Offer</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our comprehensive range of services is designed to meet your business needs,
-              from AI-powered chatbots to full-scale application development.
+              Focused solutions that solve real problems. Whether you need a website, an inventory system,
+              or something custom-built, we're here to help.
             </p>
           </motion.div>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -199,10 +213,10 @@ const ServicesPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+            <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Contact us today to discuss how our AI-powered services can help your business grow.
-              We offer free consultations to understand your needs.
+              Let's talk about what you need. We offer free consultations to understand your requirements
+              and suggest the best solution for your business.
             </p>
             <Button to="/contact" className="bg-white text-primary hover:bg-gray-100 text-lg px-8 py-3">
               Get Started Today
