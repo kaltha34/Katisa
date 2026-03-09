@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="mb-8 md:mb-0">
             <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">KatisaTech</h3>
-            <p className="mb-6 text-gray-300 font-light">Building tomorrow's AI solutions today.</p>
+            <p className="mb-6 text-gray-300 font-light">Building solutions for your business.</p>
             <div className="flex space-x-4">
               <a href="https://www.linkedin.com/company/katisatech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-300 hover:text-primary transition-colors transform hover:scale-110 duration-300 bg-white/10 p-3 rounded-full hover:bg-white/20">
                 <FiLinkedin size={20} />
@@ -43,12 +43,12 @@ const Footer = () => {
 
           {/* Services */}
           <div className="mb-8 md:mb-0">
-            <h4 className="text-lg font-semibold mb-4 text-secondary">Our Services</h4>
+            <h4 className="text-lg font-semibold mb-4 text-secondary">What We Build</h4>
             <ul className="space-y-3">
-              <li><Link to="/services" className="text-gray-300 hover:text-primary transition-colors hover:translate-x-2 inline-block duration-300">→ AI Chatbot Development</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-secondary transition-colors hover:translate-x-2 inline-block duration-300">→ MVP Websites & Apps</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-accent transition-colors hover:translate-x-2 inline-block duration-300">→ Automation & AI Tools</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-pink transition-colors hover:translate-x-2 inline-block duration-300">→ Custom AI Solutions</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-primary transition-colors hover:translate-x-2 inline-block duration-300">→ Business Websites</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-secondary transition-colors hover:translate-x-2 inline-block duration-300">→ IDORA - NFC Smart Cards</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-accent transition-colors hover:translate-x-2 inline-block duration-300">→ Inventory Management</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-pink transition-colors hover:translate-x-2 inline-block duration-300">→ Custom Solutions</Link></li>
             </ul>
           </div>
 
