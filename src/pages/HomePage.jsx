@@ -52,8 +52,7 @@ const HomePage = () => {
     {
       title: 'Business Websites',
       description: 'Professional websites tailored to your business needs, from simple portfolios to full-featured company sites.',
-      icon: FiCode,
-      link: '/services'
+      icon: FiCode
     },
     {
       title: 'IDORA - NFC Smart Cards',
@@ -64,14 +63,12 @@ const HomePage = () => {
     {
       title: 'Inventory Management',
       description: 'Simple, effective inventory tracking systems designed for small businesses and local operations.',
-      icon: FiPackage,
-      link: '/services'
+      icon: FiPackage
     },
     {
       title: 'Custom Solutions',
       description: 'Have a unique requirement? Let\'s talk and build a solution that perfectly matches your needs.',
-      icon: FiMessageSquare,
-      link: '/services'
+      icon: FiMessageSquare
     }
   ];
 
@@ -112,6 +109,7 @@ const HomePage = () => {
               className="mb-4 flex items-center gap-6"
             >
               <img src={logoImage} alt="Katisa Technologies Logo" style={{ height: '200px', width: 'auto' }} />
+              <div className="h-40 w-px bg-black/30"></div>
               <img src={idoraLogo} alt="IDORA Logo" style={{ height: '180px', width: 'auto' }} />
             </motion.div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
