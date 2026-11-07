@@ -97,8 +97,8 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold text-white">Kalhara Thabrew</h2>
               <p className="mt-1 text-sm font-medium text-gold">Founder & CEO</p>
               <p className="mt-4 text-white/65">
-                Building Katisa with hands-on product and engineering knowledge — practical software for Sri Lankan
-                businesses, supported by a focused delivery team.
+                Building Katisa with hands-on software knowledge — and a crew of AI agents that help ship product,
+                engineering, QA, and marketing work every day.
               </p>
               <div className="mt-6 flex gap-3">
                 <a
@@ -127,31 +127,31 @@ export default function AboutPage() {
 
       <Section tone="soft">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <div className="eyebrow mb-4 justify-center">The Team</div>
-          <h2 className="heading-display">Roles that ship real work</h2>
+          <div className="eyebrow mb-4 justify-center">Agent Crew</div>
+          <h2 className="heading-display">Agents that work with me</h2>
           <p className="body-muted mt-4">
-            From product and engineering to QA and marketing — each role owns a clear part of how we deliver.
+            Not a traditional org chart — specialized AI agents that help run product, engineering, QA, and marketing
+            alongside the founder.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((member) => (
-            <article
-              key={member.id}
-              className="card-surface flex h-full flex-col"
-            >
-              <div className="mb-5 flex items-center gap-4">
-                <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-gold/30 bg-gold/15 text-sm font-bold tracking-wide text-gold"
-                  aria-hidden
-                >
-                  {member.initials}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">{member.name}</h3>
-                  <p className="text-sm font-medium text-gold">{member.role}</p>
-                </div>
+            <article key={member.id} className="card-surface flex h-full flex-col overflow-hidden p-0">
+              <div className="relative aspect-square w-full overflow-hidden border-b border-white/10 bg-black">
+                <Image
+                  src={member.image}
+                  alt={`${member.name} — ${member.role}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
               </div>
-              <p className="text-sm leading-relaxed text-white/65">{member.focus}</p>
+              <div className="flex flex-1 flex-col p-6">
+                <div className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-gold">Agent</div>
+                <h3 className="text-lg font-semibold text-white">{member.name}</h3>
+                <p className="mt-1 text-sm font-medium text-white/70">{member.role}</p>
+                <p className="mt-4 text-sm leading-relaxed text-white/65">{member.focus}</p>
+              </div>
             </article>
           ))}
         </div>
