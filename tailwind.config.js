@@ -1,56 +1,61 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html"
+    './src/app/**/*.{js,jsx}',
+    './src/components/**/*.{js,jsx}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: '#F59E0B',
-        secondary: '#EF4444',
-        accent: '#FBBF24',
-        dark: '#1F2937',
-        light: '#FEF3C7',
-        purple: '#A855F7',
-        pink: '#EC4899',
-        orange: '#F97316',
-        cyan: '#06B6D4'
+        navy: {
+          DEFAULT: '#0a0a0a',
+          deep: '#050505',
+          soft: '#141414',
+        },
+        gold: {
+          DEFAULT: '#d1aa6b',
+          dark: '#b8923a',
+          soft: 'rgba(209, 170, 107, 0.15)',
+        },
+        ink: '#f5f5f5',
+        muted: 'rgba(255,255,255,0.65)',
+      },
+      fontFamily: {
+        sans: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        soft: '0 18px 50px rgba(0, 0, 0, 0.45)',
+        glow: '0 0 40px rgba(209, 170, 107, 0.28)',
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-pattern': "url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
+        'grid-navy':
+          'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
+        'hero-glow':
+          'linear-gradient(120deg, rgba(209,170,107,0.18), transparent 40%, rgba(255,255,255,0.04))',
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-in-out',
-        'bounce-slow': 'bounce 3s infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'gradient': 'gradient 8s ease infinite'
+      backgroundSize: {
+        grid: '28px 28px',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' }
+        shimmer: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
         },
-        gradient: {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
-          }
-        }
-      }
+        rise: {
+          '0%': { opacity: '0', transform: 'translateY(18px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        float: 'float 5s ease-in-out infinite',
+        shimmer: 'shimmer 8s linear infinite',
+        rise: 'rise 0.7s ease-out both',
+      },
     },
   },
   plugins: [],
-}
-
+};

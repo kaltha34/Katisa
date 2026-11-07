@@ -1,26 +1,16 @@
 [build]
   command = "npm run build"
-  publish = "build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  REACT_APP_SITE_NAME = "Katisa Technologies"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[headers]]
   for = "/*"
-  [headers.values]
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://meet.jit.si https://8x8.vc https://*.jitsi.net https://assets.calendly.com https://fonts.googleapis.com https://*.googleapis.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com https://*.calendly.com; font-src 'self' data: https://fonts.gstatic.com https://assets.calendly.com; img-src 'self' data: https: http:; connect-src 'self' https://meet.jit.si https://8x8.vc https://*.jitsi.net wss://*.jitsi.net https://*.firebase.com https://*.firebaseio.com https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firestore.googleapis.com https://api.emailjs.com https://api.qrserver.com; frame-src 'self' https://meet.jit.si https://8x8.vc https://*.jitsi.net https://calendly.com https://*.calendly.com; media-src 'self' https: data: blob:; worker-src 'self' blob:; frame-ancestors 'self';"
-    
-    # Custom metadata to override default React App metadata
-    cache-control = '''
-    max-age=0,
-    no-cache,
-    no-store,
-    must-revalidate'''
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+    [headers.values]
+      X-XSS-Protection = "1; mode=block"
+      X-Content-Type-Options = "nosniff"
+      Referrer-Policy = "strict-origin-when-cross-origin"
