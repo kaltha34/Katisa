@@ -3,6 +3,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import CtaBand from '@/components/ui/CtaBand';
+import { team } from '@/lib/site';
 import { FiAward, FiGlobe, FiLinkedin, FiInstagram, FiTrendingUp, FiUsers } from 'react-icons/fi';
 
 export const metadata = {
@@ -96,8 +97,8 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold text-white">Kalhara Thabrew</h2>
               <p className="mt-1 text-sm font-medium text-gold">Founder & CEO</p>
               <p className="mt-4 text-white/65">
-                Software entrepreneur focused on practical tools and products that help businesses operate with more
-                clarity.
+                Building Katisa with hands-on product and engineering knowledge — practical software for Sri Lankan
+                businesses, supported by a focused delivery team.
               </p>
               <div className="mt-6 flex gap-3">
                 <a
@@ -121,6 +122,38 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+        </div>
+      </Section>
+
+      <Section tone="soft">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <div className="eyebrow mb-4 justify-center">The Team</div>
+          <h2 className="heading-display">Roles that ship real work</h2>
+          <p className="body-muted mt-4">
+            From product and engineering to QA and marketing — each role owns a clear part of how we deliver.
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {team.map((member) => (
+            <article
+              key={member.id}
+              className="card-surface flex h-full flex-col"
+            >
+              <div className="mb-5 flex items-center gap-4">
+                <div
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-gold/30 bg-gold/15 text-sm font-bold tracking-wide text-gold"
+                  aria-hidden
+                >
+                  {member.initials}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{member.name}</h3>
+                  <p className="text-sm font-medium text-gold">{member.role}</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-white/65">{member.focus}</p>
+            </article>
+          ))}
         </div>
       </Section>
 

@@ -114,3 +114,42 @@ export function formatPriceHint(service) {
   const thousands = Math.round(service.priceFrom / 1000);
   return `from ${thousands}k`;
 }
+
+export const team = [
+  {
+    id: 'pm',
+    name: 'Nimasha Perera',
+    role: 'Product Manager',
+    initials: 'NP',
+    focus: 'Discovery, scope, and delivery plans that stay honest to the client’s goals.',
+  },
+  {
+    id: 'senior-se',
+    name: 'Dilan Fernando',
+    role: 'Senior Software Engineer',
+    initials: 'DF',
+    focus: 'Architecture, complex features, and keeping systems clean as they grow.',
+  },
+  {
+    id: 'associate-se',
+    name: 'Ishan Jayawardena',
+    role: 'Associate Software Engineer',
+    initials: 'IJ',
+    focus: 'Building screens, APIs, and day-to-day product work with guidance from seniors.',
+  },
+  {
+    id: 'qa',
+    name: 'Sachini Wijesinghe',
+    role: 'QA Engineer',
+    initials: 'SW',
+    focus: 'Test plans, edge cases, and release confidence before anything goes live.',
+  },
+  {
+    id: 'marketing',
+    name: 'Kavindi Silva',
+    role: 'Marketing',
+    initials: 'KS',
+    focus: 'Positioning, campaigns, and making Katisa’s services easy to understand.',
+  },
+];
+
