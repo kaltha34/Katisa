@@ -39,6 +39,7 @@ export default function JoinUsPage() {
             alt="InQRS"
             width={72}
             height={72}
+            unoptimized
             className="h-16 w-16 rounded-2xl object-cover"
           />
           <div>

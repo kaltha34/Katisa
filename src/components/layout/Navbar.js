@@ -33,11 +33,12 @@ export default function Navbar() {
       <div className="container-site flex h-[4.5rem] items-center justify-between md:h-20">
         <Link href="/" className="flex items-center" aria-label="Katisa Technologies">
           <Image
-            src="/images/Logo.jpg"
+            src="/images/katisa-mark.jpg"
             alt="Katisa Technologies"
             width={72}
             height={72}
             priority
+            unoptimized
             className="h-14 w-14 rounded-xl object-cover md:h-16 md:w-16"
           />
         </Link>

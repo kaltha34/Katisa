@@ -84,11 +84,12 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl">
           <div className="eyebrow mb-4">Leadership</div>
           <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-soft md:flex">
-            <div className="relative h-72 w-full md:h-auto md:w-72">
+            <div className="relative h-72 w-full shrink-0 md:h-auto md:min-h-[22rem] md:w-72">
               <Image
-                src="/images/kalhara-thabrew.jpeg"
+                src="/images/founder.jpg"
                 alt="Kalhara Thabrew"
                 fill
+                unoptimized
                 className="object-cover"
                 sizes="288px"
               />
@@ -142,6 +143,7 @@ export default function AboutPage() {
                   src={member.image}
                   alt={`${member.name} — ${member.role}`}
                   fill
+                  unoptimized
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
