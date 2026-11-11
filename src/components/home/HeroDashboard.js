@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { FiArrowUpRight, FiCheckCircle } from 'react-icons/fi';
-import { formatPriceHint, services, site } from '@/lib/site';
+import { FiArrowRight, FiArrowUpRight } from 'react-icons/fi';
+import { services, site } from '@/lib/site';
 
 const previewServices = services.filter((s) => s.series).slice(0, 4);
 const inqrs = services.find((s) => s.id === 'inqrs');
@@ -39,49 +39,60 @@ export default function HeroDashboard() {
         >
           <motion.div className="pointer-events-none absolute inset-0" style={{ background: glow }} />
 
-          <div className="relative z-10 mb-4 flex items-center justify-between">
-            <div>
-              <div className="text-xs uppercase tracking-[0.16em] text-gold">Our Services</div>
-              <div className="mt-1 text-lg font-semibold text-white">What we build for you</div>
-            </div>
-            <Link href="/services" className="text-xs font-semibold text-white/70 transition hover:text-gold">
-              View all
-            </Link>
+          <div className="relative z-10 mb-5">
+            <div className="text-xs uppercase tracking-[0.16em] text-gold">Packages</div>
+            <div className="mt-1 text-lg font-semibold text-white">What you can hire us for</div>
+            <p className="mt-2 text-sm leading-relaxed text-white/60">
+              Four clear software packages. Prices start from the amount shown — final cost depends on
+              the features you need.
+            </p>
           </div>
 
           <div className="relative z-10 space-y-2.5">
             {previewServices.map((service, index) => (
-              <motion.div key={service.id} whileHover={{ x: 4 }}>
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 + index * 0.07 }}
+                whileHover={{ x: 3 }}
+              >
                 <Link
                   href={`/services#${service.id}`}
-                  className="flex items-start gap-3 rounded-xl border border-transparent bg-white/[0.04] px-3 py-3 transition hover:border-gold/35 hover:bg-white/[0.08]"
+                  className="block rounded-xl border border-white/10 bg-black/30 px-4 py-3 transition hover:border-gold/40 hover:bg-white/[0.06]"
                 >
-                  <motion.div
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.07 }}
-                    className="flex w-full items-start gap-3"
-                  >
-                    <FiCheckCircle className="mt-0.5 shrink-0 text-gold" size={16} />
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="text-sm font-semibold text-white">{service.series}</div>
-                        <div className="shrink-0 text-[11px] font-semibold uppercase tracking-wide text-gold/90">
-                          {formatPriceHint(service)}
-                        </div>
-                      </div>
-                      <div className="mt-0.5 text-[12px] leading-snug text-white/55 line-clamp-1">
-                        {service.title}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-white">{service.title}</div>
+                      <div className="mt-1 text-[12px] leading-snug text-white/55 line-clamp-2">
+                        {service.description}
                       </div>
                     </div>
-                  </motion.div>
+                    <FiArrowRight className="mt-1 shrink-0 text-gold/80" size={16} />
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-gold/15 px-2.5 py-1 text-[11px] font-semibold text-gold">
+                      {service.priceLabel}
+                    </span>
+                    <span className="text-[11px] text-white/40">
+                      Package name: {service.series}
+                    </span>
+                  </div>
                 </Link>
               </motion.div>
             ))}
           </div>
-          <p className="relative z-10 mt-4 text-[11px] text-white/45">
-            Final price varies with features and scope.
-          </p>
+
+          <div className="relative z-10 mt-5 flex items-center justify-between gap-3">
+            <p className="text-[11px] text-white/45">Tap a package to see full details.</p>
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-gold hover:text-white"
+            >
+              All packages
+              <FiArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
         <motion.a
@@ -103,10 +114,10 @@ export default function HeroDashboard() {
           </div>
           <div className="min-w-0 flex-1">
             <div className="text-[11px] uppercase tracking-[0.14em] text-white/45">
-              Product by Katisa
+              Separate product we maintain
             </div>
             <div className="truncate text-sm font-semibold text-white">
-              {inqrs?.title || 'InQRS'}
+              {inqrs?.title || 'InQRS NFC Smart Cards'}
             </div>
           </div>
           <span className="inline-flex items-center gap-1 text-xs font-semibold text-gold">

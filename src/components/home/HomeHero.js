@@ -9,7 +9,7 @@ import { services } from '@/lib/site';
 const chips = services
   .filter((service) => service.series)
   .map((service) => ({
-    label: service.series,
+    label: service.title,
     href: `/services#${service.id}`,
   }));
 

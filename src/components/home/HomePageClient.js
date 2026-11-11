@@ -70,8 +70,8 @@ export default function HomePageClient() {
               <div className="eyebrow mb-4">Services</div>
               <h2 className="heading-display">What we build</h2>
               <p className="body-muted mt-4">
-                Practical software with clear starting prices — Origin, Rise, Empire, and Uncharted.
-                Final price varies with features and scope.
+                Hire us for websites, apps, inventory systems, or custom software. Each package has a
+                clear starting price in LKR — final cost depends on the features you need.
               </p>
             </div>
             <Button href="/services" variant="outline">
@@ -90,11 +90,11 @@ export default function HomePageClient() {
                   whileHover={{ y: -6 }}
                   className="card-surface block h-full hover:shadow-glow"
                 >
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <div className="text-xs font-semibold tracking-[0.18em] text-gold">
-                      SERIES · {service.series.toUpperCase()}
-                    </div>
-                    <div className="text-sm font-bold text-gold">{service.priceLabel}</div>
+                  <div className="mb-3 flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-gold/15 px-2.5 py-1 text-xs font-semibold text-gold">
+                      {service.priceLabel}
+                    </span>
+                    <span className="text-xs text-white/40">Package: {service.series}</span>
                   </div>
                   <h3 className="text-xl font-semibold text-white">{service.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-white/65">{service.description}</p>
