@@ -8,7 +8,7 @@ export default function SiteLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-[4.5rem] md:pt-20">{children}</main>
+      <main className="min-h-screen pt-16 md:pt-[4.25rem]">{children}</main>
       <Footer />
       <WhatsAppFloat />
       <BackToTop />

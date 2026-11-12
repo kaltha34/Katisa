@@ -1,4 +1,4 @@
-import { Figtree, Syne } from 'next/font/google';
+import { IBM_Plex_Sans, Syne } from 'next/font/google';
 import { site } from '@/lib/content';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { LocaleProvider } from '@/components/providers/LocaleProvider';
@@ -8,12 +8,14 @@ const display = Syne({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
+  weight: ['600', '700', '800'],
 });
 
-const body = Figtree({
+const body = IBM_Plex_Sans({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata = {

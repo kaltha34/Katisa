@@ -1,20 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import {
-  FiArrowRight,
-  FiBox,
-  FiCalendar,
-  FiClipboard,
-  FiCode,
-  FiCompass,
-  FiGlobe,
-  FiLayers,
-  FiPhone,
-  FiRocket,
-  FiSearch,
-  FiShield,
-} from 'react-icons/fi';
+import Link from 'next/link';
+import { FiArrowUpRight } from 'react-icons/fi';
 import HomeHero from '@/components/home/HomeHero';
 import PainCards from '@/components/home/PainCards';
 import PartnersWheel from '@/components/home/PartnersWheel';
@@ -25,50 +12,37 @@ import CtaBand from '@/components/ui/CtaBand';
 import Reveal from '@/components/ui/Reveal';
 import { process, services, trustItems } from '@/lib/content';
 
-const serviceVisual = {
-  apps: { icon: FiLayers, blurb: 'Internal tools staff open every day' },
-  websites: { icon: FiGlobe, blurb: 'Sites that bring calls and WhatsApp' },
-  inventory: { icon: FiBox, blurb: 'Stock levels you can trust' },
-  custom: { icon: FiCode, blurb: 'Built around your unique process' },
-};
-
-const processIcons = {
-  '01': FiSearch,
-  '02': FiCompass,
-  '03': FiClipboard,
-  '04': FiRocket,
-  '05': FiShield,
-};
-
 export default function HomePageClient() {
   return (
     <>
       <HomeHero />
 
-      <section className="border-y border-[color:var(--line)] bg-[color:var(--bg-elevated)]">
-        <div className="container-site flex flex-col items-center gap-6 py-8 md:flex-row md:justify-between">
-          <p className="text-sm font-medium text-[color:var(--ink-muted)]">
+      <section className="border-b border-[color:var(--line)] bg-[color:var(--bg-elevated)]">
+        <div className="container-site grid gap-6 py-6 md:grid-cols-[1fr_auto] md:items-center md:py-7">
+          <p className="text-sm text-[color:var(--ink-muted)]">
             Built for shops, clinics and classes in Sri Lanka
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {trustItems.map((item) => (
-              <span
+              <li
                 key={item}
-                className="rounded-full border border-[color:var(--line)] bg-[color:var(--surface)] px-3 py-1.5 text-xs font-medium text-[color:var(--ink-muted)]"
+                className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[color:var(--ink-faint)]"
               >
                 {item}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <Section>
+      <Section className="!pb-12 md:!pb-16">
         <Reveal>
-          <div className="mx-auto mb-10 max-w-2xl text-center">
-            <div className="eyebrow mb-4 justify-center">Who we build for</div>
-            <h2 className="heading-display">Partners across Sri Lanka</h2>
-            <p className="body-muted mt-4">
+          <div className="mb-8 grid gap-6 border-b border-[color:var(--line)] pb-8 md:grid-cols-[1fr_1.2fr] md:items-end">
+            <div>
+              <div className="eyebrow mb-4">Who we build for</div>
+              <h2 className="heading-display">Partners across Sri Lanka</h2>
+            </div>
+            <p className="body-muted md:text-right">
               Salons, clinics, classes, shops and studios — software that fits daily work.
             </p>
           </div>
@@ -76,10 +50,10 @@ export default function HomePageClient() {
         <PartnersWheel />
       </Section>
 
-      <Section tone="soft">
+      <Section tone="soft" className="border-y border-[color:var(--line)]">
         <Reveal>
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <div className="eyebrow mb-4 justify-center">Services in action</div>
+          <div className="mb-12 max-w-xl">
+            <div className="eyebrow mb-4">Services in action</div>
             <h2 className="heading-display">From chaos to a clear system</h2>
             <p className="body-muted mt-4">Three common problems. Three services we build.</p>
           </div>
@@ -89,7 +63,7 @@ export default function HomePageClient() {
 
       <Section>
         <Reveal>
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="mb-2 flex flex-col gap-6 border-b border-[color:var(--line)] pb-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-xl">
               <div className="eyebrow mb-4">Packages</div>
               <h2 className="heading-display">Four clear starting points</h2>
@@ -108,42 +82,47 @@ export default function HomePageClient() {
           </div>
         </Reveal>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => {
-            const visual = serviceVisual[service.id] || { icon: FiLayers, blurb: service.outcome };
-            const Icon = visual.icon;
-            return (
-              <Reveal key={service.id} delay={index * 0.04}>
-                <motion.a
-                  href={`/services#${service.id}`}
-                  whileHover={{ y: -3 }}
-                  className="card-surface block h-full !p-5"
-                >
-                  <div className="mb-4 inline-flex rounded-xl bg-[color:var(--brass-soft)] p-3 text-[color:var(--brass)]">
-                    <Icon size={22} />
-                  </div>
-                  <div className="text-xs font-semibold tracking-[0.16em] text-[color:var(--brass)]">
+        <div className="divide-y divide-[color:var(--line)] border-b border-[color:var(--line)]">
+          {services.map((service, index) => (
+            <Reveal key={service.id} delay={index * 0.04}>
+              <Link
+                href={`/services#${service.id}`}
+                className="group grid gap-3 py-6 transition md:grid-cols-[4.5rem_1fr_auto_auto] md:items-center md:gap-8"
+              >
+                <span className="index-num">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--brass)]">
                     {service.series}
                   </div>
-                  <h3 className="mt-2 font-display text-lg font-semibold">{service.title}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{visual.blurb}</p>
-                  <p className="mt-4 text-sm font-semibold text-[color:var(--brass)]">
-                    {service.priceLabel}
+                  <h3 className="mt-1 font-display text-xl font-bold tracking-tight md:text-2xl">
+                    {service.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-[color:var(--ink-muted)] md:hidden">
+                    {service.outcome}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-xs text-[color:var(--ink-muted)]">
-                    Details <FiArrowRight />
+                </div>
+                <p className="hidden max-w-sm text-sm text-[color:var(--ink-muted)] md:block">
+                  {service.outcome}
+                </p>
+                <div className="flex items-center justify-between gap-6 md:justify-end">
+                  <span className="text-sm font-semibold text-[color:var(--ink)]">
+                    {service.priceLabel}
                   </span>
-                </motion.a>
-              </Reveal>
-            );
-          })}
+                  <FiArrowUpRight
+                    className="text-[color:var(--ink-faint)] transition group-hover:text-[color:var(--brass)]"
+                    size={18}
+                  />
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
-      <Section tone="soft">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+      <Section tone="soft" className="border-y border-[color:var(--line)]">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
-            <div>
+            <div className="lg:sticky lg:top-28">
               <div className="eyebrow mb-4">How we work</div>
               <h2 className="heading-display">Five steps. No mystery months.</h2>
               <p className="body-muted mt-4">
@@ -159,27 +138,22 @@ export default function HomePageClient() {
               </div>
             </div>
           </Reveal>
-          <ol className="space-y-3">
-            {process.map((item) => {
-              const Icon = processIcons[item.step] || FiPhone;
-              return (
-                <li
-                  key={item.step}
-                  className="flex gap-4 rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)] px-4 py-3"
-                >
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[color:var(--brass-soft)] text-[color:var(--brass)]">
-                    <Icon size={18} />
-                  </span>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-[color:var(--brass)]">{item.step}</span>
-                      <span className="font-semibold">{item.title}</span>
-                    </div>
-                    <p className="mt-0.5 text-sm text-[color:var(--ink-muted)]">{item.text}</p>
-                  </div>
-                </li>
-              );
-            })}
+
+          <ol className="border-t border-[color:var(--line)]">
+            {process.map((item) => (
+              <li
+                key={item.step}
+                className="grid gap-2 border-b border-[color:var(--line)] py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-6"
+              >
+                <span className="index-num pt-1">{item.step}</span>
+                <div>
+                  <h3 className="font-display text-lg font-bold tracking-tight">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-[color:var(--ink-muted)]">
+                    {item.text}
+                  </p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </Section>

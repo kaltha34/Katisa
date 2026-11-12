@@ -27,13 +27,13 @@ module.exports = {
         muted: 'rgba(246, 240, 230, 0.68)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Georgia', 'serif'],
-        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Syne', 'sans-serif'],
+        sans: ['var(--font-body)', 'IBM Plex Sans', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'IBM Plex Sans', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        soft: '0 24px 80px rgba(0, 0, 0, 0.45)',
-        glow: '0 0 40px rgba(201, 162, 39, 0.22)',
+        soft: 'none',
+        glow: 'none',
       },
       keyframes: {
         float: {

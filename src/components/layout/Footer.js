@@ -22,7 +22,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="rounded-full bg-[color:var(--surface)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
+                className="border border-[color:var(--line)] p-2.5 transition hover:border-[color:var(--brass)] hover:bg-[color:var(--brass)] hover:text-[#0c0b0a]"
               >
                 <FiLinkedin />
               </a>
@@ -31,7 +31,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="rounded-full bg-[color:var(--surface)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
+                className="border border-[color:var(--line)] p-2.5 transition hover:border-[color:var(--brass)] hover:bg-[color:var(--brass)] hover:text-[#0c0b0a]"
               >
                 <FiInstagram />
               </a>

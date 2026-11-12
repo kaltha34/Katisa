@@ -8,28 +8,41 @@ export default function CtaBand({
   return (
     <section
       id="final-cta"
-      className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-elevated)]"
+      className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-invert)] text-[color:var(--bg)]"
     >
-      <div className="grain-overlay" />
-      <div className="absolute inset-0 hero-grid opacity-30" />
-      <div className="absolute -right-16 top-0 h-64 w-64 rounded-full bg-[color:var(--brass)]/15 blur-3xl" />
-      <div className="container-site relative z-10 py-16 md:py-20">
-        <div className="max-w-3xl">
-          <h2 className="heading-display">{title}</h2>
-          <p className="body-muted mt-4">{description}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
+      <div className="grain-overlay opacity-[0.08]" />
+      <div className="container-site relative z-10 grid gap-10 py-16 md:grid-cols-[1.4fr_0.6fr] md:items-end md:py-24">
+        <div>
+          <div className="mb-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--brass-deep)]">
+            Next step
+          </div>
+          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+          <p className="mt-4 max-w-xl text-base leading-relaxed opacity-70 md:text-lg">
+            {description}
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4 md:items-end">
+          <div className="flex flex-wrap gap-3 md:justify-end">
             <Button href="/book-consultation" variant="primary">
               Book a free call
             </Button>
-            <Button href={whatsappUrl()} variant="ghost" external>
+            <Button
+              href={whatsappUrl()}
+              variant="ghost"
+              external
+              className="!border-[color:var(--bg)]/25 !text-[color:var(--bg)] hover:!border-[color:var(--brass)] hover:!text-[color:var(--brass-deep)]"
+            >
               WhatsApp us
             </Button>
           </div>
-          <div className="mt-6 flex flex-wrap gap-6 text-sm text-[color:var(--ink-faint)]">
-            <a href={site.phoneHref} className="hover:text-[color:var(--brass)]">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm opacity-55 md:justify-end">
+            <a href={site.phoneHref} className="hover:opacity-100">
               {site.phone}
             </a>
-            <a href={`mailto:${site.email}`} className="hover:text-[color:var(--brass)]">
+            <a href={`mailto:${site.email}`} className="hover:opacity-100">
               {site.email}
             </a>
           </div>

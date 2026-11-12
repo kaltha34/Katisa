@@ -13,7 +13,7 @@ export default function Logo({ className = '', href = '/', size = 'md' }) {
 
   const mark = (
     <span
-      className={`font-display font-bold tracking-[0.12em] text-[color:var(--ink)] ${scale} ${className}`}
+      className={`font-display font-extrabold tracking-[0.08em] text-[color:var(--ink)] ${scale} ${className}`}
     >
       KATISA
     </span>
