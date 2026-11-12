@@ -3,8 +3,10 @@ import { site } from '@/lib/content';
 export default function sitemap() {
   const routes = [
     '',
-    '/services',
-    '/work',
+    '/build',
+    '/grow',
+    '/bundles',
+    '/our-work',
     '/pricing',
     '/about',
     '/contact',

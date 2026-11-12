@@ -18,11 +18,12 @@ export const messages = {
     'nav.contact': 'Contact',
     'nav.book': 'Book a Call',
     'hero.eyebrow': 'Colombo · Sri Lanka',
-    'hero.title': 'Never lose a booking, a stock count, or a customer chat again.',
+    'hero.title':
+      'Websites and systems so shops, clinics and salons stop losing customers to chaos.',
     'hero.sub':
-      'Katisa builds websites, inventory systems and internal apps for salons, clinics, tuition classes and shops across Sri Lanka — clear LKR prices, WhatsApp-friendly delivery.',
-    'hero.cta.primary': 'Book a free call',
-    'hero.cta.secondary': 'See our work',
+      'Rise websites from LKR 35,000. Empire stock & POS. Origin apps. Pulse content — clear LKR prices for Sri Lankan businesses.',
+    'hero.cta.primary': 'Get a Free Quote',
+    'hero.cta.secondary': 'See packages',
     'hero.note': 'Free discovery call · No jargon · You own the code',
     'theme.toLight': 'Switch to light mode',
     'theme.toDark': 'Switch to dark mode',
@@ -78,8 +79,8 @@ export function t(locale, key) {
 
 export const navLinkKeys = [
   { href: '/', key: 'nav.home' },
-  { href: '/services', key: 'nav.services' },
-  { href: '/work', key: 'nav.work' },
+  { href: '/build', key: 'nav.services' },
+  { href: '/our-work', key: 'nav.work' },
   { href: '/pricing', key: 'nav.pricing' },
   { href: '/webinars', key: 'nav.webinars' },
   { href: '/join-us', key: 'nav.join' },

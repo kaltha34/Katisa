@@ -2,19 +2,20 @@
 
 import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
-import { faqs } from '@/lib/content';
+import { faqs as defaultFaqs } from '@/lib/content';
 
-export default function FaqAccordion() {
+export default function FaqAccordion({ items }) {
+  const list = items?.length ? items : defaultFaqs;
   const [open, setOpen] = useState(0);
 
   return (
     <div className="space-y-3">
-      {faqs.map((item, index) => {
+      {list.map((item, index) => {
         const isOpen = open === index;
         return (
           <div
             key={item.q}
-            className="overflow-hidden rounded-2xl border border-[color:var(--line)] bg-[color:var(--surface)]"
+            className="overflow-hidden border border-[color:var(--line)] bg-[color:var(--surface)]"
           >
             <button
               type="button"

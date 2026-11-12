@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiMenu, FiMoon, FiSun, FiX } from 'react-icons/fi';
 import Logo from '@/components/ui/Logo';
-import { navLinks } from '@/lib/content';
+import { moreLinks, navLinks } from '@/lib/content';
 import { useTheme } from '@/components/providers/ThemeProvider';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
@@ -22,6 +23,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false);
+    setMoreOpen(false);
   }, [pathname]);
 
   return (
@@ -35,7 +37,7 @@ export default function Navbar() {
       <div className="container-site flex h-16 items-center justify-between gap-4 md:h-[4.25rem]">
         <Logo size="md" />
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -48,6 +50,30 @@ export default function Navbar() {
             </Link>
           ))}
 
+          <div className="relative">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 text-[13px] font-medium text-[color:var(--ink-muted)] hover:text-[color:var(--brass)]"
+              aria-expanded={moreOpen}
+              onClick={() => setMoreOpen((v) => !v)}
+            >
+              More <FiChevronDown size={14} />
+            </button>
+            {moreOpen && (
+              <div className="absolute right-0 top-full z-50 mt-2 min-w-[10rem] border border-[color:var(--line)] bg-[color:var(--bg-elevated)] py-1 shadow-soft">
+                {moreLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="block px-4 py-2.5 text-sm text-[color:var(--ink-muted)] hover:bg-[color:var(--surface)] hover:text-[color:var(--brass)]"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={toggleTheme}
@@ -58,11 +84,11 @@ export default function Navbar() {
           </button>
 
           <Link href="/book-consultation" className="btn-primary !px-4 !py-2.5 !text-[11px]">
-            Book a Call
+            Book a Free Call
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <button
             type="button"
             onClick={toggleTheme}
@@ -83,9 +109,9 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-[color:var(--line)] bg-[color:var(--bg)] lg:hidden">
+        <div className="border-t border-[color:var(--line)] bg-[color:var(--bg)] xl:hidden">
           <div className="container-site flex flex-col gap-0 py-2">
-            {navLinks.map((link) => (
+            {[...navLinks, ...moreLinks].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -95,7 +121,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link href="/book-consultation" className="btn-primary mt-3 mb-2 text-center">
-              Book a Call
+              Book a Free Call
             </Link>
           </div>
         </div>

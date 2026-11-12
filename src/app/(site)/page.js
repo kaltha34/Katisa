@@ -2,7 +2,7 @@ import HomePageClient from '@/components/home/HomePageClient';
 import { faqs, site } from '@/lib/content';
 
 export const metadata = {
-  title: 'Software for Sri Lankan shops, clinics & classes',
+  title: 'Build systems. Grow visibility.',
   description: site.description,
   alternates: { canonical: site.domain },
 };

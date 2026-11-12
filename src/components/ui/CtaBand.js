@@ -2,8 +2,8 @@ import Button from '@/components/ui/Button';
 import { site, whatsappUrl } from '@/lib/content';
 
 export default function CtaBand({
-  title = 'Ready for software that fits how you actually work?',
-  description = 'Book a free call. We’ll talk scope, timeline and budget in plain language — no pressure.',
+  title = 'Ready for a site or system that fits how your shop actually works?',
+  description = 'Get a free quote or book a call. We’ll talk scope, timeline and budget in plain language — no pressure.',
 }) {
   return (
     <section
@@ -26,8 +26,8 @@ export default function CtaBand({
 
         <div className="flex flex-col gap-4 md:items-end">
           <div className="flex flex-wrap gap-3 md:justify-end">
-            <Button href="/book-consultation" variant="primary">
-              Book a free call
+            <Button href="/book-consultation?package=free-audit" variant="primary">
+              Get a Free Audit
             </Button>
             <Button
               href={whatsappUrl()}

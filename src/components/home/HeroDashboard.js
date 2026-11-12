@@ -4,31 +4,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FiArrowUpRight } from 'react-icons/fi';
+import { catalog } from '@/lib/pricing';
 
 const builds = [
   {
     index: '01',
-    title: 'Inventory systems',
-    price: 'From LKR 62,000',
+    title: 'Websites for shops & salons',
+    price: catalog.rise.priceLabel,
+    image:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=75',
+    href: '/services#websites',
+  },
+  {
+    index: '02',
+    title: 'Inventory & POS',
+    price: catalog.empire.priceLabel,
     image:
       'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=75',
     href: '/services#inventory',
   },
   {
-    index: '02',
-    title: 'Booking apps',
-    price: 'From LKR 29,000',
+    index: '03',
+    title: 'Booking & clinic apps',
+    price: catalog.origin.priceLabel,
     image:
       'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=75',
     href: '/services#apps',
-  },
-  {
-    index: '03',
-    title: 'Business websites',
-    price: 'From LKR 58,000',
-    image:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=75',
-    href: '/services#websites',
   },
 ];
 

@@ -29,7 +29,7 @@ export default function ConsultationBooking() {
         <div className="mx-auto mb-4 inline-flex rounded-full bg-[color:var(--brass-soft)] p-4 text-[color:var(--brass)]">
           <FiCalendar size={28} />
         </div>
-        <h2 className="font-display text-3xl font-semibold">Schedule a consultation</h2>
+        <h2 className="font-display text-3xl font-semibold">Book a Free Call</h2>
         <p className="mt-2 text-[color:var(--ink-muted)]">
           Pick a time that works — calendar invite included.
         </p>

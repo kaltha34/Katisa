@@ -23,7 +23,8 @@ export default function TermsPage() {
             site you agree to these terms.
           </p>
           <p>
-            Package prices shown are starting points in LKR. Final scope, timeline and fees are
+            Package prices shown are starting points in LKR (websites from LKR 35,000). Typical
+            project payment terms are 50% upfront, 30% midpoint, 20% on launch. Final scope, timeline and fees are
             confirmed in writing before paid work begins. Ownership of deliverables is defined in
             the project agreement — typically you own the delivered code and accounts after full
             payment.

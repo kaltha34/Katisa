@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FiInstagram, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 import Logo from '@/components/ui/Logo';
-import { navLinks, services, site, whatsappUrl } from '@/lib/content';
+import { moreLinks, navLinks, services, site, whatsappUrl } from '@/lib/content';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -50,6 +50,13 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              {moreLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:text-[color:var(--brass)]">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/privacy" className="hover:text-[color:var(--brass)]">
                   Privacy
@@ -65,16 +72,26 @@ export default function Footer() {
 
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
-              Packages
+              Build packages
             </h4>
             <ul className="space-y-3 text-sm text-[color:var(--ink-muted)]">
               {services.map((service) => (
                 <li key={service.id}>
-                  <Link href={`/services#${service.id}`} className="hover:text-[color:var(--brass)]">
+                  <Link href={`/build#${service.id}`} className="hover:text-[color:var(--brass)]">
                     {service.series} · {service.title}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/grow" className="hover:text-[color:var(--brass)]">
+                  Pulse · Grow
+                </Link>
+              </li>
+              <li>
+                <Link href="/bundles" className="hover:text-[color:var(--brass)]">
+                  Bundles
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -112,18 +129,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 border-t border-[color:var(--line)] pt-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
-              Webinars
-            </h4>
-            <p className="mt-2 max-w-md text-sm text-[color:var(--ink-muted)]">
-              Practical sessions for Sri Lankan business owners. See upcoming dates and register.
-            </p>
+        <div className="mt-12 grid gap-6 border-t border-[color:var(--line)] pt-8 md:grid-cols-2">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border border-[color:var(--line)] p-5">
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
+                Webinars
+              </h4>
+              <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Software + marketing topics.</p>
+            </div>
+            <Link href="/webinars" className="btn-outline !text-xs">
+              View webinars
+            </Link>
           </div>
-          <Link href="/webinars" className="btn-outline justify-self-start md:justify-self-end">
-            View webinars
-          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border border-[color:var(--line)] p-5">
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
+                Join Us
+              </h4>
+              <p className="mt-1 text-sm text-[color:var(--ink-muted)]">Build and Pulse roles.</p>
+            </div>
+            <Link href="/join-us" className="btn-outline !text-xs">
+              See roles
+            </Link>
+          </div>
         </div>
 
         <div className="mt-8 border-t border-[color:var(--line)] pt-6 text-center text-sm text-[color:var(--ink-faint)]">

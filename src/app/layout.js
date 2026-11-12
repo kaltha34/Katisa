@@ -21,12 +21,12 @@ const body = IBM_Plex_Sans({
 export const metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: `${site.legalName} | Software for Sri Lankan businesses`,
+    default: `${site.legalName} | Build systems. Grow visibility.`,
     template: `%s | ${site.legalName}`,
   },
   description: site.description,
   openGraph: {
-    title: site.legalName,
+    title: `${site.legalName} | Build + Grow for Sri Lankan businesses`,
     description: site.description,
     url: site.domain,
     siteName: site.legalName,
@@ -36,7 +36,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: site.legalName,
+    title: `${site.legalName} | Build + Grow for Sri Lankan businesses`,
     description: site.description,
     images: ['/images/katisa-logo.png'],
   },

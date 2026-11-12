@@ -4,34 +4,35 @@ import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import CtaBand from '@/components/ui/CtaBand';
 import { team } from '@/lib/site';
-import { FiAward, FiGlobe, FiLinkedin, FiInstagram, FiTrendingUp, FiUsers } from 'react-icons/fi';
+import { positioningLine, site } from '@/lib/content';
+import { FiGlobe, FiLinkedin, FiInstagram, FiTrendingUp, FiUsers, FiEye } from 'react-icons/fi';
 
 export const metadata = {
   title: 'About',
   description:
-    'Katisa Technologies is a Colombo software company building websites, inventory systems and internal apps for Sri Lankan SMEs — plus InQRS NFC cards.',
+    'Katisa Technologies is one Colombo team that builds business systems and helps them get seen — Build (software) and Grow (Pulse), plus InQRS as a separate product.',
 };
 
 const values = [
   {
     icon: FiTrendingUp,
     title: 'Outcomes first',
-    text: 'We measure success by stock that stays accurate, bookings that stick, and sites that get messages.',
+    text: 'Success means stock that stays accurate, bookings that stick, and posts that bring inquiries.',
   },
   {
     icon: FiUsers,
     title: 'Plain language',
-    text: 'No jargon theatre. You always know scope, price range and what’s shipping next.',
+    text: 'No jargon. You always know scope, price range and what ships next.',
   },
   {
-    icon: FiAward,
-    title: 'Clean handover',
-    text: 'You own the code, accounts and docs. We’re partners — not a black box.',
+    icon: FiEye,
+    title: 'Built and seen',
+    text: 'A site or app only helps if customers find it — that is why Build and Grow sit together.',
   },
   {
     icon: FiGlobe,
     title: 'Built for Sri Lanka',
-    text: 'WhatsApp-friendly flows, LKR pricing clarity, and support that answers on local time.',
+    text: 'WhatsApp-friendly flows, clear LKR pricing, and support on local time.',
   },
 ];
 
@@ -40,9 +41,9 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About Katisa"
-        title="A Colombo workshop for"
-        accent="business software"
-        description="We help salons, clinics, tuition classes and shops replace messy spreadsheets and chat chaos with tools people actually open."
+        title="One team that builds"
+        accent="and helps it get seen"
+        description={positioningLine}
       />
 
       <Section>
@@ -50,25 +51,34 @@ export default function AboutPage() {
           <div>
             <h2 className="heading-display">Our story</h2>
             <p className="body-muted mt-4">
-              Katisa Technologies started with a simple belief: most businesses don’t need another
-              bloated platform — they need software that fits their workflow, ships on time, and is
-              easy to run.
+              Katisa started by building software for Sri Lankan shops, clinics and salons — sites,
+              stock systems and simple apps people actually open.
             </p>
             <p className="body-muted mt-4">
-              Today we build websites, inventory systems, internal apps, and maintain InQRS for teams
-              across Sri Lanka and beyond.
+              We learned the hard part often comes after launch: nobody finds the new site. That is
+              why we added Pulse (Grow) — content and video from the same team that built your
+              system, not a separate agency you have to brief from scratch.
             </p>
-            <Button href="/join-us" variant="outline" className="mt-8">
-              Join the team
-            </Button>
+            <p className="body-muted mt-4">
+              InQRS NFC smart cards remain a separate product we maintain. Linked when useful — not
+              mixed into Build or Pulse package prices.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/build" variant="outline">
+                Explore Build
+              </Button>
+              <Button href="/grow" variant="ghost">
+                Explore Grow
+              </Button>
+            </div>
           </div>
           <div className="card-surface">
             <div className="grid grid-cols-2 gap-6">
               {[
-                ['2020', 'Founded'],
-                ['InQRS', 'Product we maintain'],
+                ['Build', 'Websites & systems'],
+                ['Grow', 'Pulse content'],
                 ['Colombo', 'Home base'],
-                ['Services + product', 'How we work'],
+                ['InQRS', 'Separate product'],
               ].map(([value, label]) => (
                 <div key={label}>
                   <div className="text-2xl font-semibold text-[color:var(--brass)]">{value}</div>
@@ -80,105 +90,94 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="soft">
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <h2 className="heading-display">What we value</h2>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {values.map((value) => (
-            <div key={value.title} className="card-surface">
-              <div className="mb-4 inline-flex rounded-xl bg-[color:var(--brass-soft)] p-3 text-[color:var(--brass)]">
-                <value.icon size={20} />
-              </div>
-              <h3 className="font-semibold">{value.title}</h3>
-              <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{value.text}</p>
-            </div>
-          ))}
+      <Section tone="soft" className="border-y border-[color:var(--line)]">
+        <div className="max-w-3xl">
+          <div className="eyebrow mb-4">How we work</div>
+          <h2 className="heading-display">One onboarding. One report. One contact.</h2>
+          <ul className="mt-8 space-y-5 text-[color:var(--ink-muted)]">
+            <li className="border-b border-[color:var(--line)] pb-5">
+              <span className="font-semibold text-[color:var(--ink)]">One onboarding form</span>
+              <p className="mt-1 text-sm">
+                Brand basics, goals and access — collected once whether you start with Build, Grow,
+                or a bundle.
+              </p>
+            </li>
+            <li className="border-b border-[color:var(--line)] pb-5">
+              <span className="font-semibold text-[color:var(--ink)]">One monthly report</span>
+              <p className="mt-1 text-sm">
+                Website health and social activity in plain language when you are on Care and/or
+                Pulse — not two agencies sending two PDFs.
+              </p>
+            </li>
+            <li>
+              <span className="font-semibold text-[color:var(--ink)]">One point of contact</span>
+              <p className="mt-1 text-sm">
+                You talk to Katisa. We coordinate build and content so nothing falls between teams.
+              </p>
+            </li>
+          </ul>
         </div>
       </Section>
 
       <Section>
-        <div className="mx-auto max-w-3xl">
-          <div className="eyebrow mb-4">Leadership</div>
-          <div className="overflow-hidden rounded-3xl border border-[color:var(--line)] bg-[color:var(--surface)] shadow-soft md:flex">
-            <div className="relative h-72 w-full shrink-0 md:h-auto md:min-h-[22rem] md:w-72">
-              <Image
-                src="/images/founder.jpg"
-                alt="Kalhara Thabrew"
-                fill
-                unoptimized
-                className="object-cover"
-                sizes="288px"
-              />
-            </div>
-            <div className="flex-1 p-8">
-              <h2 className="font-display text-2xl font-semibold">Kalhara Thabrew</h2>
-              <p className="mt-1 text-sm font-medium text-[color:var(--brass)]">Founder & CEO</p>
-              <p className="mt-4 text-[color:var(--ink-muted)]">
-                Building Katisa with hands-on software knowledge — and a crew of AI agents that help
-                ship product, engineering, QA and marketing work every day.
-              </p>
-              <div className="mt-6 flex gap-3">
-                <a
-                  href="https://www.linkedin.com/in/kalhara-thabrew-288565258/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-[color:var(--surface-strong)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
-                  aria-label="LinkedIn"
-                >
-                  <FiLinkedin />
-                </a>
-                <a
-                  href="https://www.instagram.com/kali_x_sa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-[color:var(--surface-strong)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
-                  aria-label="Instagram"
-                >
-                  <FiInstagram />
-                </a>
-              </div>
-            </div>
-          </div>
+        <div className="mb-10">
+          <div className="eyebrow mb-4">Values</div>
+          <h2 className="heading-display">How we show up</h2>
         </div>
-      </Section>
-
-      <Section tone="soft">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <div className="eyebrow mb-4 justify-center">Agent Crew</div>
-          <h2 className="heading-display">Agents that work with me</h2>
-          <p className="body-muted mt-4">
-            Not a traditional org chart — specialized AI agents that help run product, engineering,
-            QA and marketing alongside the founder.
-          </p>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {team.map((member) => (
-            <article key={member.id} className="card-surface flex h-full flex-col overflow-hidden !p-0">
-              <div className="relative aspect-square w-full overflow-hidden border-b border-[color:var(--line)] bg-[color:var(--bg)]">
-                <Image
-                  src={member.image}
-                  alt={`${member.name} — ${member.role}`}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <div className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
-                  Agent
-                </div>
-                <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="mt-1 text-sm font-medium text-[color:var(--ink-muted)]">{member.role}</p>
-                <p className="mt-4 text-sm leading-relaxed text-[color:var(--ink-muted)]">{member.focus}</p>
-              </div>
-            </article>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {values.map((item) => (
+            <div key={item.title} className="card-surface">
+              <item.icon className="text-[color:var(--brass)]" size={22} />
+              <h3 className="mt-4 font-display text-lg font-bold tracking-tight">{item.title}</h3>
+              <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{item.text}</p>
+            </div>
           ))}
         </div>
       </Section>
 
-      <CtaBand />
+      <Section tone="soft">
+        <div className="mb-8">
+          <div className="eyebrow mb-4">Team</div>
+          <h2 className="heading-display">Agents who ship</h2>
+          <p className="body-muted mt-3">
+            [PLACEHOLDER: Replace agent characters with real people photos and bios when ready.]
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {team.map((member) => (
+            <div key={member.id} className="card-surface !p-0 overflow-hidden">
+              <div className="relative aspect-[4/3]">
+                <Image src={member.image} alt="" fill unoptimized className="object-cover" />
+              </div>
+              <div className="p-5">
+                <div className="font-semibold">{member.name}</div>
+                <div className="text-sm text-[color:var(--brass)]">{member.role}</div>
+                <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{member.focus}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-4 text-sm text-[color:var(--ink-muted)]">
+          <a
+            href={site.socials.linkedin}
+            className="inline-flex items-center gap-2 hover:text-[color:var(--brass)]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiLinkedin /> LinkedIn
+          </a>
+          <a
+            href={site.socials.instagram}
+            className="inline-flex items-center gap-2 hover:text-[color:var(--brass)]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiInstagram /> Instagram
+          </a>
+        </div>
+      </Section>
+
+      <CtaBand title="Want to work with one team for systems and visibility?" />
     </>
   );
 }

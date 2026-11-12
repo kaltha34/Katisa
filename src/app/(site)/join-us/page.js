@@ -2,34 +2,56 @@ import Image from 'next/image';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import JoinForm from '@/components/join/JoinForm';
-import { FiAward, FiCode, FiTrendingUp, FiUsers } from 'react-icons/fi';
+import { FiAward, FiCode, FiEdit3, FiShare2, FiTrendingUp, FiUsers, FiVideo } from 'react-icons/fi';
 
 export const metadata = {
   title: 'Join Us',
-  description: 'Join Katisa Technologies as an early contributor on InQRS and earn equity.',
+  description:
+    'Join Katisa Technologies — developers for Build, plus content creators, videographers and social managers for Pulse (Grow). Equity roles on InQRS also open.',
 };
 
 const benefits = [
-  { icon: FiTrendingUp, title: 'Equity ownership', text: 'Own a piece of InQRS and share in future success.' },
-  { icon: FiUsers, title: 'Early team member', text: 'Shape product, culture, and direction from day one.' },
-  { icon: FiCode, title: 'Real impact', text: 'Ship features that customers use immediately.' },
-  { icon: FiAward, title: 'Portfolio growth', text: 'Build real software-company experience with production work.' },
+  { icon: FiTrendingUp, title: 'Real client work', text: 'Ship for shops, salons and clinics — Build and Grow.' },
+  { icon: FiUsers, title: 'Small team', text: 'Shape how Katisa works across software and content.' },
+  { icon: FiCode, title: 'Build arm', text: 'Websites, inventory systems and apps with clear ownership.' },
+  { icon: FiAward, title: 'Grow arm', text: 'Pulse content and video with a path to portfolio pieces.' },
 ];
 
-const roles = [
-  { title: 'Full-Stack Developer', skills: ['React', 'Node.js', 'Firebase', 'REST APIs'], equity: '3–8%' },
-  { title: 'Frontend Developer', skills: ['React', 'Tailwind', 'Responsive UI'], equity: '2–5%' },
-  { title: 'Backend Developer', skills: ['Node.js', 'Firestore', 'Auth', 'APIs'], equity: '2–5%' },
+const buildRoles = [
+  { title: 'Full-Stack Developer', skills: ['React', 'Node.js', 'Firebase', 'REST APIs'], note: 'Equity / project — discuss' },
+  { title: 'Frontend Developer', skills: ['React', 'Tailwind', 'Responsive UI'], note: 'Equity / project — discuss' },
+  { title: 'Backend Developer', skills: ['Node.js', 'Firestore', 'Auth', 'APIs'], note: 'Equity / project — discuss' },
+];
+
+const growRoles = [
+  {
+    title: 'Content Creator',
+    skills: ['Captions', 'Content calendars', 'Instagram / Facebook'],
+    note: 'Open interest — [PLACEHOLDER: compensation]',
+    icon: FiEdit3,
+  },
+  {
+    title: 'Videographer / Editor',
+    skills: ['Short-form video', 'Reels', 'Mobile + camera'],
+    note: 'Open interest — [PLACEHOLDER: compensation]',
+    icon: FiVideo,
+  },
+  {
+    title: 'Social Media Manager',
+    skills: ['Scheduling', 'Community reply', 'Simple reporting'],
+    note: 'Open interest — [PLACEHOLDER: compensation]',
+    icon: FiShare2,
+  },
 ];
 
 export default function JoinUsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Careers / Equity"
-        title="Help build"
-        accent="InQRS"
-        description="We’re looking for early contributors who want ownership, responsibility, and real product work — not busywork."
+        eyebrow="Careers"
+        title="Build software."
+        accent="Grow visibility."
+        description="We’re looking for developers and Pulse creatives who want real Sri Lankan client work — plus early InQRS contributors."
       />
 
       <Section>
@@ -40,45 +62,44 @@ export default function JoinUsPage() {
             width={72}
             height={72}
             unoptimized
-            className="h-16 w-16 rounded-2xl object-cover"
+            className="h-16 w-16 object-cover"
           />
           <div>
-            <h2 className="text-2xl font-bold text-white">Join as an early contributor</h2>
-            <p className="text-white/65">Equity roles for builders who want to ship.</p>
+            <h2 className="font-display text-2xl font-bold">One company, two arms</h2>
+            <p className="text-sm text-[color:var(--ink-muted)]">
+              Build (software) · Grow / Pulse (content) · InQRS (separate product equity roles)
+            </p>
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {benefits.map((item) => (
             <div key={item.title} className="card-surface">
-              <div className="mb-4 inline-flex rounded-xl bg-gold/15 p-3 text-gold">
-                <item.icon size={20} />
-              </div>
-              <h3 className="font-semibold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm text-white/65">{item.text}</p>
+              <item.icon className="text-[color:var(--brass)]" size={20} />
+              <h3 className="mt-4 font-semibold">{item.title}</h3>
+              <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{item.text}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section tone="soft">
+      <Section tone="soft" className="border-y border-[color:var(--line)]">
         <div className="mb-8">
-          <h2 className="heading-display">Open roles</h2>
-          <p className="body-muted mt-3">Equity ranges depend on contribution, commitment, and stage.</p>
+          <h2 className="heading-display">Build roles</h2>
+          <p className="body-muted mt-3">Software for Rise, Empire, Origin and Uncharted.</p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {roles.map((role) => (
-            <div
-              key={role.title}
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-soft"
-            >
-              <div className="text-xs font-semibold tracking-[0.16em] text-gold">EQUITY {role.equity}</div>
-              <h3 className="mt-2 text-xl font-semibold text-white">{role.title}</h3>
+        <div className="grid gap-4 md:grid-cols-3">
+          {buildRoles.map((role) => (
+            <div key={role.title} className="card-surface">
+              <div className="text-xs font-semibold tracking-[0.16em] text-[color:var(--brass)]">
+                {role.note}
+              </div>
+              <h3 className="mt-2 text-xl font-semibold">{role.title}</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {role.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs font-medium text-white/80"
+                    className="border border-[color:var(--line)] px-3 py-1 text-xs text-[color:var(--ink-muted)]"
                   >
                     {skill}
                   </span>
@@ -90,10 +111,41 @@ export default function JoinUsPage() {
       </Section>
 
       <Section>
-        <div className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-soft md:p-8">
-          <h2 className="text-2xl font-bold text-white">Apply now</h2>
-          <p className="mt-2 text-sm text-white/65">
-            Tell us what you want to work on and share links to your work.
+        <div className="mb-8">
+          <h2 className="heading-display">Grow / Pulse roles</h2>
+          <p className="body-muted mt-3">
+            Open interest — tell us what you make. Compensation marked as placeholder until you set
+            it.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {growRoles.map((role) => (
+            <div key={role.title} className="card-surface">
+              <role.icon className="text-[color:var(--brass)]" size={22} />
+              <div className="mt-3 text-xs font-semibold tracking-[0.16em] text-[color:var(--brass)]">
+                {role.note}
+              </div>
+              <h3 className="mt-2 text-xl font-semibold">{role.title}</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {role.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="border border-[color:var(--line)] px-3 py-1 text-xs text-[color:var(--ink-muted)]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section tone="soft">
+        <div className="mx-auto max-w-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 md:p-8">
+          <h2 className="font-display text-2xl font-bold">Apply / register interest</h2>
+          <p className="mt-2 text-sm text-[color:var(--ink-muted)]">
+            Name the role in the form (e.g. Videographer / Editor or Frontend Developer).
           </p>
           <div className="mt-6">
             <JoinForm />

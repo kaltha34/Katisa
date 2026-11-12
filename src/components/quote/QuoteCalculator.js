@@ -2,30 +2,64 @@
 
 import { useMemo, useState } from 'react';
 import Button from '@/components/ui/Button';
-import { services, whatsappUrl } from '@/lib/content';
+import { bundles, catalog, formatLkr, services, whatsappUrl } from '@/lib/content';
 
-const addOns = [
-  { id: 'whatsapp', label: 'WhatsApp notifications', amount: 8000 },
-  { id: 'payments', label: 'PayHere / LankaQR payments', amount: 12000 },
-  { id: 'sinhala', label: 'Sinhala / Tamil UI copy', amount: 10000 },
-  { id: 'admin', label: 'Admin dashboard', amount: 15000 },
-  { id: 'support', label: 'First month Care Lite', amount: 8000 },
+const planChoices = [
+  ...catalog.rise.plans.map((p) => ({
+    id: p.id,
+    label: `Rise ${p.name} — ${p.priceLabel}`,
+    priceFrom: p.price,
+    series: 'Rise',
+    title: p.name,
+  })),
+  ...catalog.empire.plans.map((p) => ({
+    id: p.id,
+    label: `Empire ${p.name} — ${p.priceLabel}`,
+    priceFrom: p.price + (p.monthly || 0),
+    series: 'Empire',
+    title: p.name,
+  })),
+  {
+    id: 'origin',
+    label: `Origin — ${catalog.origin.priceLabel}`,
+    priceFrom: catalog.origin.priceFrom,
+    series: 'Origin',
+    title: 'Internal Apps',
+  },
+  ...bundles.map((b) => ({
+    id: `bundle-${b.id}`,
+    label: `Bundle ${b.name} — ${b.monthlyLabel ? `${b.priceLabel} + ${b.monthlyLabel}` : b.priceLabel}`,
+    priceFrom: b.price + (b.monthly || 0),
+    series: 'Bundle',
+    title: b.name,
+  })),
+  {
+    id: 'uncharted',
+    label: `Uncharted — ${catalog.uncharted.priceLabel}`,
+    priceFrom: null,
+    series: 'Uncharted',
+    title: 'Custom',
+  },
 ];
 
-function formatLkr(n) {
-  return `LKR ${n.toLocaleString('en-LK')}`;
-}
+const addOns = [
+  { id: 'care-basic', label: 'First month Website Care Basic', amount: 4500 },
+  { id: 'care-plus', label: 'First month Website Care Plus', amount: 9000 },
+  { id: 'pulse-starter', label: '1 month Pulse Starter', amount: 25000 },
+  { id: 'payments', label: 'Payment integration (if not already in plan)', amount: 12000 },
+  { id: 'sinhala', label: 'Sinhala / Tamil UI copy', amount: 10000 },
+];
 
 export default function QuoteCalculator() {
-  const [packageId, setPackageId] = useState(services[0].id);
+  const [packageId, setPackageId] = useState(planChoices[1]?.id || planChoices[0].id);
   const [selected, setSelected] = useState([]);
 
-  const base = services.find((s) => s.id === packageId) || services[0];
+  const base = planChoices.find((s) => s.id === packageId) || planChoices[0];
   const estimate = useMemo(() => {
     if (base.priceFrom == null) return null;
     const extras = addOns.filter((a) => selected.includes(a.id)).reduce((sum, a) => sum + a.amount, 0);
     const low = base.priceFrom + extras;
-    const high = Math.round(low * 1.35);
+    const high = Math.round(low * 1.2);
     return { low, high };
   }, [base, selected]);
 
@@ -35,13 +69,13 @@ export default function QuoteCalculator() {
 
   const message = estimate
     ? `Hi Katisa, I’m interested in ${base.series} (${base.title}). Estimated range ${formatLkr(estimate.low)}–${formatLkr(estimate.high)}. Add-ons: ${selected.join(', ') || 'none'}.`
-    : `Hi Katisa, I’d like a custom Uncharted quote.`;
+    : `Hi Katisa, I’d like a custom Uncharted quote. Discovery fee ${formatLkr(catalog.uncharted.discoveryFee)}.`;
 
   return (
     <div className="card-surface">
       <h3 className="font-display text-xl font-semibold">Quick quote range</h3>
       <p className="mt-2 text-sm text-[color:var(--ink-muted)]">
-        Pick a package and extras. This is a rough range — final price after discovery.
+        Pick a package and extras. Rough range only — final price after discovery.
       </p>
 
       <label className="mt-6 block text-sm font-medium">
@@ -51,9 +85,9 @@ export default function QuoteCalculator() {
           value={packageId}
           onChange={(e) => setPackageId(e.target.value)}
         >
-          {services.map((s) => (
+          {planChoices.map((s) => (
             <option key={s.id} value={s.id}>
-              {s.series} — {s.title} ({s.priceLabel})
+              {s.label}
             </option>
           ))}
         </select>
@@ -65,7 +99,7 @@ export default function QuoteCalculator() {
           {addOns.map((addon) => (
             <label
               key={addon.id}
-              className="flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-[color:var(--line)] px-3 py-2.5 text-sm"
+              className="flex cursor-pointer items-center justify-between gap-3 border border-[color:var(--line)] px-3 py-2.5 text-sm"
             >
               <span className="flex items-center gap-2">
                 <input
@@ -82,7 +116,7 @@ export default function QuoteCalculator() {
         </div>
       </fieldset>
 
-      <div className="mt-6 rounded-2xl border border-[color:var(--brass)]/30 bg-[color:var(--brass-soft)] p-4">
+      <div className="mt-6 border border-[color:var(--brass)]/30 bg-[color:var(--brass-soft)] p-4">
         {estimate ? (
           <>
             <div className="text-xs uppercase tracking-[0.16em] text-[color:var(--brass)]">
@@ -91,10 +125,14 @@ export default function QuoteCalculator() {
             <div className="mt-1 font-display text-2xl font-semibold">
               {formatLkr(estimate.low)} – {formatLkr(estimate.high)}
             </div>
+            <p className="mt-2 text-xs text-[color:var(--ink-faint)]">
+              Starting points also listed on Services ({services.map((s) => s.series).join(', ')}).
+            </p>
           </>
         ) : (
           <p className="text-sm text-[color:var(--ink-muted)]">
-            Uncharted is scoped on a discovery call — no public starting price.
+            Uncharted starts with a {formatLkr(catalog.uncharted.discoveryFee)} discovery fee
+            (credited to the project). Projects from {formatLkr(catalog.uncharted.priceFrom)}.
           </p>
         )}
       </div>
