@@ -21,8 +21,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/services', destination: '/build', permanent: true },
-      { source: '/work', destination: '/our-work', permanent: true },
+      { source: '/services', destination: '/software', permanent: true },
+      { source: '/build', destination: '/software', permanent: true },
+      { source: '/grow', destination: '/marketing', permanent: true },
+      { source: '/bundles', destination: '/pricing#bundles', permanent: false },
+      { source: '/our-work', destination: '/', permanent: false },
+      { source: '/work', destination: '/', permanent: false },
     ];
   },
 };

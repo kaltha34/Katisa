@@ -5,8 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { validateField } from '@/lib/validation';
 import {
   budgetRangeOptions,
-  focusOptions,
-  industryOptions,
+  businessTypeOptions,
+  completionReward,
   packageInterestOptions,
   site,
   whatsappUrl,
@@ -14,70 +14,69 @@ import {
 
 const initial = {
   name: '',
-  email: '',
   phone: '',
-  focus: '',
-  packageInterest: '',
-  industry: '',
+  need: '',
+  businessType: '',
   budgetRange: '',
   message: '',
 };
 
 export default function BookingInterestForm() {
   const searchParams = useSearchParams();
-  const presetPackage = searchParams.get('package') || '';
-  const presetFocus = searchParams.get('focus') || '';
+  const preset = searchParams.get('package') || '';
 
-  const [formData, setFormData] = useState({
-    ...initial,
-    focus: focusOptions.some((o) => o.value === presetFocus) ? presetFocus : '',
-    packageInterest: packageInterestOptions.some((o) => o.value === presetPackage)
-      ? presetPackage
-      : '',
-  });
+  const presetNeed = packageInterestOptions.some((o) => o.value === preset)
+    ? preset
+    : preset.startsWith('website') || preset.includes('website')
+      ? 'website'
+      : preset.startsWith('stock') || preset.includes('stock')
+        ? 'stock'
+        : preset.startsWith('custom')
+          ? 'custom'
+          : preset.startsWith('marketing') || preset.includes('marketing') || preset.includes('pulse')
+            ? 'marketing'
+            : '';
+
+  const [formData, setFormData] = useState({ ...initial, need: presetNeed });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const focusLabel = useMemo(() => {
-    return focusOptions.find((o) => o.value === formData.focus)?.label || formData.focus || 'Not selected';
-  }, [formData.focus]);
-
-  const packageLabel = useMemo(() => {
-    return (
-      packageInterestOptions.find((o) => o.value === formData.packageInterest)?.label ||
-      formData.packageInterest ||
-      'Not selected'
-    );
-  }, [formData.packageInterest]);
-
-  const industryLabel = useMemo(() => {
-    return (
-      industryOptions.find((o) => o.value === formData.industry)?.label ||
-      formData.industry ||
-      'Not selected'
-    );
-  }, [formData.industry]);
-
-  const budgetLabel = useMemo(() => {
-    return (
+  const needLabel = useMemo(
+    () => packageInterestOptions.find((o) => o.value === formData.need)?.label || formData.need || 'Not selected',
+    [formData.need],
+  );
+  const businessLabel = useMemo(
+    () =>
+      businessTypeOptions.find((o) => o.value === formData.businessType)?.label ||
+      formData.businessType ||
+      'Not selected',
+    [formData.businessType],
+  );
+  const budgetLabel = useMemo(
+    () =>
       budgetRangeOptions.find((o) => o.value === formData.budgetRange)?.label ||
-      formData.budgetRange ||
-      'Not selected'
-    );
-  }, [formData.budgetRange]);
+      'Not selected',
+    [formData.budgetRange],
+  );
 
-  const composedMessage = useMemo(() => {
-    return [
-      formData.message?.trim() || 'I would like a free audit / discovery call.',
-      '',
-      `Build, Grow, or Both?: ${focusLabel}`,
-      `Package interested in: ${packageLabel}`,
-      `Industry: ${industryLabel}`,
-      `Budget range: ${budgetLabel}`,
-    ].join('\n');
-  }, [formData.message, focusLabel, packageLabel, industryLabel, budgetLabel]);
+  const composedMessage = useMemo(
+    () =>
+      [
+        formData.message?.trim() || 'I would like to book a free call.',
+        '',
+        `What do you need?: ${needLabel}`,
+        `Business type: ${businessLabel}`,
+        `Budget range: ${budgetLabel}`,
+        completionReward.enabled
+          ? `Note: Client informed about free InQRS card on successful completion.`
+          : '',
+      ]
+        .filter(Boolean)
+        .join('\n'),
+    [formData.message, needLabel, businessLabel, budgetLabel],
+  );
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -88,17 +87,14 @@ export default function BookingInterestForm() {
   const validate = () => {
     const next = {};
     const name = validateField('Name', formData.name, { required: true, minLength: 2 });
-    const email = validateField('Email', formData.email, { required: true, email: true });
     if (!name.isValid) next.name = name.errorMessage;
-    if (!email.isValid) next.email = email.errorMessage;
-    if (!formData.focus) next.focus = 'Please choose Build, Grow, or Both';
-    if (!formData.packageInterest) next.packageInterest = 'Please choose a package';
-    if (!formData.industry) next.industry = 'Please choose an industry';
-    if (!formData.budgetRange) next.budgetRange = 'Please choose a budget range';
-    if (formData.phone) {
+    if (!formData.phone.trim()) next.phone = 'Phone or WhatsApp is required';
+    else {
       const phone = validateField('Phone', formData.phone, { phone: true });
       if (!phone.isValid) next.phone = phone.errorMessage;
     }
+    if (!formData.need) next.need = 'Please choose what you need';
+    if (!formData.businessType) next.businessType = 'Please choose a business type';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -106,7 +102,6 @@ export default function BookingInterestForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-
     setSubmitting(true);
     setError(false);
     const form = e.target;
@@ -115,35 +110,27 @@ export default function BookingInterestForm() {
     iframe.style.display = 'none';
     document.body.appendChild(iframe);
     form.target = 'hidden-booking-submit-iframe';
-
     iframe.onload = () => {
       setSubmitting(false);
       setSuccess(true);
-      setFormData({
-        ...initial,
-        focus: focusOptions.some((o) => o.value === presetFocus) ? presetFocus : '',
-        packageInterest: packageInterestOptions.some((o) => o.value === presetPackage)
-          ? presetPackage
-          : '',
-      });
-      setTimeout(() => setSuccess(false), 6000);
+      setFormData({ ...initial, need: presetNeed });
+      setTimeout(() => setSuccess(false), 8000);
       setTimeout(() => document.body.contains(iframe) && document.body.removeChild(iframe), 1000);
     };
     iframe.onerror = () => {
       setSubmitting(false);
       setError(true);
     };
-
     form.submit();
   };
 
-  const waMessage = `Hi Katisa, I'm ${formData.name || 'a business owner'}. Focus: ${focusLabel}. Package: ${packageLabel}. Industry: ${industryLabel}. Budget: ${budgetLabel}. ${formData.message || 'I want a free audit.'}`;
+  const waMessage = `Hi Katisa, I'm ${formData.name || 'a business owner'}. Need: ${needLabel}. Business: ${businessLabel}. Budget: ${budgetLabel}. ${formData.message || 'Please book a free call.'}`;
 
   return (
     <div className="border border-[color:var(--line)] bg-[color:var(--surface)] p-5 md:p-8">
-      <h2 className="font-display text-2xl font-bold tracking-tight">Tell us what you need</h2>
+      <h2 className="font-display text-2xl font-bold tracking-tight">Book a Free Call</h2>
       <p className="mt-2 text-sm text-[color:var(--ink-muted)]">
-        Build / Grow, package, industry and budget are included in the email we receive.
+        Short form. Your answers are included in the email we receive.
       </p>
 
       <form
@@ -155,36 +142,27 @@ export default function BookingInterestForm() {
       >
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_subject" value="New quote / audit request from Katisa website" />
+        <input type="hidden" name="_subject" value="New free call request from Katisa website" />
         <input type="hidden" name="composed_message" value={composedMessage} />
-        <input type="hidden" name="focus_label" value={focusLabel} />
-        <input type="hidden" name="package_label" value={packageLabel} />
-        <input type="hidden" name="industry_label" value={industryLabel} />
+        <input type="hidden" name="need_label" value={needLabel} />
+        <input type="hidden" name="business_type_label" value={businessLabel} />
         <input type="hidden" name="budget_label" value={budgetLabel} />
         <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label className="mb-1.5 block text-sm font-medium">Name</label>
-            <input className="input-field" name="name" value={formData.name} onChange={onChange} />
-            {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
-          </div>
-          <div>
-            <label className="mb-1.5 block text-sm font-medium">Email</label>
-            <input
-              className="input-field"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={onChange}
-            />
-            {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
-          </div>
+        <div>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="name">
+            Name
+          </label>
+          <input id="name" className="input-field" name="name" value={formData.name} onChange={onChange} />
+          {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-medium">Phone (optional)</label>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="phone">
+            Phone / WhatsApp
+          </label>
           <input
+            id="phone"
             className="input-field"
             type="tel"
             name="phone"
@@ -195,105 +173,95 @@ export default function BookingInterestForm() {
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-medium">Build, Grow, or Both?</label>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="need">
+            What do you need?
+          </label>
           <select
+            id="need"
             className="input-field"
-            name="focus_area"
-            value={formData.focus}
+            name="what_do_you_need"
+            value={formData.need}
             onChange={(e) => {
-              setFormData((prev) => ({ ...prev, focus: e.target.value }));
-              if (errors.focus) setErrors((prev) => ({ ...prev, focus: '' }));
+              setFormData((prev) => ({ ...prev, need: e.target.value }));
+              if (errors.need) setErrors((prev) => ({ ...prev, need: '' }));
             }}
           >
             <option value="">Select</option>
-            {focusOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          {errors.focus && <p className="mt-1 text-sm text-red-400">{errors.focus}</p>}
-        </div>
-
-        <div>
-          <label className="mb-1.5 block text-sm font-medium">Package interested in</label>
-          <select
-            className="input-field"
-            name="package_interested_in"
-            value={formData.packageInterest}
-            onChange={(e) => {
-              setFormData((prev) => ({ ...prev, packageInterest: e.target.value }));
-              if (errors.packageInterest) setErrors((prev) => ({ ...prev, packageInterest: '' }));
-            }}
-          >
-            <option value="">Select a package</option>
             {packageInterestOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>
             ))}
           </select>
-          {errors.packageInterest && (
-            <p className="mt-1 text-sm text-red-400">{errors.packageInterest}</p>
-          )}
+          {errors.need && <p className="mt-1 text-sm text-red-400">{errors.need}</p>}
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-medium">Industry</label>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="businessType">
+            Business type
+          </label>
           <select
+            id="businessType"
             className="input-field"
-            name="industry"
-            value={formData.industry}
+            name="business_type"
+            value={formData.businessType}
             onChange={(e) => {
-              setFormData((prev) => ({ ...prev, industry: e.target.value }));
-              if (errors.industry) setErrors((prev) => ({ ...prev, industry: '' }));
+              setFormData((prev) => ({ ...prev, businessType: e.target.value }));
+              if (errors.businessType) setErrors((prev) => ({ ...prev, businessType: '' }));
             }}
           >
-            <option value="">Select industry</option>
-            {industryOptions.map((opt) => (
+            <option value="">Select</option>
+            {businessTypeOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>
             ))}
           </select>
-          {errors.industry && <p className="mt-1 text-sm text-red-400">{errors.industry}</p>}
+          {errors.businessType && <p className="mt-1 text-sm text-red-400">{errors.businessType}</p>}
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-medium">Budget range</label>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="budget">
+            Budget range (optional)
+          </label>
           <select
+            id="budget"
             className="input-field"
             name="budget_range"
             value={formData.budgetRange}
-            onChange={(e) => {
-              setFormData((prev) => ({ ...prev, budgetRange: e.target.value }));
-              if (errors.budgetRange) setErrors((prev) => ({ ...prev, budgetRange: '' }));
-            }}
+            onChange={(e) => setFormData((prev) => ({ ...prev, budgetRange: e.target.value }))}
           >
-            <option value="">Select a range</option>
             {budgetRangeOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
+              <option key={opt.value || 'none'} value={opt.value}>
                 {opt.label}
               </option>
             ))}
           </select>
-          {errors.budgetRange && <p className="mt-1 text-sm text-red-400">{errors.budgetRange}</p>}
         </div>
 
         <div>
-          <label className="mb-1.5 block text-sm font-medium">Anything else? (optional)</label>
+          <label className="mb-1.5 block text-sm font-medium" htmlFor="message">
+            Message (optional)
+          </label>
           <textarea
+            id="message"
             className="input-field min-h-24"
             name="message"
             value={formData.message}
             onChange={onChange}
-            placeholder="e.g. salon in Colombo, need site + Instagram help"
+            placeholder="e.g. salon in Colombo, need a website"
           />
         </div>
 
         {success && (
           <div className="border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-300">
-            Request sent. You can also book a time on the calendar below.
+            Request sent. We will contact you soon.
+            {completionReward.enabled && (
+              <span className="mt-1 block text-emerald-200/80">
+                Reminder: successfully completed projects include a free InQRS NFC card (
+                {completionReward.inqrsLabel}).
+              </span>
+            )}
           </div>
         )}
         {error && (
@@ -304,7 +272,7 @@ export default function BookingInterestForm() {
 
         <div className="flex flex-col gap-3 sm:flex-row">
           <button type="submit" disabled={submitting} className="btn-primary flex-1 disabled:opacity-60">
-            {submitting ? 'Sending…' : 'Get a Free Audit'}
+            {submitting ? 'Sending…' : 'Book a Free Call'}
           </button>
           <a
             href={whatsappUrl(waMessage)}

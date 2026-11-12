@@ -6,30 +6,27 @@ import BookingInterestForm from '@/components/book/BookingInterestForm';
 import { FiCheck } from 'react-icons/fi';
 
 export const metadata = {
-  title: 'Book a Call',
+  title: 'Book a Free Call',
   description:
-    'Get a free business audit or book a discovery call with Katisa — Build (websites & systems) and Grow (Pulse content) for Sri Lankan shops, clinics and salons.',
+    'Book a free call with Katisa Technologies — websites, stock systems, apps and marketing for Sri Lankan businesses. Clear next steps. No pressure.',
 };
 
 export default function BookConsultationPage() {
   return (
     <>
       <PageHero
-        eyebrow="Discovery Call"
-        title="Free audit for your shop,"
-        accent="clinic or salon"
-        description="Tell us Build, Grow or Both — plus package, industry and budget — then pick a time. Clear next steps, no pressure."
+        eyebrow="Free call"
+        title="Tell us what you need."
+        accent="We will map the next step."
+        description="About 15–30 minutes. Plain English. Clear LKR range when we can give one."
       />
 
       <Section tone="soft">
-        <div className="mb-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-10 grid gap-4 md:grid-cols-3">
           {[
-            'Free 30-minute consultation',
-            'Package + budget captured up front',
-            'Practical fit for your industry',
-            'Rough timeline and LKR range',
+            'Free consultation',
+            'Website, stock, app, or marketing',
             'No obligation',
-            'Written next steps',
           ].map((item) => (
             <div
               key={item}
@@ -44,7 +41,7 @@ export default function BookConsultationPage() {
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
           <Suspense
             fallback={
-              <div className="border border-[color:var(--line)] bg-[color:var(--surface)] p-8 text-sm text-[color:var(--ink-muted)]">
+              <div className="border border-[color:var(--line)] p-8 text-sm text-[color:var(--ink-muted)]">
                 Loading form…
               </div>
             }

@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import Button from '@/components/ui/Button';
-import { positioningLine } from '@/lib/pricing';
 
 export default function HomeHero() {
   const reduceMotion = useReducedMotion();
@@ -20,37 +19,31 @@ export default function HomeHero() {
       <div className="grain-overlay" />
       <div className="absolute inset-0 hero-grid opacity-40" />
 
-      <div className="container-site relative z-10 py-10 md:py-14 lg:py-16">
+      <div className="container-site relative z-10 py-12 md:py-16 lg:py-20">
         <motion.p
           {...enter(0)}
-          className="font-display text-[clamp(2.75rem,12vw,8.5rem)] font-extrabold leading-[0.85] tracking-[-0.06em] text-[color:var(--ink)]"
+          className="font-display text-[clamp(2.5rem,10vw,6.5rem)] font-extrabold leading-[0.85] tracking-[-0.06em] text-[color:var(--ink)]"
         >
           KATISA
         </motion.p>
 
-        <div className="mt-8 max-w-3xl border-t border-[color:var(--line)] pt-6">
-          <motion.p
-            {...enter(0.04)}
-            className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--brass)]"
-          >
-            Build · Grow
-          </motion.p>
+        <div className="mt-8 max-w-2xl border-t border-[color:var(--line)] pt-6">
           <motion.h1
-            {...enter(0.08)}
-            className="mt-3 font-display text-2xl font-bold leading-[1.12] tracking-tight text-[color:var(--ink)] sm:text-3xl lg:text-4xl"
+            {...enter(0.06)}
+            className="font-display text-2xl font-bold leading-[1.15] tracking-tight text-[color:var(--ink)] sm:text-3xl lg:text-4xl"
           >
-            {positioningLine}
+            Websites, software and marketing for Sri Lankan businesses.
           </motion.h1>
-          <motion.p {...enter(0.12)} className="body-muted mt-5 max-w-2xl text-base md:text-lg">
-            One team for shops, salons, clinics, restaurants and vehicle sellers — websites and
-            systems under Build, content and video under Pulse (Grow).
+          <motion.p {...enter(0.12)} className="body-muted mt-5 text-base md:text-lg">
+            Clear LKR prices for shops, salons, clinics, restaurants and tuition centres — so you
+            know what you get and what happens next.
           </motion.p>
           <motion.div {...enter(0.18)} className="mt-8 flex flex-wrap gap-3">
-            <Button href="/build" variant="primary">
-              Explore Build
+            <Button href="/pricing" variant="primary">
+              See Pricing
             </Button>
-            <Button href="/grow" variant="ghost">
-              Explore Grow
+            <Button href="/book-consultation" variant="ghost">
+              Book a Free Call
             </Button>
           </motion.div>
         </div>

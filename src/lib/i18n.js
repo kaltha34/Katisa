@@ -78,12 +78,9 @@ export function t(locale, key) {
 }
 
 export const navLinkKeys = [
-  { href: '/', key: 'nav.home' },
-  { href: '/build', key: 'nav.services' },
-  { href: '/our-work', key: 'nav.work' },
+  { href: '/software', key: 'nav.services' },
+  { href: '/marketing', key: 'nav.work' },
   { href: '/pricing', key: 'nav.pricing' },
-  { href: '/webinars', key: 'nav.webinars' },
-  { href: '/join-us', key: 'nav.join' },
   { href: '/about', key: 'nav.about' },
   { href: '/contact', key: 'nav.contact' },
 ];

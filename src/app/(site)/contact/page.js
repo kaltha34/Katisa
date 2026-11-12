@@ -7,7 +7,7 @@ import { FiMail, FiMapPin, FiPhone, FiMessageCircle } from 'react-icons/fi';
 export const metadata = {
   title: 'Contact',
   description:
-    'Contact Katisa Technologies in Colombo for websites, inventory systems, internal apps and custom software.',
+    'Contact Katisa Technologies in Colombo for websites, stock systems, custom apps and marketing.',
 };
 
 export default function ContactPage() {
@@ -15,9 +15,9 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Tell us what is breaking"
-        accent="today"
-        description="Lost stock, missed bookings, or a site that doesn’t bring calls — send a short brief. We usually reply within one business day."
+        title="Send a short message."
+        accent="We reply in plain English."
+        description="Website, stock, custom app, or marketing — tell us what you need. We usually reply within one business day."
       />
 
       <Section>

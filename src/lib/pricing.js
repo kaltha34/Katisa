@@ -1,6 +1,6 @@
 /**
- * SINGLE SOURCE OF TRUTH for Katisa packages & prices (LKR).
- * Edit foundingOffer.spotsTaken to update “X of 5 spots” across the site.
+ * SINGLE SOURCE OF TRUTH — prices, plans, bundles, offers, completion reward.
+ * Edit foundingOffer.spotsTaken and completionReward fields here only.
  */
 
 export function formatLkr(amount) {
@@ -24,90 +24,526 @@ export const foundingOffer = {
     return Math.max(0, this.totalSpots - this.spotsTaken);
   },
   get label() {
-    return `Limited: ${this.spotsLeft} of ${this.totalSpots} spots`;
+    return `${this.spotsLeft} of ${this.totalSpots} spots left`;
   },
   get active() {
     return this.spotsLeft > 0;
   },
 };
 
+/**
+ * Free InQRS NFC card on successful project completion.
+ * Sister product: https://idora.click
+ * Trigger: final delivery + client sign-off + final payment received.
+ */
+export const completionReward = {
+  enabled: true,
+  minProjectValueLKR: 0,
+  cardsPerProject: 1,
+  /** [CONFIRM] working days after sign-off + final payment */
+  dispatchDays: '[CONFIRM: e.g. 5–7 working days]',
+  badgeLabel: 'Free InQRS card on completion',
+  bannerTitle: 'Finish a project with us — get a free InQRS card',
+  bannerBody:
+    'Every successfully completed project includes one free InQRS NFC smart card (our sister product). Tap to share your digital profile. No cash value. Not transferable.',
+  terms: [
+    'Personalised with your name or business using our standard design',
+    'You supply the details we need to print the card',
+    'Sent after final delivery, your sign-off, and final payment',
+    `Dispatch: ${'[CONFIRM: e.g. 5–7 working days]'} after those steps`,
+    'No cash value and not transferable',
+    'InQRS is our sister product — learn more at idora.click',
+  ],
+  inqrsUrl: 'https://idora.click',
+  inqrsLabel: 'our sister product',
+};
+
 export const paymentTerms = {
-  summary: '50% upfront, 30% at midpoint, 20% on launch',
+  summary: '50% upfront, 30% midpoint, 20% on launch',
   detail:
-    'Projects are billed 50% to start, 30% when we hit the agreed midpoint, and 20% on launch. Monthly care and Pulse plans are billed monthly.',
+    'Projects: 50% to start, 30% at the agreed midpoint, 20% on launch. Monthly website care and marketing plans are billed monthly.',
 };
 
-export const notIncludedDefaults = [
-  'Domain name purchase (you own it; we can help register)',
-  'Third-party fees (SMS, payment gateways, Google Workspace, etc.)',
-  'Stock photography or paid ad spend unless agreed in writing',
+export const sharedNotIncluded = [
+  'Domain name purchase (you own it; we can help you register)',
+  'Third-party fees (SMS, payment gateways, Google tools, and similar)',
+  'Paid ads or stock photos unless we agree in writing',
 ];
 
-export const positioningLine =
-  'We build the systems and the visibility Sri Lankan businesses need to grow.';
+/** Home “What do you need?” cards */
+export const goalCards = [
+  {
+    id: 'website',
+    title: 'I need a website',
+    text: 'A clear site so customers can find you and message you.',
+    href: '/software#website',
+  },
+  {
+    id: 'stock',
+    title: 'I want to track stock and sales',
+    text: 'Know what you have, what sold, and what to reorder.',
+    href: '/software#stock',
+  },
+  {
+    id: 'custom',
+    title: 'I need a custom app or system',
+    text: 'One tool built around how your team already works.',
+    href: '/software#custom',
+  },
+  {
+    id: 'marketing',
+    title: 'I want more customers',
+    text: 'Social posts and short videos that help people find you.',
+    href: '/marketing',
+  },
+];
 
-export const arms = {
-  build: {
-    id: 'build',
-    name: 'Build',
-    href: '/build',
-    tagline: 'Websites, inventory, apps and custom software',
+export const homeHowItWorks = [
+  { step: '1', title: 'Tell us what you need', text: 'A short call or form. Plain language, no jargon.' },
+  { step: '2', title: 'We build or create it', text: 'Website, stock system, app, or marketing content.' },
+  { step: '3', title: 'You grow', text: 'You go live. We support you. Optional care and marketing continue.' },
+];
+
+/** Software engineering plan — durations marked [CONFIRM] until you lock them */
+export const softwareProcess = [
+  {
+    step: '1',
+    title: 'Discovery',
+    weDo: 'We learn your process and goals.',
+    youReceive: 'A written scope summary.',
+    weNeed: 'Honest answers about how you work today and what “done” means.',
+    duration: '[CONFIRM: e.g. 3–5 days]',
   },
-  grow: {
-    id: 'grow',
-    name: 'Grow',
-    href: '/grow',
-    tagline: 'Pulse — content, video and marketing',
+  {
+    step: '2',
+    title: 'Design',
+    weDo: 'Layouts and workflow screens.',
+    youReceive: 'Designs to review.',
+    weNeed: 'Your approval before we build.',
+    duration: '[CONFIRM: e.g. 3–7 days]',
   },
+  {
+    step: '3',
+    title: 'Build',
+    weDo: 'We develop in small steps with demos.',
+    youReceive: 'Working demos you can click through.',
+    weNeed: 'Feedback within agreed review windows.',
+    duration: '[CONFIRM: depends on plan]',
+  },
+  {
+    step: '4',
+    title: 'Launch',
+    weDo: 'Go live, train your team, hand over access.',
+    youReceive: 'Live system + documentation.',
+    weNeed: 'Someone available for training and final checks.',
+    duration: '[CONFIRM: e.g. 1–3 days]',
+  },
+  {
+    step: '5',
+    title: 'Support',
+    weDo: 'Fixes and improvements; care plans available.',
+    youReceive: 'Optional monthly care or one-off help.',
+    weNeed: 'Clear reports when something breaks.',
+    duration: 'Ongoing if you choose a care plan',
+  },
+];
+
+export const qualityStandards = [
+  'Tested on mobile and desktop',
+  'Secure logins and backups where the project needs them',
+  'Written handover notes',
+  'A training session for your team',
+  '[CONFIRM: free bug-fix period after launch — e.g. 14 or 30 days]',
+];
+
+/** Marketing plan phases */
+export const marketingProcess = [
+  {
+    step: '1',
+    title: 'Plan',
+    weDo: 'Goals, audience, and a monthly content calendar.',
+    youReceive: 'A simple plan you can follow.',
+    weNeed: 'Your goals and any dates or offers coming up.',
+    duration: 'At kickoff',
+  },
+  {
+    step: '2',
+    title: 'Create',
+    weDo: 'Photos, videos, and designs.',
+    youReceive: 'Draft content for review.',
+    weNeed: 'Product or location access and timely approvals.',
+    duration: 'Through the month',
+  },
+  {
+    step: '3',
+    title: 'Publish',
+    weDo: 'Scheduled posts on your accounts.',
+    youReceive: 'Posts going live as agreed.',
+    weNeed: 'Login access (or posting rights) to your pages.',
+    duration: 'Through the month',
+  },
+  {
+    step: '4',
+    title: 'Report',
+    weDo: 'A simple monthly report in plain English.',
+    youReceive: 'What we posted and what stood out.',
+    weNeed: 'A few minutes to read and reply with questions.',
+    duration: 'End of each month',
+  },
+];
+
+export const marketingNeedsFromYou = [
+  'Access to Instagram / Facebook (or posting permission)',
+  'Access to products, premises, or vehicles for shoots when needed',
+  'Approvals within the agreed time so posts stay on schedule',
+  'Honest brand rules (what you will and will not say)',
+];
+
+export const marketingWeDoNotPromise = [
+  'No guaranteed follower counts',
+  'No guaranteed sales or bookings from posts alone',
+  'No paid ad results unless we agree a separate ads plan in writing',
+];
+
+/**
+ * SOFTWARE PLANS
+ * ids are internal only — never show Origin/Rise/Empire/Uncharted to users.
+ */
+export const websitePlans = [
+  {
+    id: 'website-starter',
+    name: 'Starter',
+    price: 35000,
+    priceLabel: formatLkr(35000),
+    popular: false,
+    bestFor: 'New businesses that need a simple online presence fast',
+    delivery: '[CONFIRM: e.g. 1–2 weeks]',
+    includes: ['1 to 3 pages', 'Works well on phones', 'Contact form', 'WhatsApp button'],
+    excludes: ['Online booking or ordering', 'Payment checkout', ...sharedNotIncluded],
+  },
+  {
+    id: 'website-business',
+    name: 'Business',
+    price: 65000,
+    priceLabel: formatLkr(65000),
+    popular: true,
+    bestFor: 'Shops, clinics and salons that need more pages and to be found on Google',
+    delivery: '[CONFIRM: e.g. 2–3 weeks]',
+    includes: [
+      'Up to 8 pages',
+      'SEO setup (so search engines can find you)',
+      'Contact forms',
+      'Google Maps',
+      'WhatsApp button',
+    ],
+    excludes: ['Booking or online ordering', 'Payment checkout', ...sharedNotIncluded],
+  },
+  {
+    id: 'website-growth',
+    name: 'Growth',
+    price: 110000,
+    priceLabel: formatLkr(110000),
+    popular: false,
+    bestFor: 'Businesses that need bookings, orders, or payments on the site',
+    delivery: '[CONFIRM: e.g. 3–5 weeks]',
+    includes: [
+      'Booking or online ordering',
+      'Payment integration',
+      'Up to 15 pages',
+      'SEO setup',
+      'WhatsApp and forms',
+    ],
+    excludes: [...sharedNotIncluded],
+  },
+];
+
+export const websiteCarePlans = [
+  {
+    id: 'care-basic',
+    name: 'Basic',
+    price: 4500,
+    priceLabel: `${formatLkr(4500)}/month`,
+    popular: false,
+    bestFor: 'Owners who want the site hosted and kept safe',
+    delivery: 'Ongoing monthly',
+    includes: ['Hosting', 'Backups', 'Security updates'],
+    excludes: ['Content rewrites', 'New features', 'Ad management'],
+  },
+  {
+    id: 'care-plus',
+    name: 'Plus',
+    price: 9000,
+    priceLabel: `${formatLkr(9000)}/month`,
+    popular: false,
+    bestFor: 'Owners who change hours, photos or offers often',
+    delivery: 'Ongoing monthly',
+    includes: ['Everything in Basic', 'Monthly edits', 'Monthly report'],
+    excludes: ['Major redesigns', 'New custom features', 'Ad spend'],
+  },
+];
+
+export const stockPlans = [
+  {
+    id: 'stock-starter',
+    name: 'Starter',
+    price: 40000,
+    monthly: 4500,
+    priceLabel: `${formatLkr(40000)} setup + ${formatLkr(4500)}/month`,
+    popular: false,
+    bestFor: 'Single-counter shops starting with live stock numbers',
+    delivery: '[CONFIRM: e.g. 3–4 weeks]',
+    includes: ['Stock tracking', 'Sales recording', 'Low-stock alerts', 'Simple reports'],
+    excludes: ['Multi-user roles', 'Barcode scanning', 'SMS alerts', ...sharedNotIncluded],
+  },
+  {
+    id: 'stock-pro',
+    name: 'Pro',
+    price: 75000,
+    monthly: 8500,
+    priceLabel: `${formatLkr(75000)} setup + ${formatLkr(8500)}/month`,
+    popular: true,
+    bestFor: 'Busy shops that need more staff logins and faster checkout',
+    delivery: '[CONFIRM: e.g. 4–5 weeks]',
+    includes: [
+      'Everything in Starter',
+      'Multi-user access',
+      'Barcode support',
+      'SMS alerts',
+      'Advanced reports',
+    ],
+    excludes: [...sharedNotIncluded],
+  },
+];
+
+export const customAppPlan = {
+  id: 'custom-app',
+  name: 'Custom Business App',
+  price: 85000,
+  priceLabel: formatLkrFrom(85000),
+  popular: false,
+  bestFor: 'Teams stuck in WhatsApp notes and spreadsheets who need one clear workflow',
+  delivery: '[CONFIRM: e.g. 3–6 weeks]',
+  includes: [
+    'One workflow (for example bookings or records)',
+    'Up to 3 users',
+    'Phone-friendly screens',
+    'Staff walkthrough',
+    'Handover notes',
+  ],
+  excludes: [
+    'Unlimited users or multi-branch setups (see Custom Project)',
+    ...sharedNotIncluded,
+  ],
 };
 
-export const journeySteps = [
-  { id: 'build', label: 'Build', text: 'Website, stock system or app that fits how you work' },
-  { id: 'launch', label: 'Launch', text: 'Go live with training and a clean handover' },
-  { id: 'grow', label: 'Grow', text: 'Pulse content and video so customers find you' },
-  { id: 'retain', label: 'Retain', text: 'Website Care + monthly reporting in one place' },
+export const customProjectPlan = {
+  id: 'custom-project',
+  name: 'Custom Project',
+  price: 150000,
+  discoveryFee: 10000,
+  priceLabel: `Discovery ${formatLkr(10000)} · projects ${formatLkrFrom(150000)}`,
+  popular: false,
+  bestFor: 'When the standard plans do not fit your process',
+  delivery: 'Agreed after discovery',
+  includes: [
+    'Paid discovery (credited if you proceed)',
+    'Written scope and timeline',
+    'Build to your process',
+    'Optional care after launch',
+  ],
+  excludes: ['Open-ended work without a written scope', ...sharedNotIncluded],
+};
+
+/** Marketing monthly + one-offs */
+export const marketingPlans = [
+  {
+    id: 'marketing-starter',
+    name: 'Starter',
+    price: 25000,
+    priceLabel: `${formatLkr(25000)}/month`,
+    popular: false,
+    bestFor: 'Businesses starting steady social content',
+    delivery: 'Monthly',
+    includes: [
+      'Monthly content plan (details confirmed at kickoff)',
+      'Short videos / posts as agreed',
+    ],
+    excludes: ['Paid ad management', 'Full brand redesign', ...marketingWeDoNotPromise],
+  },
+  {
+    id: 'marketing-growth',
+    name: 'Growth',
+    price: 45000,
+    priceLabel: `${formatLkr(45000)}/month`,
+    popular: true,
+    bestFor: 'Shops and salons that post often and need a steadier pipeline',
+    delivery: 'Monthly',
+    includes: ['Higher monthly volume than Starter', 'Planning and delivery as agreed at kickoff'],
+    excludes: ['Paid ad management unless quoted separately', ...marketingWeDoNotPromise],
+  },
+  {
+    id: 'marketing-pro',
+    name: 'Pro',
+    price: 75000,
+    priceLabel: `${formatLkr(75000)}/month`,
+    popular: false,
+    bestFor: 'Brands that need a fuller monthly content engine',
+    delivery: 'Monthly',
+    includes: ['Highest monthly volume', 'Priority scheduling'],
+    excludes: ['Media buying unless quoted separately', ...marketingWeDoNotPromise],
+  },
 ];
 
-export const industries = [
+export const marketingOneOffs = [
   {
-    id: 'shops',
-    label: 'Shops',
-    benefit: 'Know what is in stock and get found by nearby buyers',
-    href: '/build#inventory',
+    id: 'reel',
+    name: 'Reel',
+    price: 15000,
+    priceLabel: formatLkrFrom(15000),
+    bestFor: 'One short video for social media',
+    includes: ['Single short video', 'Basic edit and captions as agreed'],
+    excludes: ['Monthly posting plan', 'Paid promotion'],
   },
   {
-    id: 'salons',
-    label: 'Salons',
-    benefit: 'Fewer missed bookings and a site that brings WhatsApp chats',
-    href: '/build#apps',
+    id: 'vehicle',
+    name: 'Vehicle showcase video',
+    price: 15000,
+    priceLabel: formatLkrFrom(15000),
+    bestFor: 'Vehicle sellers who need a clean listing video',
+    includes: ['One showcase video', 'Basic edit'],
+    excludes: ['Monthly posting plan', 'Paid promotion'],
   },
   {
-    id: 'restaurants',
-    label: 'Restaurants',
-    benefit: 'Menus online, orders or bookings, and content that fills tables',
-    href: '/grow',
-  },
-  {
-    id: 'vehicles',
-    label: 'Vehicle sellers',
-    benefit: 'Listing-ready videos and a simple site for inquiries',
-    href: '/grow#one-offs',
-  },
-  {
-    id: 'events',
-    label: 'Events',
-    benefit: 'Coverage that looks sharp on Instagram and Facebook',
-    href: '/grow#one-offs',
+    id: 'event',
+    name: 'Event coverage',
+    price: 30000,
+    priceLabel: formatLkrFrom(30000),
+    bestFor: 'Openings, workshops and local events',
+    includes: ['Coverage of the agreed event window', 'Edited highlights as agreed'],
+    excludes: ['Full-day multi-camera production unless quoted'],
   },
 ];
 
-export const focusOptions = [
-  { value: 'build', label: 'Build — website / software' },
-  { value: 'grow', label: 'Grow — Pulse content & video' },
-  { value: 'both', label: 'Both — Build + Grow' },
+export const bundles = [
+  {
+    id: 'presence',
+    name: 'Presence',
+    price: 85000,
+    priceLabel: formatLkr(85000),
+    monthly: null,
+    monthlyLabel: null,
+    forWho: 'Launch a strong website and start posting in month one',
+    includes: ['Business Website (Business plan)', '1 month Marketing Starter'],
+    separateTotal: 65000 + 25000,
+    get savingsLabel() {
+      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
+    },
+  },
+  {
+    id: 'shop',
+    name: 'Shop',
+    price: 70000,
+    priceLabel: `${formatLkr(70000)} setup`,
+    monthly: 4500,
+    monthlyLabel: `${formatLkr(4500)}/month`,
+    forWho: 'Retail shops that need stock tracking plus a simple site',
+    includes: ['Stock & Sales Starter', 'Business Website Starter'],
+    separateTotal: 40000 + 35000,
+    get savingsLabel() {
+      return `Setup normally ${formatLkr(this.separateTotal)} separately — bundle ${formatLkr(this.price)} setup + ${formatLkr(this.monthly)}/month`;
+    },
+  },
+  {
+    id: 'growth',
+    name: 'Growth',
+    price: 185000,
+    priceLabel: formatLkr(185000),
+    monthly: null,
+    monthlyLabel: null,
+    forWho: 'A business website plus three months of steady marketing',
+    includes: ['Business Website (Business plan)', '3 months Marketing Growth'],
+    separateTotal: 65000 + 45000 * 3,
+    get savingsLabel() {
+      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
+    },
+  },
 ];
 
-export const industryOptions = [
+/** Software page sections */
+export const softwareSections = [
+  {
+    id: 'website',
+    title: 'Business Website',
+    bestFor: 'Shops, clinics, salons, restaurants and tuition centres that need to look credible online',
+    startingPriceLabel: formatLkrFrom(35000),
+    plans: websitePlans,
+  },
+  {
+    id: 'stock',
+    title: 'Stock & Sales System',
+    bestFor: 'Shops that lose money to missing stock or messy sales notes',
+    startingPriceLabel: formatLkrFrom(40000),
+    plans: stockPlans,
+  },
+  {
+    id: 'custom',
+    title: 'Custom Business App',
+    bestFor: 'One workflow your staff will actually open every day',
+    startingPriceLabel: formatLkrFrom(85000),
+    plans: [customAppPlan],
+  },
+  {
+    id: 'custom-project',
+    title: 'Custom Project',
+    bestFor: 'Unique processes that standard plans cannot cover',
+    startingPriceLabel: formatLkrFrom(150000),
+    plans: [customProjectPlan],
+  },
+];
+
+/** Pricing page anchor sections — max 3 plans highlighted in main grids */
+export const pricingSoftwareBlocks = [
+  {
+    id: 'pricing-websites',
+    title: 'Business Website',
+    intro: 'Clear sites for Sri Lankan businesses. Starter, Business, or Growth.',
+    plans: websitePlans,
+  },
+  {
+    id: 'pricing-stock',
+    title: 'Stock & Sales System',
+    intro: 'Setup fee plus a clear monthly fee so the system stays useful.',
+    plans: stockPlans,
+  },
+];
+
+export const pricingMarketingBlock = {
+  id: 'pricing-marketing',
+  title: 'Social Media & Video Marketing',
+  intro: 'Monthly plans. No guaranteed followers or sales — honest work and clear reporting.',
+  plans: marketingPlans,
+};
+
+export const pricingPreview = [
+  { label: 'Business Website', priceLabel: formatLkrFrom(35000), href: '/pricing#pricing-websites' },
+  { label: 'Stock & Sales System', priceLabel: formatLkrFrom(40000), href: '/pricing#pricing-stock' },
+  { label: 'Custom Business App', priceLabel: formatLkrFrom(85000), href: '/software#custom' },
+  {
+    label: 'Social Media & Video Marketing',
+    priceLabel: formatLkrFrom(25000, { monthly: true }),
+    href: '/pricing#pricing-marketing',
+  },
+];
+
+export const packageInterestOptions = [
+  { value: 'website', label: 'Website' },
+  { value: 'stock', label: 'Stock & Sales' },
+  { value: 'custom', label: 'Custom App' },
+  { value: 'marketing', label: 'Marketing' },
+  { value: 'not-sure', label: 'Not sure' },
+];
+
+export const businessTypeOptions = [
   { value: 'shop', label: 'Shop / retail' },
   { value: 'salon', label: 'Salon / beauty' },
   { value: 'clinic', label: 'Clinic / healthcare' },
@@ -118,508 +554,53 @@ export const industryOptions = [
   { value: 'other', label: 'Other' },
 ];
 
-/** Package options for booking / contact dropdowns */
-export const packageInterestOptions = [
-  { value: 'rise-launch', label: 'Rise Launch — Website', arm: 'build' },
-  { value: 'rise-business', label: 'Rise Business — Website (Most Popular)', arm: 'build' },
-  { value: 'rise-growth', label: 'Rise Growth — Website', arm: 'build' },
-  { value: 'website-care', label: 'Website Care (monthly)', arm: 'build' },
-  { value: 'empire-starter', label: 'Empire Starter — Inventory & POS', arm: 'build' },
-  { value: 'empire-pro', label: 'Empire Pro — Inventory & POS (Most Popular)', arm: 'build' },
-  { value: 'origin', label: 'Origin — Internal App', arm: 'build' },
-  { value: 'uncharted', label: 'Uncharted — Custom Solution', arm: 'build' },
-  { value: 'pulse-monthly', label: 'Pulse — Content & Video (monthly)', arm: 'grow' },
-  { value: 'pulse-oneoff', label: 'Pulse — One-off video', arm: 'grow' },
-  { value: 'bundle-presence', label: 'Bundle: Presence', arm: 'both' },
-  { value: 'bundle-shop', label: 'Bundle: Shop', arm: 'both' },
-  { value: 'bundle-growth', label: 'Bundle: Growth', arm: 'both' },
-  { value: 'free-audit', label: 'Free Business Audit', arm: 'both' },
-  { value: 'not-sure', label: 'Not sure yet — need advice', arm: 'both' },
-];
-
 export const budgetRangeOptions = [
+  { value: '', label: 'Prefer not to say' },
   { value: 'under-40k', label: 'Under LKR 40,000' },
   { value: '40k-80k', label: 'LKR 40,000 – 80,000' },
   { value: '80k-150k', label: 'LKR 80,000 – 150,000' },
   { value: '150k-plus', label: 'LKR 150,000+' },
-  { value: 'monthly-care', label: 'Looking at monthly care / content' },
-  { value: 'discuss', label: 'Prefer to discuss on the call' },
+  { value: 'monthly', label: 'Looking at monthly plans' },
 ];
-
-export const pulseProcess = [
-  { step: '01', title: 'Plan', text: 'We agree topics, platforms and a simple monthly calendar.' },
-  { step: '02', title: 'Film', text: 'Short shoots at your shop, salon, lot or event.' },
-  { step: '03', title: 'Edit', text: 'Clean cuts, captions and formats ready for Instagram / Facebook.' },
-  { step: '04', title: 'Post & Report', text: 'We publish as agreed and send a plain-language monthly note.' },
-];
-
-/**
- * Full catalog — Services & Pricing pages read this.
- * Delivery times are estimates; confirm on discovery.
- */
-export const catalog = {
-  rise: {
-    id: 'websites',
-    series: 'Rise',
-    title: 'Websites',
-    plainLabel: 'A site that brings calls and WhatsApp chats',
-    audience:
-      'Shops, clinics, salons, restaurants, tuition centres and vehicle sellers who need to look credible online and get inquiries',
-    outcome: 'A fast, mobile-friendly website customers can find and contact in one tap',
-    description:
-      'Clear websites for Sri Lankan businesses — phone-first, WhatsApp-ready, and priced in LKR with no surprise packages.',
-    priceFrom: 35000,
-    priceLabel: formatLkrFrom(35000),
-    delivery: '1–4 weeks depending on plan',
-    priceNote: 'Choose Launch, Business or Growth',
-    plans: [
-      {
-        id: 'rise-launch',
-        name: 'Launch',
-        price: 35000,
-        priceLabel: formatLkr(35000),
-        popular: false,
-        delivery: '1–2 weeks',
-        forWho: 'New businesses that need a simple online presence fast',
-        includes: [
-          '1–3 pages',
-          'Mobile-friendly design',
-          'Contact form',
-          'WhatsApp button',
-        ],
-        excludes: [
-          'Online booking or ordering',
-          'Payment integration',
-          'Ongoing content / SEO campaigns',
-          ...notIncludedDefaults,
-        ],
-      },
-      {
-        id: 'rise-business',
-        name: 'Business',
-        price: 65000,
-        priceLabel: formatLkr(65000),
-        popular: true,
-        delivery: '2–3 weeks',
-        forWho: 'Growing shops, clinics and salons that need more pages and search visibility',
-        includes: [
-          'Up to 8 pages',
-          'SEO setup',
-          'Contact / inquiry forms',
-          'Google Maps',
-          'WhatsApp button',
-        ],
-        excludes: [
-          'Booking or online ordering flows',
-          'Payment gateway setup',
-          ...notIncludedDefaults,
-        ],
-      },
-      {
-        id: 'rise-growth',
-        name: 'Growth',
-        price: 110000,
-        priceLabel: formatLkr(110000),
-        popular: false,
-        delivery: '3–5 weeks',
-        forWho: 'Restaurants, clinics and sellers who need bookings, orders or payments online',
-        includes: [
-          'Booking or online ordering',
-          'Payment integration',
-          'Up to 15 pages',
-          'SEO setup',
-          'WhatsApp + forms',
-        ],
-        excludes: notIncludedDefaults,
-      },
-    ],
-  },
-
-  care: {
-    id: 'website-care',
-    series: 'Care',
-    title: 'Website Care',
-    plainLabel: 'Keep your site online, safe and up to date',
-    audience: 'Anyone with a live website who wants hosting handled and small updates without drama',
-    outcome: 'Hosting, backups and optional monthly edits — billed clearly each month',
-    description:
-      'Monthly plans so your site stays live, backed up and secure. Plus adds edits and a short monthly report.',
-    priceFrom: 4500,
-    priceLabel: formatLkrFrom(4500, { monthly: true }),
-    delivery: 'Starts after your site launches (or when you hand hosting to us)',
-    priceNote: 'Billed monthly',
-    plans: [
-      {
-        id: 'care-basic',
-        name: 'Basic',
-        price: 4500,
-        priceLabel: `${formatLkr(4500)}/month`,
-        popular: false,
-        delivery: 'Ongoing',
-        forWho: 'Owners who want hosting and peace of mind',
-        includes: ['Hosting', 'Backups', 'Security updates'],
-        excludes: ['Content rewrites or redesigns', 'New feature builds', 'Ad management'],
-      },
-      {
-        id: 'care-plus',
-        name: 'Plus',
-        price: 9000,
-        priceLabel: `${formatLkr(9000)}/month`,
-        popular: false,
-        delivery: 'Ongoing',
-        forWho: 'Owners who change offers, hours or photos often',
-        includes: [
-          'Everything in Basic',
-          'Monthly edits',
-          'Monthly report',
-        ],
-        excludes: ['Major redesigns', 'New custom features', 'Ad spend'],
-      },
-    ],
-  },
-
-  empire: {
-    id: 'inventory',
-    series: 'Empire',
-    title: 'Inventory & POS',
-    plainLabel: 'Know what you have, what sold, and what to reorder',
-    audience: 'Shops, pharmacies, spare-parts stores and cafés that lose money to missing stock',
-    outcome: 'Stock tracking, sales and alerts — plus a clear monthly fee for upkeep',
-    description:
-      'Inventory and point-of-sale without enterprise complexity. Setup fee + monthly support so the system stays useful.',
-    priceFrom: 40000,
-    priceLabel: formatLkrFrom(40000),
-    delivery: '3–5 weeks',
-    priceNote: 'Setup + monthly fee',
-    plans: [
-      {
-        id: 'empire-starter',
-        name: 'Starter',
-        price: 40000,
-        monthly: 4500,
-        priceLabel: `${formatLkr(40000)} setup + ${formatLkr(4500)}/month`,
-        popular: false,
-        delivery: '3–4 weeks',
-        forWho: 'Single-counter shops starting with live stock numbers',
-        includes: [
-          'Stock tracking',
-          'Sales recording',
-          'Low-stock alerts',
-          'Simple reports',
-        ],
-        excludes: [
-          'Multi-user roles',
-          'Barcode scanning',
-          'SMS alerts',
-          ...notIncludedDefaults,
-        ],
-      },
-      {
-        id: 'empire-pro',
-        name: 'Pro',
-        price: 75000,
-        monthly: 8500,
-        priceLabel: `${formatLkr(75000)} setup + ${formatLkr(8500)}/month`,
-        popular: true,
-        delivery: '4–5 weeks',
-        forWho: 'Busy shops that need more staff accounts and faster checkout',
-        includes: [
-          'Everything in Starter',
-          'Multi-user access',
-          'Barcode support',
-          'SMS alerts',
-          'Advanced reports',
-        ],
-        excludes: notIncludedDefaults,
-      },
-    ],
-  },
-
-  origin: {
-    id: 'apps',
-    series: 'Origin',
-    title: 'Internal Apps',
-    plainLabel: 'One workflow your staff actually opens every day',
-    audience: 'Clinics, salons, tuition centres and teams drowning in WhatsApp notes and Excel',
-    outcome: 'A focused app for one workflow — bookings, records or daily ops — for up to 3 users',
-    description:
-      'Custom tools for one clear workflow. Built around how your team already works, not a generic template.',
-    priceFrom: 85000,
-    priceLabel: formatLkrFrom(85000),
-    delivery: '3–6 weeks',
-    priceNote: 'One workflow, up to 3 users. Larger scope moves to Uncharted.',
-    plans: [
-      {
-        id: 'origin',
-        name: 'Origin',
-        price: 85000,
-        priceLabel: formatLkrFrom(85000),
-        popular: false,
-        delivery: '3–6 weeks',
-        forWho: 'Teams that need one simple system instead of chat chaos',
-        includes: [
-          'One workflow (e.g. bookings or records)',
-          'Up to 3 users',
-          'Phone-friendly screens',
-          'Staff walkthrough',
-          'Handover + plain-language guide',
-        ],
-        excludes: [
-          'Unlimited users or multi-branch setups',
-          'Complex multi-module systems (see Uncharted)',
-          ...notIncludedDefaults,
-        ],
-      },
-    ],
-  },
-
-  uncharted: {
-    id: 'custom',
-    series: 'Uncharted',
-    title: 'Custom Solutions',
-    plainLabel: 'Software that fits your process — not the other way around',
-    audience: 'Businesses with a unique workflow that packages do not cover',
-    outcome: 'A scoped build after discovery — discovery fee credited to the project',
-    description:
-      'When Rise, Empire or Origin do not fit, we map the problem, propose a clear scope, and build only what you need.',
-    priceFrom: 150000,
-    priceLabel: formatLkrFrom(150000),
-    delivery: 'Scoped after discovery',
-    priceNote: `${formatLkr(10000)} discovery fee (credited to the project)`,
-    discoveryFee: 10000,
-    plans: [
-      {
-        id: 'uncharted',
-        name: 'Custom',
-        price: 150000,
-        priceLabel: `Discovery ${formatLkr(10000)} · projects ${formatLkrFrom(150000)}`,
-        popular: false,
-        delivery: 'Agreed after discovery',
-        forWho: 'Owners with a process no off-the-shelf tool handles well',
-        includes: [
-          'Paid discovery (credited if you proceed)',
-          'Written scope & timeline',
-          'Build to your process',
-          'Optional care after launch',
-        ],
-        excludes: [
-          'Open-ended “build everything” without a written scope',
-          ...notIncludedDefaults,
-        ],
-      },
-    ],
-  },
-
-  pulse: {
-    id: 'pulse',
-    series: 'Pulse',
-    title: 'Content & Video',
-    plainLabel: 'Reels and videos that help shops and sellers get noticed',
-    audience: 'Shops, salons, restaurants, vehicle sellers and event hosts who need regular content',
-    outcome: 'Monthly content plans or one-off videos — clear LKR packages',
-    description:
-      'Short-form video and content for Sri Lankan businesses. Monthly retainers for steady posting, or one-off shoots for vehicles and events.',
-    priceFrom: 15000,
-    priceLabel: formatLkrFrom(15000),
-    delivery: 'Monthly plans start after kickoff · one-offs by shoot date',
-    priceNote: 'Monthly or one-off',
-    plans: [
-      {
-        id: 'pulse-starter',
-        name: 'Starter',
-        price: 25000,
-        priceLabel: `${formatLkr(25000)}/month`,
-        popular: false,
-        delivery: 'Monthly',
-        forWho: 'Businesses starting consistent social content',
-        includes: ['Monthly content plan (scope confirmed on kickoff)', 'Reels / short videos as agreed'],
-        excludes: ['Paid ad management', 'Full brand redesign'],
-        kind: 'monthly',
-      },
-      {
-        id: 'pulse-growth',
-        name: 'Growth',
-        price: 45000,
-        priceLabel: `${formatLkr(45000)}/month`,
-        popular: true,
-        delivery: 'Monthly',
-        forWho: 'Shops and salons that post weekly and need a steadier pipeline',
-        includes: ['Higher monthly volume than Starter', 'Planning + delivery as agreed in kickoff'],
-        excludes: ['Paid ad management unless quoted separately'],
-        kind: 'monthly',
-      },
-      {
-        id: 'pulse-pro',
-        name: 'Pro',
-        price: 75000,
-        priceLabel: `${formatLkr(75000)}/month`,
-        popular: false,
-        delivery: 'Monthly',
-        forWho: 'Brands that need a fuller monthly content engine',
-        includes: ['Highest monthly volume', 'Priority scheduling'],
-        excludes: ['Media buying unless quoted separately'],
-        kind: 'monthly',
-      },
-    ],
-    oneOffs: [
-      {
-        id: 'pulse-reel',
-        name: 'Reel',
-        price: 15000,
-        priceLabel: formatLkrFrom(15000),
-        forWho: 'Single short video for socials',
-      },
-      {
-        id: 'pulse-vehicle',
-        name: 'Vehicle showcase video',
-        price: 15000,
-        priceLabel: formatLkrFrom(15000),
-        forWho: 'Vehicle sellers who need a clean listing video',
-      },
-      {
-        id: 'pulse-event',
-        name: 'Event coverage',
-        price: 30000,
-        priceLabel: formatLkrFrom(30000),
-        forWho: 'Openings, workshops and local events',
-      },
-    ],
-  },
-
-};
-
-/**
- * Build + Grow bundles — single source for Home, /bundles, booking.
- * Separate prices are calculated from catalog plans for savings copy.
- */
-export const bundles = [
-  {
-    id: 'presence',
-    name: 'Presence',
-    plainLabel: 'A credible site plus your first month of content',
-    forWho: 'Shops, salons and clinics launching online who also need help posting in month one',
-    price: 85000,
-    priceLabel: formatLkr(85000),
-    monthly: null,
-    monthlyLabel: null,
-    delivery: '2–3 weeks for the site · content in month one',
-    includes: ['Rise Business website', '1 month Pulse Starter'],
-    separateTotal: 65000 + 25000,
-    get savingsLabel() {
-      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
-    },
-    href: '/bundles#presence',
-  },
-  {
-    id: 'shop',
-    name: 'Shop',
-    plainLabel: 'Stock control plus a simple site customers can find',
-    forWho: 'Retail shops that need live inventory and a basic online presence',
-    price: 70000,
-    priceLabel: `${formatLkr(70000)} setup`,
-    monthly: 4500,
-    monthlyLabel: `${formatLkr(4500)}/month`,
-    delivery: 'About 3–4 weeks · monthly Empire Starter care included',
-    includes: ['Empire Starter (inventory & POS)', 'Rise Launch website'],
-    separateTotal: 40000 + 35000,
-    get savingsLabel() {
-      return `Setup normally ${formatLkr(this.separateTotal)} separately — bundle ${formatLkr(this.price)} setup + ${formatLkr(this.monthly)}/month`;
-    },
-    href: '/bundles#shop',
-  },
-  {
-    id: 'growth',
-    name: 'Growth',
-    plainLabel: 'Business website plus three months of steady content',
-    forWho: 'Owners ready to launch a stronger site and stay visible for a full quarter',
-    price: 185000,
-    priceLabel: formatLkr(185000),
-    monthly: null,
-    monthlyLabel: null,
-    delivery: '2–3 weeks for the site · Pulse Growth across 3 months',
-    includes: ['Rise Business website', '3 months Pulse Growth'],
-    separateTotal: 65000 + 45000 * 3,
-    get savingsLabel() {
-      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
-    },
-    href: '/bundles#growth',
-  },
-];
-
-/** @deprecated use bundles — kept for older references */
-export const catalogBundleLegacy = bundles[0];
-
-/** Build-arm packages (no Pulse mixed into Build pricing cards) */
-export const buildPackages = [catalog.rise, catalog.empire, catalog.origin, catalog.uncharted, catalog.care];
-
-/** Grow-arm = Pulse */
-export const growPackage = catalog.pulse;
-
-/** Ordered list used on Home, Footer, Build nav cards */
-export const services = [
-  catalog.rise,
-  catalog.empire,
-  catalog.origin,
-  catalog.uncharted,
-].map((pkg) => ({
-  id: pkg.id,
-  series: pkg.series,
-  title: pkg.title,
-  plainLabel: pkg.plainLabel,
-  audience: pkg.audience,
-  outcome: pkg.outcome,
-  description: pkg.description,
-  priceFrom: pkg.priceFrom,
-  priceLabel: pkg.priceLabel,
-  delivery: pkg.delivery,
-  priceNote: pkg.priceNote,
-  pulseCrossSell: 'Add Pulse to get customers to your new site.',
-  features: (pkg.plans?.[0]?.includes || []).map((item) => ({
-    title: item,
-    detail: '',
-  })),
-  plans: pkg.plans,
-  oneOffs: pkg.oneOffs,
-  discoveryFee: pkg.discoveryFee,
-}));
-
-export const supportPlans = catalog.care.plans.map((plan) => ({
-  name: `Website Care ${plan.name}`,
-  price: plan.priceLabel,
-  items: plan.includes,
-  id: plan.id,
-}));
 
 export const pricingFaqs = [
   {
-    q: 'What affects the final cost?',
-    a: 'Page count, booking/ordering/payments, number of users, integrations (SMS, barcodes, maps), and how much content you already have. We confirm a written scope before heavy build starts.',
+    q: 'What changes the final price?',
+    a: 'Page count, booking or payments, number of users, and extras like SMS. We confirm a written scope before heavy work starts.',
   },
   {
     q: 'How do payments work?',
-    a: `${paymentTerms.detail}`,
+    a: paymentTerms.detail,
   },
   {
-    q: 'What is not included in package prices?',
-    a: 'Domain purchase, third-party fees (SMS, payment gateways, etc.), and paid ads unless we agree in writing. See each package’s “Not included” list on the Build and Grow pages.',
+    q: 'What is not included?',
+    a: 'Domain purchase, third-party fees, and paid ads unless we agree in writing. Each plan lists “Not included”.',
   },
   {
-    q: 'How do Website Care plans work?',
-    a: 'Care Basic covers hosting, backups and security updates for LKR 4,500/month. Care Plus adds monthly edits and a monthly report for LKR 9,000/month. You can start Care when the site launches.',
+    q: 'What is the free InQRS card?',
+    a: `On successful completion (delivery, your sign-off, and final payment), you get ${completionReward.cardsPerProject} free InQRS NFC card(s) — ${completionReward.inqrsLabel}. See terms on the Pricing page.`,
   },
   {
-    q: 'What is the Founding Client offer?',
+    q: 'What is the Founding Client Offer?',
     a: `The first ${foundingOffer.totalSpots} clients get ${foundingOffer.discountPercent}% off in exchange for ${foundingOffer.requirement}. ${foundingOffer.label}.`,
-  },
-  {
-    q: 'How long does delivery take?',
-    a: 'Rise Launch about 1–2 weeks, Business 2–3 weeks, Growth 3–5 weeks. Empire about 3–5 weeks. Origin about 3–6 weeks. Uncharted and Pulse timelines are agreed after we scope the work.',
   },
 ];
 
-export function formatPriceHint(service) {
-  if (!service?.priceLabel) return null;
-  if (service.priceFrom == null) return service.priceLabel;
-  const thousands = Math.round(service.priceFrom / 1000);
-  return `from ${thousands}k`;
+/** Compat aliases used by older imports — plain-English only */
+export const services = softwareSections.map((s) => ({
+  id: s.id,
+  title: s.title,
+  priceLabel: s.startingPriceLabel,
+  outcome: s.bestFor,
+}));
+
+export const supportPlans = websiteCarePlans.map((p) => ({
+  id: p.id,
+  name: `Website Care ${p.name}`,
+  price: p.priceLabel,
+  items: p.includes,
+}));
+
+export function formatPriceHint(item) {
+  return item?.priceLabel || null;
 }

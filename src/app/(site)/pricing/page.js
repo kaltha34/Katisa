@@ -1,84 +1,40 @@
-import { FiCheck } from 'react-icons/fi';
 import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import CtaBand from '@/components/ui/CtaBand';
-import FoundingOfferBanner from '@/components/ui/FoundingOfferBanner';
+import PlanSection from '@/components/ui/PlanSection';
 import FaqAccordion from '@/components/home/FaqAccordion';
-import QuoteCalculator from '@/components/quote/QuoteCalculator';
+import { FoundingOfferBanner } from '@/components/ui/OfferBanner';
+import Badge from '@/components/ui/Badge';
 import {
   bundles,
-  catalog,
+  completionReward,
+  customAppPlan,
+  customProjectPlan,
   formatLkr,
+  foundingOffer,
+  marketingOneOffs,
   paymentTerms,
   pricingFaqs,
-  services,
-  supportPlans,
+  pricingMarketingBlock,
+  pricingSoftwareBlocks,
+  websiteCarePlans,
 } from '@/lib/content';
+import { FiCheck } from 'react-icons/fi';
 
 export const metadata = {
   title: 'Pricing',
   description:
-    'Clear LKR prices: Rise websites from 35,000, Empire inventory from 40,000 setup, Origin apps from 85,000, Pulse content, Website Care from 4,500/month, and a Rise + Pulse bundle at 85,000.',
+    'Clear LKR prices: Business Website from 35,000, Stock & Sales from 40,000 setup, Custom Business App from 85,000, Social Media & Video Marketing from 25,000/month — plus free InQRS card on completion.',
 };
 
-const tableRows = [
-  ...catalog.rise.plans.map((p) => ({
-    package: `Rise ${p.name}`,
-    title: 'Website',
-    bestFor: p.forWho,
-    from: p.priceLabel,
-    delivery: p.delivery,
-    popular: p.popular,
-  })),
-  ...catalog.care.plans.map((p) => ({
-    package: `Care ${p.name}`,
-    title: 'Website Care',
-    bestFor: p.forWho,
-    from: p.priceLabel,
-    delivery: p.delivery,
-    popular: false,
-  })),
-  ...catalog.empire.plans.map((p) => ({
-    package: `Empire ${p.name}`,
-    title: 'Inventory & POS',
-    bestFor: p.forWho,
-    from: p.priceLabel,
-    delivery: p.delivery,
-    popular: p.popular,
-  })),
-  {
-    package: 'Origin',
-    title: 'Internal Apps',
-    bestFor: catalog.origin.audience,
-    from: catalog.origin.priceLabel,
-    delivery: catalog.origin.delivery,
-    popular: false,
-  },
-  {
-    package: 'Uncharted',
-    title: 'Custom',
-    bestFor: catalog.uncharted.audience,
-    from: catalog.uncharted.priceLabel,
-    delivery: catalog.uncharted.delivery,
-    popular: false,
-  },
-  ...catalog.pulse.plans.map((p) => ({
-    package: `Pulse ${p.name}`,
-    title: 'Content (monthly)',
-    bestFor: p.forWho,
-    from: p.priceLabel,
-    delivery: p.delivery,
-    popular: p.popular,
-  })),
-  ...bundles.map((b) => ({
-    package: `Bundle · ${b.name}`,
-    title: b.plainLabel,
-    bestFor: b.forWho,
-    from: b.monthlyLabel ? `${b.priceLabel} + ${b.monthlyLabel}` : b.priceLabel,
-    delivery: b.delivery,
-    popular: false,
-  })),
+const anchors = [
+  { href: '#pricing-websites', label: 'Websites' },
+  { href: '#pricing-stock', label: 'Stock & Sales' },
+  { href: '#pricing-marketing', label: 'Marketing' },
+  { href: '#add-ons', label: 'Add-ons' },
+  { href: '#bundles', label: 'Bundles' },
+  { href: '#completion-reward', label: 'Free InQRS card' },
 ];
 
 export default function PricingPage() {
@@ -86,16 +42,16 @@ export default function PricingPage() {
     <>
       <PageHero
         eyebrow="Pricing"
-        title="Clear LKR prices for shops,"
-        accent="clinics and salons"
-        description={`Compare packages side by side. Payment terms: ${paymentTerms.summary}. Final scope confirmed in writing after discovery.`}
+        title="Clear prices in LKR."
+        accent="No mystery quotes."
+        description={`Payment terms: ${paymentTerms.summary}. Every completed project includes a free InQRS card (${completionReward.inqrsLabel}).`}
         actions={
           <>
-            <Button href="/book-consultation?package=free-audit" variant="primary">
-              Get a Free Audit
+            <Button href="/book-consultation" variant="primary">
+              Book a Free Call
             </Button>
-            <Button href="/build" variant="ghost">
-              Explore Build
+            <Button href="/software" variant="ghost">
+              See Software
             </Button>
           </>
         }
@@ -103,99 +59,161 @@ export default function PricingPage() {
 
       <FoundingOfferBanner />
 
-      <Section>
-        <div className="overflow-x-auto border border-[color:var(--line)]">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-[color:var(--bg-elevated)] text-[color:var(--ink-muted)]">
-              <tr>
-                <th className="px-4 py-4 font-medium">Package</th>
-                <th className="px-4 py-4 font-medium">Best for</th>
-                <th className="px-4 py-4 font-medium">Price</th>
-                <th className="px-4 py-4 font-medium">Delivery</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tableRows.map((row) => (
-                <tr key={`${row.package}-${row.from}`} className="border-t border-[color:var(--line)]">
-                  <td className="px-4 py-4 font-semibold">
-                    {row.package}
-                    {row.popular && (
-                      <span className="ml-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[color:var(--brass)]">
-                        Most Popular
-                      </span>
-                    )}
-                    <span className="mt-0.5 block text-xs font-normal text-[color:var(--ink-faint)]">
-                      {row.title}
-                    </span>
-                  </td>
-                  <td className="px-4 py-4 text-[color:var(--ink-muted)]">{row.bestFor}</td>
-                  <td className="px-4 py-4 font-semibold text-[color:var(--brass)]">{row.from}</td>
-                  <td className="px-4 py-4 text-[color:var(--ink-muted)]">{row.delivery}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <nav
+        className="border-b border-[color:var(--line)] bg-[color:var(--bg-elevated)]"
+        aria-label="Pricing sections"
+      >
+        <div className="container-site flex flex-wrap gap-x-5 gap-y-2 py-4 text-sm">
+          {anchors.map((a) => (
+            <a key={a.href} href={a.href} className="text-[color:var(--ink-muted)] hover:text-[color:var(--brass)]">
+              {a.label}
+            </a>
+          ))}
         </div>
+      </nav>
 
-        <p className="mt-4 text-sm text-[color:var(--ink-faint)]">
-          Pulse one-offs: Reel {formatLkr(15000)} · Vehicle showcase from {formatLkr(15000)} · Event
-          coverage from {formatLkr(30000)}. Domain and third-party fees not included.
-        </p>
+      <div className="container-site">
+        {pricingSoftwareBlocks.map((block) => (
+          <PlanSection
+            key={block.id}
+            id={block.id}
+            title={block.title}
+            intro={block.intro}
+            plans={block.plans}
+            productLabel={block.title.includes('Website') ? 'Website' : 'Stock & Sales'}
+          />
+        ))}
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {supportPlans.map((plan) => (
-            <div key={plan.name} className="card-surface">
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-xl font-semibold">{plan.name}</h2>
-                <span className="text-sm font-semibold text-[color:var(--brass)]">{plan.price}</span>
+        <PlanSection
+          id={pricingMarketingBlock.id}
+          title={pricingMarketingBlock.title}
+          intro={pricingMarketingBlock.intro}
+          plans={pricingMarketingBlock.plans}
+          productLabel="Marketing"
+        />
+      </div>
+
+      <Section id="add-ons" tone="soft" className="border-y border-[color:var(--line)]">
+        <h2 className="heading-display">Add-ons</h2>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <div>
+            <h3 className="font-display text-xl font-bold">Website Care</h3>
+            <div className="mt-4 space-y-3">
+              {websiteCarePlans.map((p) => (
+                <div key={p.id} className="flex items-baseline justify-between gap-3 border border-[color:var(--line)] bg-[color:var(--bg)] px-4 py-3 text-sm">
+                  <span>{p.name}</span>
+                  <span className="font-semibold text-[color:var(--brass)]">{p.priceLabel}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-display text-xl font-bold">Custom work & one-offs</h3>
+            <ul className="mt-4 space-y-3 text-sm text-[color:var(--ink-muted)]">
+              <li className="flex justify-between gap-3 border border-[color:var(--line)] bg-[color:var(--bg)] px-4 py-3">
+                <span>{customAppPlan.name}</span>
+                <span className="font-semibold text-[color:var(--brass)]">{customAppPlan.priceLabel}</span>
+              </li>
+              <li className="flex justify-between gap-3 border border-[color:var(--line)] bg-[color:var(--bg)] px-4 py-3">
+                <span>{customProjectPlan.name}</span>
+                <span className="font-semibold text-[color:var(--brass)] text-right">{customProjectPlan.priceLabel}</span>
+              </li>
+              {marketingOneOffs.map((o) => (
+                <li
+                  key={o.id}
+                  className="flex justify-between gap-3 border border-[color:var(--line)] bg-[color:var(--bg)] px-4 py-3"
+                >
+                  <span>{o.name}</span>
+                  <span className="font-semibold text-[color:var(--brass)]">{o.priceLabel}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="bundles">
+        <h2 className="heading-display">Bundles</h2>
+        <p className="body-muted mt-3 max-w-xl">Save versus buying each piece alone.</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {bundles.map((b) => (
+            <article key={b.id} className="border border-[color:var(--line)] bg-[color:var(--surface)] p-5">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="font-display text-xl font-bold tracking-tight">{b.name}</h3>
+                {completionReward.enabled && <Badge>{completionReward.badgeLabel}</Badge>}
               </div>
-              <ul className="mt-4 space-y-2">
-                {plan.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-[color:var(--ink-muted)]">
-                    <FiCheck className="mt-0.5 text-[color:var(--brass)]" />
-                    {item}
+              <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{b.forWho}</p>
+              <div className="mt-4 text-lg font-semibold text-[color:var(--brass)]">
+                {b.priceLabel}
+                {b.monthlyLabel ? ` + ${b.monthlyLabel}` : ''}
+              </div>
+              <p className="mt-2 text-xs text-[color:var(--ink-faint)]">{b.savingsLabel}</p>
+              <ul className="mt-4 space-y-2 text-sm text-[color:var(--ink-muted)]">
+                {b.includes.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <FiCheck className="mt-0.5 text-[color:var(--brass)]" /> {item}
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
+      </Section>
 
-        <div className="mt-6 border border-[color:var(--line)] bg-[color:var(--surface)] p-5 text-sm text-[color:var(--ink-muted)]">
-          <span className="font-semibold text-[color:var(--ink)]">Quick start packages: </span>
-          {services
-            .map((s) => `${s.series} ${s.priceLabel}`)
-            .join(' · ')}
+      <Section id="completion-reward" tone="soft" className="border-y border-[color:var(--line)]">
+        <div className="max-w-2xl">
+          <div className="eyebrow mb-4">Completion reward</div>
+          <h2 className="heading-display">{completionReward.bannerTitle}</h2>
+          <p className="body-muted mt-4">{completionReward.bannerBody}</p>
+          <ul className="mt-6 space-y-2 text-sm text-[color:var(--ink-muted)]">
+            {completionReward.terms.map((t) => (
+              <li key={t} className="flex gap-2">
+                <FiCheck className="mt-0.5 text-[color:var(--brass)]" /> {t}
+              </li>
+            ))}
+          </ul>
+          <Button href={completionReward.inqrsUrl} variant="outline" external className="mt-6">
+            Visit InQRS
+          </Button>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-2">
+          <div>
+            <h2 className="heading-display">Founding Client Offer</h2>
+            <p className="body-muted mt-4">
+              {foundingOffer.discountPercent}% off for the first {foundingOffer.totalSpots} clients —
+              in exchange for {foundingOffer.requirement}. <strong>{foundingOffer.label}</strong>.
+            </p>
+            <p className="mt-4 text-sm text-[color:var(--ink-faint)]">
+              Payment terms: {paymentTerms.summary}.
+            </p>
+          </div>
+          <div className="border border-[color:var(--brass)]/40 bg-[color:var(--brass-soft)] p-6">
+            <h3 className="font-display text-xl font-bold tracking-tight">Not sure which plan?</h3>
+            <p className="mt-2 text-sm text-[color:var(--ink-muted)]">
+              Book a free 15-minute call. We will point you to Software, Marketing, or a bundle —
+              starting from {formatLkr(35000)} for a website.
+            </p>
+            <Button href="/book-consultation" variant="primary" className="mt-5">
+              Book a Free Call
+            </Button>
+          </div>
         </div>
       </Section>
 
       <Section tone="soft">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
-          <div>
-            <div className="eyebrow mb-4">Estimate</div>
-            <h2 className="heading-display">Rough price before the call</h2>
-            <p className="body-muted mt-4">
-              Ballpark only. We’ll confirm a written quote after discovery.
-            </p>
-          </div>
-          <QuoteCalculator />
-        </div>
-      </Section>
-
-      <Section>
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <div className="eyebrow mb-4">FAQ</div>
             <h2 className="heading-display">Straight answers</h2>
-            <p className="body-muted mt-4">
-              Cost drivers, payment terms ({paymentTerms.summary}), care plans and ownership.
-            </p>
           </div>
           <FaqAccordion items={pricingFaqs} />
         </div>
       </Section>
 
-      <CtaBand title="Ready for a written quote?" />
+      <CtaBand title="Ready for a clear next step?" />
     </>
   );
 }
