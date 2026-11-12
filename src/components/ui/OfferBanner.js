@@ -7,20 +7,30 @@ export function FoundingOfferBanner({ className = '' }) {
 
   return (
     <aside
-      className={`border-y border-[color:var(--brass)]/40 bg-[color:var(--brass-soft)] ${className}`}
+      className={`relative overflow-hidden border-y-2 border-[color:var(--brass)] bg-[color:var(--brass)] text-[#0c0b0a] ${className}`}
       aria-label="Founding client offer"
     >
-      <div className="container-site flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--brass)]">
-            Founding client offer · {foundingOffer.label}
-          </p>
-          <p className="mt-1 text-sm text-[color:var(--ink)]">
+      <div className="pointer-events-none absolute inset-0 opacity-20 hero-grid" />
+      <div className="container-site relative z-10 flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 md:py-6">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0c0b0a]/90">
+              Founding client offer
+            </p>
+            <span className="inline-flex items-center border-2 border-[#0c0b0a] bg-[#0c0b0a] px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[color:var(--brass)]">
+              {foundingOffer.label}
+            </span>
+          </div>
+          <p className="mt-2 text-base font-semibold leading-snug text-[#0c0b0a] md:text-lg">
             {foundingOffer.discountPercent}% off for the first {foundingOffer.totalSpots} clients —
             in exchange for {foundingOffer.requirement}.
           </p>
         </div>
-        <Button href="/book-consultation" variant="primary" className="!px-4 !py-2.5 !text-[11px]">
+        <Button
+          href="/book-consultation"
+          variant="ghost"
+          className="!shrink-0 !border-2 !border-[#0c0b0a] !bg-[#0c0b0a] !px-5 !py-3 !text-[11px] !text-[color:var(--brass)] hover:!bg-transparent hover:!text-[#0c0b0a]"
+        >
           Book a Free Call
         </Button>
       </div>
@@ -50,10 +60,7 @@ export function CompletionRewardBanner({ className = '' }) {
           <Button href={completionReward.inqrsUrl} variant="outline" external>
             About InQRS
           </Button>
-          <Link
-            href="/pricing#completion-reward"
-            className="btn-ghost !text-xs"
-          >
+          <Link href="/pricing#completion-reward" className="btn-ghost !text-xs">
             See terms
           </Link>
         </div>

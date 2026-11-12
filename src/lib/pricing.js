@@ -27,13 +27,14 @@ export function formatLkrPlan(amount, { monthly = false, setupMonthly = null } =
 export const foundingOffer = {
   discountPercent: 20,
   totalSpots: 5,
-  spotsTaken: 0,
+  /** Spots already claimed — edit this when someone takes a founding spot */
+  spotsTaken: 3,
   requirement: 'a short testimonial and permission to publish the project as a case study',
   get spotsLeft() {
     return Math.max(0, this.totalSpots - this.spotsTaken);
   },
   get label() {
-    return `${this.spotsLeft} of ${this.totalSpots} spots left`;
+    return `${this.spotsLeft} of ${this.totalSpots} spots remain`;
   },
   get active() {
     return this.spotsLeft > 0;
