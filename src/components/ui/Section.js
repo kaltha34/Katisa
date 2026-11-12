@@ -1,20 +1,17 @@
-export default function Section({
-  children,
-  className = '',
-  tone = 'black',
-  id,
-}) {
+export default function Section({ children, className = '', tone = 'default', id }) {
   const tones = {
-    white: 'bg-black text-white',
-    soft: 'bg-[#0a0a0a] text-white',
-    black: 'bg-black text-white',
-    navy: 'bg-navy text-white',
-    deep: 'bg-navy-deep text-white',
+    default: 'bg-[color:var(--bg)]',
+    soft: 'bg-[color:var(--bg-soft)]',
+    elevated: 'bg-[color:var(--bg-elevated)]',
+    black: 'bg-[color:var(--bg)]',
+    white: 'bg-[color:var(--bg)]',
+    navy: 'bg-[color:var(--bg-elevated)]',
+    deep: 'bg-[color:var(--bg-elevated)]',
   };
 
   return (
-    <section id={id} className={`section-pad ${tones[tone] || tones.black} ${className}`}>
-      <div className="container-site">{children}</div>
+    <section id={id} className={`section-pad relative ${tones[tone] || tones.default} ${className}`}>
+      <div className="container-site relative z-10">{children}</div>
     </section>
   );
 }

@@ -83,7 +83,7 @@ export default function ContactForm() {
         ['subject', 'Subject', 'text'],
       ].map(([name, label, type]) => (
         <div key={name}>
-          <label className="mb-1.5 block text-sm font-medium text-white/85">{label}</label>
+          <label className="mb-1.5 block text-sm font-medium text-[color:var(--ink)]">{label}</label>
           <input
             className="input-field"
             type={type}
@@ -96,7 +96,7 @@ export default function ContactForm() {
       ))}
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-white/85">Message</label>
+        <label className="mb-1.5 block text-sm font-medium text-[color:var(--ink)]">Message</label>
         <textarea
           className="input-field min-h-32"
           name="message"
@@ -117,7 +117,10 @@ export default function ContactForm() {
         </div>
       )}
 
-      <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-60">
+      {/* Honeypot — leave empty */}
+      <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+
+      <button type="submit" disabled={submitting} className="btn-primary w-full disabled:opacity-60">
         {submitting ? 'Sending…' : 'Send message'}
       </button>
     </form>

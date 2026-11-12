@@ -26,12 +26,9 @@ export default function WebinarsPage() {
               ['100% free', 'Every session is free to attend.'],
               ['Certificates', 'Completion certificates for attended sessions.'],
             ].map(([title, text]) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-left shadow-soft"
-              >
-                <h3 className="font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm text-white/65">{text}</p>
+              <div key={title} className="card-surface text-left">
+                <h3 className="font-semibold">{title}</h3>
+                <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{text}</p>
               </div>
             ))}
           </div>

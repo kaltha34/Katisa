@@ -1,32 +1,79 @@
-import { Plus_Jakarta_Sans } from 'next/font/google';
-import { site } from '@/lib/site';
+import { Figtree, Syne } from 'next/font/google';
+import { site } from '@/lib/content';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { LocaleProvider } from '@/components/providers/LocaleProvider';
 import './globals.css';
 
-const jakarta = Plus_Jakarta_Sans({
+const display = Syne({
   subsets: ['latin'],
-  variable: '--font-jakarta',
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const body = Figtree({
+  subsets: ['latin'],
+  variable: '--font-body',
   display: 'swap',
 });
 
 export const metadata = {
+  metadataBase: new URL(site.domain),
   title: {
-    default: `${site.legalName} | Software Company`,
+    default: `${site.legalName} | Software for Sri Lankan businesses`,
     template: `%s | ${site.legalName}`,
   },
-  description: site.tagline,
-  metadataBase: new URL('https://katisatech.com'),
+  description: site.description,
   openGraph: {
     title: site.legalName,
-    description: site.tagline,
+    description: site.description,
+    url: site.domain,
+    siteName: site.legalName,
+    locale: 'en_LK',
     type: 'website',
-    images: ['/og-image.png'],
+    images: [{ url: '/images/katisa-logo.png', width: 1200, height: 630, alt: site.legalName }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: site.legalName,
+    description: site.description,
+    images: ['/images/katisa-logo.png'],
+  },
+  alternates: {
+    canonical: site.domain,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'LocalBusiness'],
+    name: site.legalName,
+    url: site.domain,
+    email: site.email,
+    telephone: site.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Colombo',
+      addressCountry: 'LK',
+    },
+    sameAs: [site.socials.linkedin, site.socials.instagram],
+  };
+
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body className="font-sans">{children}</body>
+    <html lang="en" className={`dark ${display.variable} ${body.variable}`}>
+      <body className="font-body">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <ThemeProvider>
+          <LocaleProvider>{children}</LocaleProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

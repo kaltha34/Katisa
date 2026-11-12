@@ -19,7 +19,7 @@ export default function BackToTop() {
       type="button"
       aria-label="Scroll to top"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white shadow-soft backdrop-blur transition hover:border-gold hover:bg-gold hover:text-black"
+      className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--line)] bg-[color:var(--bg-elevated)] text-[color:var(--ink)] shadow-soft transition hover:border-[color:var(--brass)] hover:bg-[color:var(--brass)] hover:text-[#14110c]"
     >
       <FiArrowUp />
     </button>

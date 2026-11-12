@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { FiCalendar, FiCheck } from 'react-icons/fi';
-import { site } from '@/lib/site';
+import { site } from '@/lib/content';
 
 export default function ConsultationBooking() {
   useEffect(() => {
@@ -24,13 +24,15 @@ export default function ConsultationBooking() {
   };
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-soft backdrop-blur">
+    <div className="card-surface md:p-8">
       <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 inline-flex rounded-full bg-gold/15 p-4 text-gold">
+        <div className="mx-auto mb-4 inline-flex rounded-full bg-[color:var(--brass-soft)] p-4 text-[color:var(--brass)]">
           <FiCalendar size={28} />
         </div>
-        <h2 className="text-3xl font-bold text-white">Schedule a consultation</h2>
-        <p className="mt-2 text-white/65">Pick a time that works — calendar invite included.</p>
+        <h2 className="font-display text-3xl font-semibold">Schedule a consultation</h2>
+        <p className="mt-2 text-[color:var(--ink-muted)]">
+          Pick a time that works — calendar invite included.
+        </p>
       </div>
 
       <div className="mb-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
@@ -44,21 +46,27 @@ export default function ConsultationBooking() {
         ].map((item) => (
           <div
             key={item}
-            className="flex items-start gap-3 rounded-xl border border-white/10 bg-black/40 p-4 text-sm text-white/85"
+            className="flex items-start gap-3 rounded-xl border border-[color:var(--line)] bg-[color:var(--bg)] p-4 text-sm text-[color:var(--ink-muted)]"
           >
-            <FiCheck className="mt-0.5 shrink-0 text-gold" />
+            <FiCheck className="mt-0.5 shrink-0 text-[color:var(--brass)]" />
             {item}
           </div>
         ))}
       </div>
 
-      <button type="button" onClick={handleBooking} className="btn-gold w-full md:w-auto">
+      <button type="button" onClick={handleBooking} className="btn-primary w-full md:w-auto">
         Open booking calendar
       </button>
 
-      <p className="mt-4 text-sm text-white/55">
+      <div
+        className="calendly-inline-widget mt-8 min-h-[640px] w-full overflow-hidden rounded-2xl border border-[color:var(--line)]"
+        data-url={site.calendly}
+        style={{ minWidth: '320px', height: '700px' }}
+      />
+
+      <p className="mt-4 text-sm text-[color:var(--ink-faint)]">
         Prefer email?{' '}
-        <a href={`mailto:${site.email}`} className="font-medium text-gold hover:text-white">
+        <a href={`mailto:${site.email}`} className="text-[color:var(--brass)]">
           {site.email}
         </a>
       </p>

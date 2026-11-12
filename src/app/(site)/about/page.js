@@ -9,14 +9,30 @@ import { FiAward, FiGlobe, FiLinkedin, FiInstagram, FiTrendingUp, FiUsers } from
 export const metadata = {
   title: 'About',
   description:
-    'Learn about Katisa Technologies — a Sri Lankan software company building practical tools and InQRS NFC products.',
+    'Katisa Technologies is a Colombo software company building websites, inventory systems and internal apps for Sri Lankan SMEs — plus InQRS NFC cards.',
 };
 
 const values = [
-  { icon: FiTrendingUp, title: 'Innovation', text: 'We push for better products without unnecessary complexity.' },
-  { icon: FiUsers, title: 'Quality', text: 'Detail-minded delivery, from UX polish to reliable infrastructure.' },
-  { icon: FiAward, title: 'Excellence', text: 'We treat every client project like a product launch.' },
-  { icon: FiGlobe, title: 'Local impact', text: 'Showcasing Sri Lankan talent while solving real business problems.' },
+  {
+    icon: FiTrendingUp,
+    title: 'Outcomes first',
+    text: 'We measure success by stock that stays accurate, bookings that stick, and sites that get messages.',
+  },
+  {
+    icon: FiUsers,
+    title: 'Plain language',
+    text: 'No jargon theatre. You always know scope, price range and what’s shipping next.',
+  },
+  {
+    icon: FiAward,
+    title: 'Clean handover',
+    text: 'You own the code, accounts and docs. We’re partners — not a black box.',
+  },
+  {
+    icon: FiGlobe,
+    title: 'Built for Sri Lanka',
+    text: 'WhatsApp-friendly flows, LKR pricing clarity, and support that answers on local time.',
+  },
 ];
 
 export default function AboutPage() {
@@ -24,9 +40,9 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About Katisa"
-        title="A Sri Lankan software company building"
-        accent="useful tools"
-        description="Founded to help businesses grow with websites, operational tools, and products like InQRS — without enterprise bloat."
+        title="A Colombo workshop for"
+        accent="business software"
+        description="We help salons, clinics, tuition classes and shops replace messy spreadsheets and chat chaos with tools people actually open."
       />
 
       <Section>
@@ -34,18 +50,19 @@ export default function AboutPage() {
           <div>
             <h2 className="heading-display">Our story</h2>
             <p className="body-muted mt-4">
-              Katisa Technologies started with a simple belief: most businesses don’t need another bloated platform —
-              they need software that fits their workflow, ships on time, and is easy to run.
+              Katisa Technologies started with a simple belief: most businesses don’t need another
+              bloated platform — they need software that fits their workflow, ships on time, and is
+              easy to run.
             </p>
             <p className="body-muted mt-4">
-              Today we build websites, inventory systems, internal apps, and maintain InQRS for teams across Sri Lanka
-              and beyond.
+              Today we build websites, inventory systems, internal apps, and maintain InQRS for teams
+              across Sri Lanka and beyond.
             </p>
             <Button href="/join-us" variant="outline" className="mt-8">
               Join the team
             </Button>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
+          <div className="card-surface">
             <div className="grid grid-cols-2 gap-6">
               {[
                 ['2020', 'Founded'],
@@ -54,8 +71,8 @@ export default function AboutPage() {
                 ['Services + product', 'How we work'],
               ].map(([value, label]) => (
                 <div key={label}>
-                  <div className="text-2xl font-bold text-gold">{value}</div>
-                  <div className="mt-1 text-sm text-white/55">{label}</div>
+                  <div className="text-2xl font-semibold text-[color:var(--brass)]">{value}</div>
+                  <div className="mt-1 text-sm text-[color:var(--ink-faint)]">{label}</div>
                 </div>
               ))}
             </div>
@@ -70,11 +87,11 @@ export default function AboutPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {values.map((value) => (
             <div key={value.title} className="card-surface">
-              <div className="mb-4 inline-flex rounded-xl bg-gold/15 p-3 text-gold">
+              <div className="mb-4 inline-flex rounded-xl bg-[color:var(--brass-soft)] p-3 text-[color:var(--brass)]">
                 <value.icon size={20} />
               </div>
-              <h3 className="font-semibold text-white">{value.title}</h3>
-              <p className="mt-2 text-sm text-white/65">{value.text}</p>
+              <h3 className="font-semibold">{value.title}</h3>
+              <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{value.text}</p>
             </div>
           ))}
         </div>
@@ -83,7 +100,7 @@ export default function AboutPage() {
       <Section>
         <div className="mx-auto max-w-3xl">
           <div className="eyebrow mb-4">Leadership</div>
-          <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-soft md:flex">
+          <div className="overflow-hidden rounded-3xl border border-[color:var(--line)] bg-[color:var(--surface)] shadow-soft md:flex">
             <div className="relative h-72 w-full shrink-0 md:h-auto md:min-h-[22rem] md:w-72">
               <Image
                 src="/images/founder.jpg"
@@ -95,18 +112,18 @@ export default function AboutPage() {
               />
             </div>
             <div className="flex-1 p-8">
-              <h2 className="text-2xl font-bold text-white">Kalhara Thabrew</h2>
-              <p className="mt-1 text-sm font-medium text-gold">Founder & CEO</p>
-              <p className="mt-4 text-white/65">
-                Building Katisa with hands-on software knowledge — and a crew of AI agents that help ship product,
-                engineering, QA, and marketing work every day.
+              <h2 className="font-display text-2xl font-semibold">Kalhara Thabrew</h2>
+              <p className="mt-1 text-sm font-medium text-[color:var(--brass)]">Founder & CEO</p>
+              <p className="mt-4 text-[color:var(--ink-muted)]">
+                Building Katisa with hands-on software knowledge — and a crew of AI agents that help
+                ship product, engineering, QA and marketing work every day.
               </p>
               <div className="mt-6 flex gap-3">
                 <a
                   href="https://www.linkedin.com/in/kalhara-thabrew-288565258/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-white/10 p-2.5 text-white hover:bg-gold hover:text-black"
+                  className="rounded-full bg-[color:var(--surface-strong)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
                   aria-label="LinkedIn"
                 >
                   <FiLinkedin />
@@ -115,7 +132,7 @@ export default function AboutPage() {
                   href="https://www.instagram.com/kali_x_sa/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-white/10 p-2.5 text-white hover:bg-gold hover:text-black"
+                  className="rounded-full bg-[color:var(--surface-strong)] p-2.5 hover:bg-[color:var(--brass)] hover:text-[#14110c]"
                   aria-label="Instagram"
                 >
                   <FiInstagram />
@@ -131,14 +148,14 @@ export default function AboutPage() {
           <div className="eyebrow mb-4 justify-center">Agent Crew</div>
           <h2 className="heading-display">Agents that work with me</h2>
           <p className="body-muted mt-4">
-            Not a traditional org chart — specialized AI agents that help run product, engineering, QA, and marketing
-            alongside the founder.
+            Not a traditional org chart — specialized AI agents that help run product, engineering,
+            QA and marketing alongside the founder.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((member) => (
-            <article key={member.id} className="card-surface flex h-full flex-col overflow-hidden p-0">
-              <div className="relative aspect-square w-full overflow-hidden border-b border-white/10 bg-black">
+            <article key={member.id} className="card-surface flex h-full flex-col overflow-hidden !p-0">
+              <div className="relative aspect-square w-full overflow-hidden border-b border-[color:var(--line)] bg-[color:var(--bg)]">
                 <Image
                   src={member.image}
                   alt={`${member.name} — ${member.role}`}
@@ -149,10 +166,12 @@ export default function AboutPage() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <div className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-gold">Agent</div>
-                <h3 className="text-lg font-semibold text-white">{member.name}</h3>
-                <p className="mt-1 text-sm font-medium text-white/70">{member.role}</p>
-                <p className="mt-4 text-sm leading-relaxed text-white/65">{member.focus}</p>
+                <div className="mb-1 text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
+                  Agent
+                </div>
+                <h3 className="text-lg font-semibold">{member.name}</h3>
+                <p className="mt-1 text-sm font-medium text-[color:var(--ink-muted)]">{member.role}</p>
+                <p className="mt-4 text-sm leading-relaxed text-[color:var(--ink-muted)]">{member.focus}</p>
               </div>
             </article>
           ))}
