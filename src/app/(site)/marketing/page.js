@@ -13,6 +13,7 @@ import {
   marketingProcess,
   marketingWeDoNotPromise,
 } from '@/lib/content';
+import { media } from '@/lib/media';
 import { FiCheck, FiX } from 'react-icons/fi';
 
 export const metadata = {
@@ -29,6 +30,8 @@ export default function MarketingPage() {
         title="Social media and video"
         accent="that help people find you"
         description="Monthly plans from LKR 6,000 and upwards, plus one-off videos for shops, salons, restaurants, vehicle sellers and events. Clear prices. Honest limits."
+        image={media.heroMarketing}
+        imageAlt="Phone showing social content for a business"
         actions={
           <>
             <Button href="/pricing#pricing-marketing" variant="primary">

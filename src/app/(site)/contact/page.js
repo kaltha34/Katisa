@@ -2,6 +2,7 @@ import PageHero from '@/components/ui/PageHero';
 import Section from '@/components/ui/Section';
 import ContactForm from '@/components/contact/ContactForm';
 import { site, whatsappUrl } from '@/lib/content';
+import { media } from '@/lib/media';
 import { FiMail, FiMapPin, FiPhone, FiMessageCircle } from 'react-icons/fi';
 
 export const metadata = {
@@ -18,6 +19,8 @@ export default function ContactPage() {
         title="Send a short message."
         accent="We reply in plain English."
         description="Website, stock, custom app, or marketing — tell us what you need. We usually reply within one business day."
+        image={media.heroContact}
+        imageAlt="Phone ready for a customer message"
       />
 
       <Section>

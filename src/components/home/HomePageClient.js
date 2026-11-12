@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import HomeHero from '@/components/home/HomeHero';
 import Section from '@/components/ui/Section';
@@ -12,9 +13,20 @@ import {
   featuredWork,
   goalCards,
   homeHowItWorks,
+  partners,
   pricingPreview,
 } from '@/lib/content';
+import { media } from '@/lib/media';
 import { FiArrowUpRight } from 'react-icons/fi';
+
+const partnerImages = {
+  salons: media.salon,
+  clinics: media.salon,
+  tuition: media.website,
+  shops: media.shop,
+  restaurants: media.restaurant,
+  vehicles: media.vehicle,
+};
 
 export default function HomePageClient() {
   return (
@@ -30,10 +42,48 @@ export default function HomePageClient() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {goalCards.map((card) => (
-            <GoalCard key={card.id} title={card.title} text={card.text} href={card.href} />
+            <GoalCard
+              key={card.id}
+              title={card.title}
+              text={card.text}
+              href={card.href}
+              image={card.image}
+              imageAlt={card.imageAlt}
+            />
           ))}
         </div>
       </Section>
+
+      <section className="border-y border-[color:var(--line)] bg-[color:var(--surface)]">
+        <div className="container-site py-10 md:py-12">
+          <div className="mb-6 max-w-xl">
+            <div className="eyebrow mb-3">Built for</div>
+            <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+              Shops, salons, clinics and more
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+            {partners.map((p) => (
+              <div
+                key={p.id}
+                className="group relative aspect-[4/5] overflow-hidden border border-[color:var(--line)]"
+              >
+                <Image
+                  src={partnerImages[p.id] || media.shop}
+                  alt={p.label}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 16vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--bg-invert)]/85 via-[color:var(--bg-invert)]/20 to-transparent" />
+                <span className="absolute bottom-3 left-3 font-display text-sm font-bold tracking-tight text-[color:var(--bg)]">
+                  {p.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Section tone="soft" className="border-y border-[color:var(--line)]">
         <ProcessSteps
@@ -91,16 +141,29 @@ export default function HomePageClient() {
               <Comp
                 key={item.id}
                 {...linkProps}
-                className="group border border-[color:var(--line)] bg-[color:var(--surface)] p-5 transition hover:border-[color:var(--brass)]"
+                className="group overflow-hidden border border-[color:var(--line)] bg-[color:var(--surface)] transition hover:border-[color:var(--brass)]"
               >
-                <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
-                  {item.industry}
+                {item.image && (
+                  <div className="relative aspect-[16/10] overflow-hidden border-b border-[color:var(--line)]">
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt || item.label}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                )}
+                <div className="p-5">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[color:var(--brass)]">
+                    {item.industry}
+                  </div>
+                  <h3 className="mt-3 font-display text-lg font-bold tracking-tight">{item.label}</h3>
+                  <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{item.detail}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--brass)]">
+                    View <FiArrowUpRight />
+                  </span>
                 </div>
-                <h3 className="mt-3 font-display text-lg font-bold tracking-tight">{item.label}</h3>
-                <p className="mt-2 text-sm text-[color:var(--ink-muted)]">{item.detail}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--brass)]">
-                  View <FiArrowUpRight />
-                </span>
               </Comp>
             );
           })}
@@ -109,8 +172,16 @@ export default function HomePageClient() {
 
       <ReviewsSection />
 
-      <section className="border-t border-[color:var(--line)] bg-[color:var(--bg-invert)] text-[color:var(--bg)]">
-        <div className="container-site flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between md:py-20">
+      <section className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-invert)] text-[color:var(--bg)]">
+        <Image
+          src={media.phoneWhatsapp}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-30"
+        />
+        <div className="absolute inset-0 bg-[color:var(--bg-invert)]/75" />
+        <div className="container-site relative z-10 flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between md:py-20">
           <div>
             <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Ready to talk?

@@ -1,15 +1,30 @@
+import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import { site, whatsappUrl } from '@/lib/content';
+import { media } from '@/lib/media';
 
 export default function CtaBand({
   title = 'Ready for a clear next step?',
   description = 'Book a free call. We will talk scope, timeline and budget in plain language — no pressure.',
+  image = media.cta,
 }) {
   return (
     <section
       id="final-cta"
       className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--bg-invert)] text-[color:var(--bg)]"
     >
+      {image && (
+        <>
+          <Image
+            src={image}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center opacity-35"
+          />
+          <div className="absolute inset-0 bg-[color:var(--bg-invert)]/80" />
+        </>
+      )}
       <div className="grain-overlay opacity-[0.08]" />
       <div className="container-site relative z-10 grid gap-10 py-16 md:grid-cols-[1.4fr_0.6fr] md:items-end md:py-24">
         <div>

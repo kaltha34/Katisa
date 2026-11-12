@@ -96,6 +96,8 @@ export const featuredWork = [
     detail:
       'A gallery-first website for originals, prints and workshops — live at nipunimallikaarachchi.com.',
     href: 'https://www.nipunimallikaarachchi.com/',
+    image: 'https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Art gallery wall with framed works',
   },
   {
     id: 'shops',
@@ -103,6 +105,8 @@ export const featuredWork = [
     industry: 'Stock & sales',
     detail: 'Stock tracking, low-stock alerts and simple sales reports so the counter stays honest.',
     href: '/software#stock',
+    image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Retail shop interior with clothing racks',
   },
   {
     id: 'salons',
@@ -110,6 +114,8 @@ export const featuredWork = [
     industry: 'Websites & bookings',
     detail: 'Phone-friendly sites and booking-style apps so fewer chats get lost in WhatsApp.',
     href: '/software#website',
+    image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Salon interior with styling chairs',
   },
 ];
 

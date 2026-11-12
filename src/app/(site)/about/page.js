@@ -3,6 +3,7 @@ import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import CtaBand from '@/components/ui/CtaBand';
 import { site } from '@/lib/content';
+import { media } from '@/lib/media';
 
 export const metadata = {
   title: 'About',
@@ -18,6 +19,8 @@ export default function AboutPage() {
         title="One team for websites,"
         accent="software and marketing"
         description="We help small businesses in Sri Lanka get online systems that work — and content that helps customers find them."
+        image={media.heroAbout}
+        imageAlt="Team collaborating on a project"
       />
 
       <Section>

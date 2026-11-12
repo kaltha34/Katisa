@@ -20,6 +20,7 @@ import {
   pricingSoftwareBlocks,
   websiteCarePlans,
 } from '@/lib/content';
+import { media } from '@/lib/media';
 import { FiCheck } from 'react-icons/fi';
 
 export const metadata = {
@@ -45,6 +46,8 @@ export default function PricingPage() {
         title="Clear prices in LKR."
         accent="No mystery quotes."
         description={`Prices shown are from each plan and upwards. Payment terms: ${paymentTerms.summary}. Every completed project includes a free InQRS card (${completionReward.inqrsLabel}).`}
+        image={media.heroPricing}
+        imageAlt="Calculator and invoices for clear pricing"
         actions={
           <>
             <Button href="/book-consultation" variant="primary">

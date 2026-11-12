@@ -88,24 +88,32 @@ export const goalCards = [
     title: 'I need a website',
     text: 'A clear site so customers can find you and message you.',
     href: '/software#website',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Laptop on a desk during website work',
   },
   {
     id: 'stock',
     title: 'I want to track stock and sales',
     text: 'Know what you have, what sold, and what to reorder.',
     href: '/software#stock',
+    image: 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Warehouse shelves with packed stock',
   },
   {
     id: 'custom',
     title: 'I need a custom app or system',
     text: 'One tool built around how your team already works.',
     href: '/software#custom',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Person using a laptop for business software',
   },
   {
     id: 'marketing',
     title: 'I want more customers',
     text: 'Social posts and short videos that help people find you.',
     href: '/marketing',
+    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1200&q=75',
+    imageAlt: 'Phone showing social media content',
   },
 ];
 

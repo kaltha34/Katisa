@@ -14,6 +14,7 @@ import {
   websiteCarePlans,
   websitePlans,
 } from '@/lib/content';
+import { media } from '@/lib/media';
 import { FiCheck } from 'react-icons/fi';
 
 export const metadata = {
@@ -30,6 +31,8 @@ export default function SoftwarePage() {
         title="Websites and systems"
         accent="your team will actually use"
         description="Business Website, Stock & Sales System, or a Custom Business App. Plain English. Clear starting prices."
+        image={media.heroSoftware}
+        imageAlt="Laptop and charts for business software work"
         actions={
           <>
             <Button href="/pricing" variant="primary">

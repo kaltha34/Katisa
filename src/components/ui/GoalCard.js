@@ -1,19 +1,33 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowUpRight } from 'react-icons/fi';
 
-export default function GoalCard({ title, text, href }) {
+export default function GoalCard({ title, text, href, image, imageAlt }) {
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col border border-[color:var(--line)] bg-[color:var(--surface)] p-6 transition hover:border-[color:var(--brass)]"
+      className="group flex h-full flex-col overflow-hidden border border-[color:var(--line)] bg-[color:var(--surface)] transition hover:border-[color:var(--brass)]"
     >
-      <h3 className="font-display text-xl font-bold tracking-tight text-[color:var(--ink)] md:text-2xl">
-        {title}
-      </h3>
-      <p className="mt-3 flex-1 text-sm text-[color:var(--ink-muted)] md:text-base">{text}</p>
-      <span className="mt-6 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--brass)]">
-        Continue <FiArrowUpRight className="transition group-hover:translate-x-0.5" />
-      </span>
+      {image && (
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-[color:var(--line)]">
+          <Image
+            src={image}
+            alt={imageAlt || title}
+            fill
+            sizes="(max-width: 640px) 100vw, 50vw"
+            className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="font-display text-xl font-bold tracking-tight text-[color:var(--ink)] md:text-2xl">
+          {title}
+        </h3>
+        <p className="mt-3 flex-1 text-sm text-[color:var(--ink-muted)] md:text-base">{text}</p>
+        <span className="mt-6 inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--brass)]">
+          Continue <FiArrowUpRight className="transition group-hover:translate-x-0.5" />
+        </span>
+      </div>
     </Link>
   );
 }
