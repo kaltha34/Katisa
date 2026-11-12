@@ -1,8 +1,8 @@
 export default function CaseStudyCard({ study }) {
   return (
-    <article className="flex h-full flex-col border border-dashed border-[color:var(--brass)]/50 bg-[color:var(--surface)] p-5 md:p-6">
+    <article className="flex h-full flex-col border border-[color:var(--line)] bg-[color:var(--surface)] p-5 md:p-6">
       <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--brass)]">
-        Placeholder · {study.arm === 'grow' ? 'Grow' : 'Build'}
+        {study.arm === 'grow' ? 'Marketing' : 'Software'}
       </div>
       <h3 className="mt-3 font-display text-xl font-bold tracking-tight">{study.client}</h3>
       <p className="mt-1 text-sm text-[color:var(--ink-faint)]">{study.industry}</p>

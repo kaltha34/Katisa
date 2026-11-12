@@ -29,7 +29,8 @@ export default function AboutPage() {
             you launch actually gets seen.
           </p>
           <p className="body-muted mt-4">
-            InQRS NFC smart cards are our sister product (
+            We have shipped live work such as the Nipuni Studio gallery site. InQRS NFC smart cards
+            are our sister product (
             <a href={site.inqrsUrl} className="text-[color:var(--brass)] hover:underline" target="_blank" rel="noopener noreferrer">
               idora.click
             </a>

@@ -18,7 +18,7 @@ Config lives in `src/lib/pricing.js` → `completionReward`.
 - [ ] Project meets `minProjectValueLKR` (currently 0)
 - [ ] Collect card details from client (name / business for standard design)
 - [ ] Order / print **cardsPerProject** card(s) (currently 1)
-- [ ] Dispatch within **dispatchDays** after sign-off + final payment — **[CONFIRM value in config]**
+- [ ] Dispatch within **5–7 working days** after sign-off + final payment
 - [ ] Note: no cash value, not transferable; link client to https://idora.click
 
 ## Close-out

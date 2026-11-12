@@ -11,7 +11,16 @@ export function formatLkr(amount) {
 export function formatLkrFrom(amount, { monthly = false } = {}) {
   const base = formatLkr(amount);
   if (!base) return null;
-  return monthly ? `From ${base}/month` : `From ${base}`;
+  return monthly ? `From ${base}/month and upwards` : `From ${base} and upwards`;
+}
+
+/** Fixed package price shown as a floor (extras can raise the total). */
+export function formatLkrPlan(amount, { monthly = false, setupMonthly = null } = {}) {
+  if (setupMonthly != null) {
+    return `From ${formatLkr(amount)} setup + ${formatLkr(setupMonthly)}/month and upwards`;
+  }
+  if (monthly) return `From ${formatLkr(amount)}/month and upwards`;
+  return `From ${formatLkr(amount)} and upwards`;
 }
 
 /** Edit spotsTaken when a founding client claims a spot (0–5). */
@@ -40,20 +49,21 @@ export const completionReward = {
   enabled: true,
   minProjectValueLKR: 0,
   cardsPerProject: 1,
-  /** [CONFIRM] working days after sign-off + final payment */
-  dispatchDays: '[CONFIRM: e.g. 5–7 working days]',
+  dispatchDays: '5–7 working days',
   badgeLabel: 'Free InQRS card on completion',
   bannerTitle: 'Finish a project with us — get a free InQRS card',
   bannerBody:
     'Every successfully completed project includes one free InQRS NFC smart card (our sister product). Tap to share your digital profile. No cash value. Not transferable.',
-  terms: [
-    'Personalised with your name or business using our standard design',
-    'You supply the details we need to print the card',
-    'Sent after final delivery, your sign-off, and final payment',
-    `Dispatch: ${'[CONFIRM: e.g. 5–7 working days]'} after those steps`,
-    'No cash value and not transferable',
-    'InQRS is our sister product — learn more at idora.click',
-  ],
+  get terms() {
+    return [
+      'Personalised with your name or business using our standard design',
+      'You supply the details we need to print the card',
+      'Sent after final delivery, your sign-off, and final payment',
+      `Dispatch: ${this.dispatchDays} after those steps`,
+      'No cash value and not transferable',
+      'InQRS is our sister product — learn more at idora.click',
+    ];
+  },
   inqrsUrl: 'https://idora.click',
   inqrsLabel: 'our sister product',
 };
@@ -104,7 +114,6 @@ export const homeHowItWorks = [
   { step: '3', title: 'You grow', text: 'You go live. We support you. Optional care and marketing continue.' },
 ];
 
-/** Software engineering plan — durations marked [CONFIRM] until you lock them */
 export const softwareProcess = [
   {
     step: '1',
@@ -112,7 +121,7 @@ export const softwareProcess = [
     weDo: 'We learn your process and goals.',
     youReceive: 'A written scope summary.',
     weNeed: 'Honest answers about how you work today and what “done” means.',
-    duration: '[CONFIRM: e.g. 3–5 days]',
+    duration: '3–5 days',
   },
   {
     step: '2',
@@ -120,7 +129,7 @@ export const softwareProcess = [
     weDo: 'Layouts and workflow screens.',
     youReceive: 'Designs to review.',
     weNeed: 'Your approval before we build.',
-    duration: '[CONFIRM: e.g. 3–7 days]',
+    duration: '3–7 days',
   },
   {
     step: '3',
@@ -128,7 +137,7 @@ export const softwareProcess = [
     weDo: 'We develop in small steps with demos.',
     youReceive: 'Working demos you can click through.',
     weNeed: 'Feedback within agreed review windows.',
-    duration: '[CONFIRM: depends on plan]',
+    duration: '1–4 weeks depending on the plan',
   },
   {
     step: '4',
@@ -136,7 +145,7 @@ export const softwareProcess = [
     weDo: 'Go live, train your team, hand over access.',
     youReceive: 'Live system + documentation.',
     weNeed: 'Someone available for training and final checks.',
-    duration: '[CONFIRM: e.g. 1–3 days]',
+    duration: '1–3 days',
   },
   {
     step: '5',
@@ -153,7 +162,7 @@ export const qualityStandards = [
   'Secure logins and backups where the project needs them',
   'Written handover notes',
   'A training session for your team',
-  '[CONFIRM: free bug-fix period after launch — e.g. 14 or 30 days]',
+  '14 days of free bug fixes after launch',
 ];
 
 /** Marketing plan phases */
@@ -214,10 +223,10 @@ export const websitePlans = [
     id: 'website-starter',
     name: 'Starter',
     price: 35000,
-    priceLabel: formatLkr(35000),
+    priceLabel: formatLkrPlan(35000),
     popular: false,
     bestFor: 'New businesses that need a simple online presence fast',
-    delivery: '[CONFIRM: e.g. 1–2 weeks]',
+    delivery: '1–2 weeks',
     includes: ['1 to 3 pages', 'Works well on phones', 'Contact form', 'WhatsApp button'],
     excludes: ['Online booking or ordering', 'Payment checkout', ...sharedNotIncluded],
   },
@@ -225,10 +234,10 @@ export const websitePlans = [
     id: 'website-business',
     name: 'Business',
     price: 65000,
-    priceLabel: formatLkr(65000),
+    priceLabel: formatLkrPlan(65000),
     popular: true,
     bestFor: 'Shops, clinics and salons that need more pages and to be found on Google',
-    delivery: '[CONFIRM: e.g. 2–3 weeks]',
+    delivery: '2–3 weeks',
     includes: [
       'Up to 8 pages',
       'SEO setup (so search engines can find you)',
@@ -242,10 +251,10 @@ export const websitePlans = [
     id: 'website-growth',
     name: 'Growth',
     price: 110000,
-    priceLabel: formatLkr(110000),
+    priceLabel: formatLkrPlan(110000),
     popular: false,
     bestFor: 'Businesses that need bookings, orders, or payments on the site',
-    delivery: '[CONFIRM: e.g. 3–5 weeks]',
+    delivery: '3–5 weeks',
     includes: [
       'Booking or online ordering',
       'Payment integration',
@@ -262,7 +271,7 @@ export const websiteCarePlans = [
     id: 'care-basic',
     name: 'Basic',
     price: 4500,
-    priceLabel: `${formatLkr(4500)}/month`,
+    priceLabel: formatLkrPlan(4500, { monthly: true }),
     popular: false,
     bestFor: 'Owners who want the site hosted and kept safe',
     delivery: 'Ongoing monthly',
@@ -273,7 +282,7 @@ export const websiteCarePlans = [
     id: 'care-plus',
     name: 'Plus',
     price: 9000,
-    priceLabel: `${formatLkr(9000)}/month`,
+    priceLabel: formatLkrPlan(9000, { monthly: true }),
     popular: false,
     bestFor: 'Owners who change hours, photos or offers often',
     delivery: 'Ongoing monthly',
@@ -288,10 +297,10 @@ export const stockPlans = [
     name: 'Starter',
     price: 40000,
     monthly: 4500,
-    priceLabel: `${formatLkr(40000)} setup + ${formatLkr(4500)}/month`,
+    priceLabel: formatLkrPlan(40000, { setupMonthly: 4500 }),
     popular: false,
     bestFor: 'Single-counter shops starting with live stock numbers',
-    delivery: '[CONFIRM: e.g. 3–4 weeks]',
+    delivery: '3–4 weeks',
     includes: ['Stock tracking', 'Sales recording', 'Low-stock alerts', 'Simple reports'],
     excludes: ['Multi-user roles', 'Barcode scanning', 'SMS alerts', ...sharedNotIncluded],
   },
@@ -300,10 +309,10 @@ export const stockPlans = [
     name: 'Pro',
     price: 75000,
     monthly: 8500,
-    priceLabel: `${formatLkr(75000)} setup + ${formatLkr(8500)}/month`,
+    priceLabel: formatLkrPlan(75000, { setupMonthly: 8500 }),
     popular: true,
     bestFor: 'Busy shops that need more staff logins and faster checkout',
-    delivery: '[CONFIRM: e.g. 4–5 weeks]',
+    delivery: '4–5 weeks',
     includes: [
       'Everything in Starter',
       'Multi-user access',
@@ -322,7 +331,7 @@ export const customAppPlan = {
   priceLabel: formatLkrFrom(85000),
   popular: false,
   bestFor: 'Teams stuck in WhatsApp notes and spreadsheets who need one clear workflow',
-  delivery: '[CONFIRM: e.g. 3–6 weeks]',
+  delivery: '3–6 weeks',
   includes: [
     'One workflow (for example bookings or records)',
     'Up to 3 users',
@@ -344,7 +353,7 @@ export const customProjectPlan = {
   priceLabel: `Discovery ${formatLkr(10000)} · projects ${formatLkrFrom(150000)}`,
   popular: false,
   bestFor: 'When the standard plans do not fit your process',
-  delivery: 'Agreed after discovery',
+  delivery: 'Scoped after discovery — typically 4–10 weeks',
   includes: [
     'Paid discovery (credited if you proceed)',
     'Written scope and timeline',
@@ -357,16 +366,63 @@ export const customProjectPlan = {
 /** Marketing monthly + one-offs */
 export const marketingPlans = [
   {
+    id: 'marketing-lite',
+    name: 'Lite',
+    price: 6000,
+    priceLabel: formatLkrPlan(6000, { monthly: true }),
+    popular: false,
+    bestFor: 'Very small shops that want a light monthly presence without a big budget',
+    delivery: 'Monthly',
+    includes: [
+      'Simple monthly post plan',
+      '4 feed posts per month',
+      'Captions and basic hashtags',
+      'Posted on your accounts (or sent ready to post)',
+    ],
+    excludes: [
+      'Video / reels',
+      'On-site shoots',
+      'Paid ad management',
+      'Full brand redesign',
+      ...marketingWeDoNotPromise,
+    ],
+  },
+  {
+    id: 'marketing-basic',
+    name: 'Basic',
+    price: 10000,
+    priceLabel: formatLkrPlan(10000, { monthly: true }),
+    popular: false,
+    bestFor: 'Small businesses that want posts plus one short video each month',
+    delivery: 'Monthly',
+    includes: [
+      'Simple monthly content plan',
+      '6 feed posts per month',
+      '1 short video / reel per month',
+      'Captions and basic hashtags',
+      'Posted on your accounts (or sent ready to post)',
+    ],
+    excludes: [
+      'On-site multi-hour shoots',
+      'Paid ad management',
+      'Full brand redesign',
+      ...marketingWeDoNotPromise,
+    ],
+  },
+  {
     id: 'marketing-starter',
     name: 'Starter',
     price: 25000,
-    priceLabel: `${formatLkr(25000)}/month`,
+    priceLabel: formatLkrPlan(25000, { monthly: true }),
     popular: false,
     bestFor: 'Businesses starting steady social content',
     delivery: 'Monthly',
     includes: [
-      'Monthly content plan (details confirmed at kickoff)',
-      'Short videos / posts as agreed',
+      'Monthly content calendar',
+      '8 feed posts per month',
+      '2 short videos / reels per month',
+      'Captions and basic hashtags',
+      'Simple end-of-month note',
     ],
     excludes: ['Paid ad management', 'Full brand redesign', ...marketingWeDoNotPromise],
   },
@@ -374,22 +430,34 @@ export const marketingPlans = [
     id: 'marketing-growth',
     name: 'Growth',
     price: 45000,
-    priceLabel: `${formatLkr(45000)}/month`,
+    priceLabel: formatLkrPlan(45000, { monthly: true }),
     popular: true,
     bestFor: 'Shops and salons that post often and need a steadier pipeline',
     delivery: 'Monthly',
-    includes: ['Higher monthly volume than Starter', 'Planning and delivery as agreed at kickoff'],
+    includes: [
+      'Monthly content calendar',
+      '16 feed posts per month',
+      '4 short videos / reels per month',
+      'Captions, hashtags and story ideas',
+      'Monthly performance report',
+    ],
     excludes: ['Paid ad management unless quoted separately', ...marketingWeDoNotPromise],
   },
   {
     id: 'marketing-pro',
     name: 'Pro',
     price: 75000,
-    priceLabel: `${formatLkr(75000)}/month`,
+    priceLabel: formatLkrPlan(75000, { monthly: true }),
     popular: false,
     bestFor: 'Brands that need a fuller monthly content engine',
     delivery: 'Monthly',
-    includes: ['Highest monthly volume', 'Priority scheduling'],
+    includes: [
+      'Monthly content calendar',
+      '24 feed posts per month',
+      '8 short videos / reels per month',
+      'Priority shoot scheduling',
+      'Monthly performance report with next-month plan',
+    ],
     excludes: ['Media buying unless quoted separately', ...marketingWeDoNotPromise],
   },
 ];
@@ -401,7 +469,7 @@ export const marketingOneOffs = [
     price: 15000,
     priceLabel: formatLkrFrom(15000),
     bestFor: 'One short video for social media',
-    includes: ['Single short video', 'Basic edit and captions as agreed'],
+    includes: ['Single short video (up to ~30–60 seconds)', 'Basic edit and on-screen captions'],
     excludes: ['Monthly posting plan', 'Paid promotion'],
   },
   {
@@ -410,7 +478,7 @@ export const marketingOneOffs = [
     price: 15000,
     priceLabel: formatLkrFrom(15000),
     bestFor: 'Vehicle sellers who need a clean listing video',
-    includes: ['One showcase video', 'Basic edit'],
+    includes: ['One showcase video of a single vehicle', 'Basic edit ready for socials or WhatsApp'],
     excludes: ['Monthly posting plan', 'Paid promotion'],
   },
   {
@@ -419,8 +487,8 @@ export const marketingOneOffs = [
     price: 30000,
     priceLabel: formatLkrFrom(30000),
     bestFor: 'Openings, workshops and local events',
-    includes: ['Coverage of the agreed event window', 'Edited highlights as agreed'],
-    excludes: ['Full-day multi-camera production unless quoted'],
+    includes: ['Up to 3 hours of coverage', 'Edited highlight reel'],
+    excludes: ['Full-day multi-camera production unless quoted separately'],
   },
 ];
 
@@ -429,42 +497,42 @@ export const bundles = [
     id: 'presence',
     name: 'Presence',
     price: 85000,
-    priceLabel: formatLkr(85000),
+    priceLabel: formatLkrPlan(85000),
     monthly: null,
     monthlyLabel: null,
     forWho: 'Launch a strong website and start posting in month one',
     includes: ['Business Website (Business plan)', '1 month Marketing Starter'],
     separateTotal: 65000 + 25000,
     get savingsLabel() {
-      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
+      return `Normally ${formatLkr(this.separateTotal)} separately — bundle from ${formatLkr(this.price)} and upwards`;
     },
   },
   {
     id: 'shop',
     name: 'Shop',
     price: 70000,
-    priceLabel: `${formatLkr(70000)} setup`,
+    priceLabel: formatLkrPlan(70000, { setupMonthly: 4500 }),
     monthly: 4500,
-    monthlyLabel: `${formatLkr(4500)}/month`,
+    monthlyLabel: formatLkrPlan(4500, { monthly: true }),
     forWho: 'Retail shops that need stock tracking plus a simple site',
     includes: ['Stock & Sales Starter', 'Business Website Starter'],
     separateTotal: 40000 + 35000,
     get savingsLabel() {
-      return `Setup normally ${formatLkr(this.separateTotal)} separately — bundle ${formatLkr(this.price)} setup + ${formatLkr(this.monthly)}/month`;
+      return `Setup normally ${formatLkr(this.separateTotal)} separately — bundle from ${formatLkr(this.price)} setup + ${formatLkr(this.monthly)}/month and upwards`;
     },
   },
   {
     id: 'growth',
     name: 'Growth',
     price: 185000,
-    priceLabel: formatLkr(185000),
+    priceLabel: formatLkrPlan(185000),
     monthly: null,
     monthlyLabel: null,
     forWho: 'A business website plus three months of steady marketing',
     includes: ['Business Website (Business plan)', '3 months Marketing Growth'],
     separateTotal: 65000 + 45000 * 3,
     get savingsLabel() {
-      return `Normally ${formatLkr(this.separateTotal)} separately — bundle ${this.priceLabel}`;
+      return `Normally ${formatLkr(this.separateTotal)} separately — bundle from ${formatLkr(this.price)} and upwards`;
     },
   },
 ];
@@ -520,7 +588,8 @@ export const pricingSoftwareBlocks = [
 export const pricingMarketingBlock = {
   id: 'pricing-marketing',
   title: 'Social Media & Video Marketing',
-  intro: 'Monthly plans. No guaranteed followers or sales — honest work and clear reporting.',
+  intro:
+    'Monthly plans from LKR 6,000 and upwards — built for small Sri Lankan businesses. No guaranteed followers or sales.',
   plans: marketingPlans,
 };
 
@@ -530,7 +599,7 @@ export const pricingPreview = [
   { label: 'Custom Business App', priceLabel: formatLkrFrom(85000), href: '/software#custom' },
   {
     label: 'Social Media & Video Marketing',
-    priceLabel: formatLkrFrom(25000, { monthly: true }),
+    priceLabel: formatLkrFrom(6000, { monthly: true }),
     href: '/pricing#pricing-marketing',
   },
 ];
@@ -566,11 +635,15 @@ export const budgetRangeOptions = [
 export const pricingFaqs = [
   {
     q: 'What changes the final price?',
-    a: 'Page count, booking or payments, number of users, and extras like SMS. We confirm a written scope before heavy work starts.',
+    a: 'Page count, booking or payments, number of users, and extras like SMS. Prices shown are starting points and go upwards if you add more. We confirm a written scope before heavy work starts.',
   },
   {
     q: 'How do payments work?',
     a: paymentTerms.detail,
+  },
+  {
+    q: 'How long does delivery take?',
+    a: 'Business Website Starter about 1–2 weeks, Business 2–3 weeks, Growth 3–5 weeks. Stock & Sales about 3–5 weeks. Custom Business App about 3–6 weeks. Marketing plans run monthly. We confirm dates in writing after discovery.',
   },
   {
     q: 'What is not included?',
@@ -578,7 +651,7 @@ export const pricingFaqs = [
   },
   {
     q: 'What is the free InQRS card?',
-    a: `On successful completion (delivery, your sign-off, and final payment), you get ${completionReward.cardsPerProject} free InQRS NFC card(s) — ${completionReward.inqrsLabel}. See terms on the Pricing page.`,
+    a: `On successful completion (delivery, your sign-off, and final payment), you get ${completionReward.cardsPerProject} free InQRS NFC card(s) — ${completionReward.inqrsLabel}. Cards usually dispatch in ${completionReward.dispatchDays}. See terms on the Pricing page.`,
   },
   {
     q: 'What is the Founding Client Offer?',

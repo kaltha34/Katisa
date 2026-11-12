@@ -28,7 +28,7 @@ export default function MarketingPage() {
         eyebrow="Marketing"
         title="Social media and video"
         accent="that help people find you"
-        description="Monthly plans and one-off videos for shops, salons, restaurants, vehicle sellers and events. Clear prices. Honest limits."
+        description="Monthly plans from LKR 6,000 and upwards, plus one-off videos for shops, salons, restaurants, vehicle sellers and events. Clear prices. Honest limits."
         actions={
           <>
             <Button href="/pricing#pricing-marketing" variant="primary">

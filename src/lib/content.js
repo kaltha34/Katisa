@@ -1,6 +1,7 @@
 export {
   formatLkr,
   formatLkrFrom,
+  formatLkrPlan,
   formatPriceHint,
   foundingOffer,
   completionReward,
@@ -40,7 +41,7 @@ export const site = {
   legalName: 'Katisa Technologies',
   tagline: 'Websites, software and marketing for Sri Lankan businesses.',
   description:
-    'Katisa Technologies builds websites from LKR 35,000, stock & sales systems, custom business apps, and social media & video marketing for shops, salons, clinics, restaurants and tuition centres in Sri Lanka.',
+    'Katisa Technologies builds websites from LKR 35,000 and upwards, stock & sales systems, custom business apps, and social media & video marketing for shops, salons, clinics, restaurants and tuition centres in Sri Lanka.',
   email: 'katisatechnologies@gmail.com',
   phone: '+94 72 595 0375',
   phoneHref: 'tel:+94725950375',
@@ -86,23 +87,33 @@ export const faqs = [
   },
 ];
 
-export const proofPlaceholders = [
+/** Featured work — only real projects we can show */
+export const featuredWork = [
   {
-    id: 'p1',
-    label: '[PLACEHOLDER: Client or project name]',
-    detail: '[PLACEHOLDER: One-line result you can verify — do not invent numbers]',
+    id: 'nipuni',
+    label: 'Nipuni Studio',
+    industry: 'Artist brand website',
+    detail:
+      'A gallery-first website for originals, prints and workshops — live at nipunimallikaarachchi.com.',
+    href: 'https://www.nipunimallikaarachchi.com/',
   },
   {
-    id: 'p2',
-    label: '[PLACEHOLDER: Client or project name]',
-    detail: '[PLACEHOLDER: One-line result you can verify]',
+    id: 'shops',
+    label: 'Shops & retailers',
+    industry: 'Stock & sales',
+    detail: 'Stock tracking, low-stock alerts and simple sales reports so the counter stays honest.',
+    href: '/software#stock',
   },
   {
-    id: 'p3',
-    label: '[PLACEHOLDER: Client or project name]',
-    detail: '[PLACEHOLDER: One-line result you can verify]',
+    id: 'salons',
+    label: 'Salons & clinics',
+    industry: 'Websites & bookings',
+    detail: 'Phone-friendly sites and booking-style apps so fewer chats get lost in WhatsApp.',
+    href: '/software#website',
   },
 ];
+
+export const proofPlaceholders = featuredWork;
 
 export const inqrs = {
   id: 'inqrs',
@@ -129,11 +140,44 @@ export const process = [
   { step: '05', title: 'Support', text: 'Optional care plans after launch.' },
 ];
 
-export const testimonials = [];
+export const testimonials = [
+  {
+    id: 't1',
+    name: 'Nipuni Mallika Arachchi',
+    business: 'Nipuni Studio · Artist',
+    quote:
+      'Katisa built a calm gallery site that feels like the studio — artwork first, clear paths to buy, workshops and the story behind the work.',
+  },
+];
 
-export const caseStudies = [];
+export const caseStudies = [
+  {
+    id: 'nipuni-studio',
+    arm: 'build',
+    client: 'Nipuni Studio',
+    industry: 'Creative / Artist',
+    whatWeDid: 'Business website with gallery shop, workshops and studio story',
+    result: 'Live brand site at nipunimallikaarachchi.com',
+  },
+];
 
-export const pains = [];
+export const pains = [
+  {
+    id: 'stock',
+    before: 'Stock living in notebooks and memory',
+    after: 'Live stock levels and reorder alerts',
+  },
+  {
+    id: 'bookings',
+    before: 'Missed calls and messy appointment chats',
+    after: 'Clear booking flows and follow-ups',
+  },
+  {
+    id: 'sheets',
+    before: 'Spreadsheets nobody trusts',
+    after: 'One system your team can open on a phone',
+  },
+];
 
 export const trustItems = [
   'Colombo-based',
@@ -142,7 +186,17 @@ export const trustItems = [
   'You own the work',
 ];
 
-export const projects = [];
+export const projects = [
+  {
+    id: 'nipuni-studio',
+    title: 'Nipuni Studio',
+    client: 'Nipuni Mallika Arachchi',
+    url: 'https://www.nipunimallikaarachchi.com/',
+    category: 'Artist brand website',
+    summary:
+      'A calm, gallery-first website for a Sri Lankan artist — originals, prints, workshops, and studio storytelling.',
+  },
+];
 
 export function whatsappUrl(message = site.whatsappMessage) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;

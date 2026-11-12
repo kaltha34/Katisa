@@ -6,8 +6,8 @@ import { caseStudies } from '@/lib/content';
 
 const tabs = [
   { id: 'all', label: 'All' },
-  { id: 'build', label: 'Build' },
-  { id: 'grow', label: 'Grow' },
+  { id: 'build', label: 'Software' },
+  { id: 'grow', label: 'Marketing' },
 ];
 
 export default function OurWorkClient() {
@@ -37,16 +37,17 @@ export default function OurWorkClient() {
         ))}
       </div>
 
-      <p className="mb-6 text-sm text-[color:var(--ink-faint)]">
-        Cards below are clearly marked placeholders. Replace them with real projects before using
-        any numbers or client claims.
-      </p>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        {items.map((study) => (
-          <CaseStudyCard key={study.id} study={study} />
-        ))}
-      </div>
+      {items.length === 0 ? (
+        <p className="text-sm text-[color:var(--ink-muted)]">
+          More case studies will appear here as we publish approved projects.
+        </p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {items.map((study) => (
+            <CaseStudyCard key={study.id} study={study} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

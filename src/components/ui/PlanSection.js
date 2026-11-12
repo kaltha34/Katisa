@@ -13,7 +13,13 @@ export default function PlanSection({
 }) {
   const cols =
     columns ||
-    (plans.length >= 3 ? 'md:grid-cols-3' : plans.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-1 md:max-w-xl');
+    (plans.length >= 4
+      ? 'sm:grid-cols-2 lg:grid-cols-3'
+      : plans.length >= 3
+        ? 'md:grid-cols-3'
+        : plans.length === 2
+          ? 'md:grid-cols-2'
+          : 'md:grid-cols-1 md:max-w-xl');
 
   return (
     <section id={id} className="scroll-mt-24 border-b border-[color:var(--line)] py-12 md:py-16">

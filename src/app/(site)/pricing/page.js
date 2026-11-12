@@ -44,7 +44,7 @@ export default function PricingPage() {
         eyebrow="Pricing"
         title="Clear prices in LKR."
         accent="No mystery quotes."
-        description={`Payment terms: ${paymentTerms.summary}. Every completed project includes a free InQRS card (${completionReward.inqrsLabel}).`}
+        description={`Prices shown are from each plan and upwards. Payment terms: ${paymentTerms.summary}. Every completed project includes a free InQRS card (${completionReward.inqrsLabel}).`}
         actions={
           <>
             <Button href="/book-consultation" variant="primary">

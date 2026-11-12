@@ -21,7 +21,7 @@ export const messages = {
     'hero.title':
       'Websites and systems so shops, clinics and salons stop losing customers to chaos.',
     'hero.sub':
-      'Rise websites from LKR 35,000. Empire stock & POS. Origin apps. Pulse content — clear LKR prices for Sri Lankan businesses.',
+      'Websites from LKR 35,000 and upwards, stock systems, custom apps and social marketing — clear LKR prices for Sri Lankan businesses.',
     'hero.cta.primary': 'Get a Free Quote',
     'hero.cta.secondary': 'See packages',
     'hero.note': 'Free discovery call · No jargon · You own the code',

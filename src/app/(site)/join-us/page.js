@@ -7,39 +7,39 @@ import { FiAward, FiCode, FiEdit3, FiShare2, FiTrendingUp, FiUsers, FiVideo } fr
 export const metadata = {
   title: 'Join Us',
   description:
-    'Join Katisa Technologies — developers for Build, plus content creators, videographers and social managers for Pulse (Grow). Equity roles on InQRS also open.',
+    'Join Katisa Technologies — developers for software, plus content creators, videographers and social managers for marketing. Equity roles on InQRS also open.',
 };
 
 const benefits = [
-  { icon: FiTrendingUp, title: 'Real client work', text: 'Ship for shops, salons and clinics — Build and Grow.' },
-  { icon: FiUsers, title: 'Small team', text: 'Shape how Katisa works across software and content.' },
-  { icon: FiCode, title: 'Build arm', text: 'Websites, inventory systems and apps with clear ownership.' },
-  { icon: FiAward, title: 'Grow arm', text: 'Pulse content and video with a path to portfolio pieces.' },
+  { icon: FiTrendingUp, title: 'Real client work', text: 'Ship for shops, salons and clinics across Sri Lanka.' },
+  { icon: FiUsers, title: 'Small team', text: 'Shape how Katisa works across software and marketing.' },
+  { icon: FiCode, title: 'Software', text: 'Websites, stock systems and apps with clear ownership.' },
+  { icon: FiAward, title: 'Marketing', text: 'Social content and video with portfolio-ready work.' },
 ];
 
 const buildRoles = [
-  { title: 'Full-Stack Developer', skills: ['React', 'Node.js', 'Firebase', 'REST APIs'], note: 'Equity / project — discuss' },
-  { title: 'Frontend Developer', skills: ['React', 'Tailwind', 'Responsive UI'], note: 'Equity / project — discuss' },
-  { title: 'Backend Developer', skills: ['Node.js', 'Firestore', 'Auth', 'APIs'], note: 'Equity / project — discuss' },
+  { title: 'Full-Stack Developer', skills: ['React', 'Node.js', 'Firebase', 'REST APIs'], note: 'Equity or project-based — discuss on apply' },
+  { title: 'Frontend Developer', skills: ['React', 'Tailwind', 'Responsive UI'], note: 'Equity or project-based — discuss on apply' },
+  { title: 'Backend Developer', skills: ['Node.js', 'Firestore', 'Auth', 'APIs'], note: 'Equity or project-based — discuss on apply' },
 ];
 
 const growRoles = [
   {
     title: 'Content Creator',
     skills: ['Captions', 'Content calendars', 'Instagram / Facebook'],
-    note: 'Open interest — [PLACEHOLDER: compensation]',
+    note: 'Project or retainer — discuss on apply',
     icon: FiEdit3,
   },
   {
     title: 'Videographer / Editor',
     skills: ['Short-form video', 'Reels', 'Mobile + camera'],
-    note: 'Open interest — [PLACEHOLDER: compensation]',
+    note: 'Per shoot or retainer — discuss on apply',
     icon: FiVideo,
   },
   {
     title: 'Social Media Manager',
     skills: ['Scheduling', 'Community reply', 'Simple reporting'],
-    note: 'Open interest — [PLACEHOLDER: compensation]',
+    note: 'Retainer — discuss on apply',
     icon: FiShare2,
   },
 ];
@@ -51,7 +51,7 @@ export default function JoinUsPage() {
         eyebrow="Careers"
         title="Build software."
         accent="Grow visibility."
-        description="We’re looking for developers and Pulse creatives who want real Sri Lankan client work — plus early InQRS contributors."
+        description="We’re looking for developers and marketing creatives who want real Sri Lankan client work — plus early InQRS contributors."
       />
 
       <Section>
@@ -67,7 +67,7 @@ export default function JoinUsPage() {
           <div>
             <h2 className="font-display text-2xl font-bold">One company, two arms</h2>
             <p className="text-sm text-[color:var(--ink-muted)]">
-              Build (software) · Grow / Pulse (content) · InQRS (separate product equity roles)
+              Software · Marketing · InQRS (sister product equity roles)
             </p>
           </div>
         </div>
@@ -85,8 +85,8 @@ export default function JoinUsPage() {
 
       <Section tone="soft" className="border-y border-[color:var(--line)]">
         <div className="mb-8">
-          <h2 className="heading-display">Build roles</h2>
-          <p className="body-muted mt-3">Software for Rise, Empire, Origin and Uncharted.</p>
+          <h2 className="heading-display">Software roles</h2>
+          <p className="body-muted mt-3">Websites, stock systems, apps and custom projects.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {buildRoles.map((role) => (
@@ -112,10 +112,9 @@ export default function JoinUsPage() {
 
       <Section>
         <div className="mb-8">
-          <h2 className="heading-display">Grow / Pulse roles</h2>
+          <h2 className="heading-display">Marketing roles</h2>
           <p className="body-muted mt-3">
-            Open interest — tell us what you make. Compensation marked as placeholder until you set
-            it.
+            Open interest for creators who can shoot, edit and keep a calendar moving.
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
@@ -145,7 +144,7 @@ export default function JoinUsPage() {
         <div className="mx-auto max-w-2xl border border-[color:var(--line)] bg-[color:var(--surface)] p-6 md:p-8">
           <h2 className="font-display text-2xl font-bold">Apply / register interest</h2>
           <p className="mt-2 text-sm text-[color:var(--ink-muted)]">
-            Name the role in the form (e.g. Videographer / Editor or Frontend Developer).
+            Name the role in the form (for example Videographer / Editor or Frontend Developer).
           </p>
           <div className="mt-6">
             <JoinForm />
